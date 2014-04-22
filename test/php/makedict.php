@@ -23,12 +23,13 @@
 	//Print vocabulary
 	//echo "<h4>Dictionary:</h4>";
 	echo $lang;
+//	echo $filecontent;
 	echo "<br/>";
 	echo "<br/>";
 	echo "<table border='1'>
 		<tr>
-		<th>частота</th>
-		<th>слова</th>
+        <th>freq</th>
+        <th>words</th>
 		</tr>";
 	foreach($vals as $key => $value)
         {
