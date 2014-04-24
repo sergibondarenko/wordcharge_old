@@ -1,6 +1,5 @@
 <?php
-include ($_SERVER['DOCUMENT_ROOT'] . "/php/vars.php");
-include ($_SERVER['DOCUMENT_ROOT'] . "/php/func.php");
+include ($_SERVER['DOCUMENT_ROOT'] . "/test/php/vars.php");
 
 $textArea = $_POST['text'];
 
