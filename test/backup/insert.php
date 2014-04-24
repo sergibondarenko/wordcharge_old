@@ -1,5 +1,8 @@
 <?php
 include ($_SERVER['DOCUMENT_ROOT'] . "/php/vars.php");
+include ($_SERVER['DOCUMENT_ROOT'] . "/php/func.php");
+
+$textArea = $_POST['text'];
 
 $con=mysqli_connect("localhost",$MysqlUser,$MysqlUPass,$MysqlDB);
 
@@ -16,7 +19,7 @@ if (!mysqli_query($con,$sqlDelete)) {
 
 // Get data from html form textrArea field, remove all special characters
 // and make an array ($words), convert all words to lowercase 
-$textArea = mysqli_real_escape_string($con, $_POST['textArea']);
+$textArea = mysqli_real_escape_string($con, $textArea);
 $words = preg_split('/\P{L}+/u', $textArea);
 $words = array_map('strtolower', $words);
 
@@ -37,6 +40,7 @@ foreach($words as $key => $value){
 // Mysql query to display the table content 
 $sqlSelect = mysqli_query($con,"SELECT * FROM $UserNW");
 
+echo "<br><br>";
 echo "<table border='1'>
 <tr>
 <th>freq</th>
