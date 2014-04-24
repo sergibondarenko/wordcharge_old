@@ -39,12 +39,13 @@ $sqlSelect = mysqli_query($con,"SELECT * FROM $UserNW");
 
 echo "<table border='1'>
 <tr>
+<th>freq</th>
 <th>word</th>
 </tr>";
 
 while($row = mysqli_fetch_array($sqlSelect)) {
   echo "<tr>";
-//  echo "<td>" . $row['freq'] . "</td>";
+  echo "<td>" . $row['freq'] . "</td>";
   echo "<td>" . $row['word'] . "</td>";
   echo "</tr>";
 }
