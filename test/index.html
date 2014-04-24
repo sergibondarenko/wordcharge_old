@@ -32,12 +32,16 @@
         </div>
 
 	    <div id="wrapper-textarea">
-	        <textarea rows="4" cols="40" placeholder="Copy your text in this field ..." id="textArea"></textarea>
+            <form action="insert.php" method="post">
+	            <textarea rows="4" cols="40" placeholder="Copy your text in this field ..." name="textArea" id="textArea"></textarea>
+                <br>
+                <input type="submit" value="Make Dict">
+            </form>
 	    </div>
 
-	    <div id="wrapper-btn"> 
+	    <!--<div id="wrapper-btn"> 
 	        <button id="textAreaBtn">Make dictionary</button>
-        </div>
+        </div>-->
         
         <div id="wrapper-main">
 	        <article id="main"></article>
