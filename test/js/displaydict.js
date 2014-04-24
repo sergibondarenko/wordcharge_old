@@ -9,15 +9,15 @@ $(document).ready(function(){
 	$("#makeDict").click(function(){
         	//$('#waitDict').html('Click words to translate');
 		var text = $("#textArea").val();
-		//var lang = $("#langSelect option:selected").val();
+		var lang = $("#langId option:selected").val();
 		//var lang = langid;
 		//alert(lang);
 		var request = $.ajax({
     			url: 'php/insert.php',
 			    type: 'POST',
 			    dataType: 'text',
-			    data: {text:text},
-			    //data: {text:text, lang:lang},
+			    //data: {text:text},
+			    data: {text:text, lang:lang},
     			//success: function(data){
         		//	$('#VocCont').html(data); // Load data into a <div> as HTML
     			//}
