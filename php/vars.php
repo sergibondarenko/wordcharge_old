@@ -7,6 +7,7 @@
     $MysqlDB="wordcharge";
     $MysqlUser='wordcharge';
     $MysqlUPass="zef1rv1ter";
-    $GuestNW="Guest_NewWords_it1en";
+    //$GuestNW="Guest_NewWords_it1en";
+    $GuestNW="GuestNW";
     $GuestNotNW="Guest_IKnowWords_it1en";
 ?>
