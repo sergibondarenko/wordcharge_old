@@ -1,8 +1,9 @@
 <?php
-include ($_SERVER['DOCUMENT_ROOT'] . "/php/vars.php");
-include ($_SERVER['DOCUMENT_ROOT'] . "/php/func.php");
+include ($_SERVER['DOCUMENT_ROOT'] . "/test/php/vars.php");
 
 $textArea = $_POST['text'];
+$langId = $_POST['lang'];
+$countWords = 0;
 
 $con=mysqli_connect("localhost",$MysqlUser,$MysqlUPass,$MysqlDB);
 
@@ -27,9 +28,16 @@ $words = array_map('strtolower', $words);
 $words = array_count_values($words);
 arsort($words);
 
+echo "<br>"."Total: " . count($words) . "<br>";
+
 // Mysql query to insert new values into user table
 foreach($words as $key => $value){
-    $sqlInsert = mysqli_query($con, "INSERT INTO $UserNW (freq, word) VALUES ('$value', '$key')");
+    $jsonurlTr = $trnsl_api."?key=".$trnsl_key."&lang=".$langId."&format=html&text=".$key;
+    $jsonTr = file_get_contents($jsonurlTr);
+    //var_dump(json_decode($json));
+    $sqlInsert = mysqli_query($con, "INSERT INTO $UserNW (freq, word, text) VALUES ('$value', '$key', '$jsonTr')");
+    echo "Translated: ".$countWords++;
+    flush();
 }
 /*for($i=0; $i<sizeof($words)-1; $i++){
     //echo $words[$i];
@@ -40,21 +48,29 @@ foreach($words as $key => $value){
 // Mysql query to display the table content 
 $sqlSelect = mysqli_query($con,"SELECT * FROM $UserNW");
 
-echo "<br><br>";
+echo "<br>";
+echo "Dictionary: " . $langId . "<br>";
 echo "<table border='1'>
 <tr>
 <th>freq</th>
 <th>word</th>
+<th>text</th>
 </tr>";
 
 while($row = mysqli_fetch_array($sqlSelect)) {
   echo "<tr>";
   echo "<td>" . $row['freq'] . "</td>";
   echo "<td>" . $row['word'] . "</td>";
+  echo "<td>" . $row['text'] . "</td>";
   echo "</tr>";
 }
 
-echo "</table>";
+echo "</table><br>";
+
+//$jsonurlTr = $trnsl_api."?key=".$trnsl_key."&lang=".$langId."&format=html&text="."cosa";
+//$jsonTr = file_get_contents($jsonurlTr);
+//echo $jsonTr;
+//var_dump(json_decode($json));
 
 mysqli_close($con);
 

@@ -16,6 +16,7 @@ $(document).ready(function(){
     			url: 'php/insert.php',
 			    type: 'POST',
 			    dataType: 'text',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 			    //data: {text:text},
 			    data: {text:text, lang:lang},
     			//success: function(data){
@@ -24,10 +25,10 @@ $(document).ready(function(){
 		//});
 		});
 		request.done(function( data ) {
-    			$('#main').html(data);
+    			$('#mainDict').html(data);
   		});
 		request.fail(function( jqXHR, textStatus ) {
-    			$('#main').html( "Request failed: " + textStatus );
+    			$('#mainDict').html( "displaydict.js request failed: " + textStatus );
   		});
 
 	});

@@ -1,17 +1,45 @@
 <?php
+header('Content-type: text/plain; charset=utf-8');
 
-include ($_SERVER['DOCUMENT_ROOT'] . "/php/vars.php");
+include ($_SERVER['DOCUMENT_ROOT'] . "/test/php/vars.php");
 
-function makeArrayOfWords(){
-    // Get data from html form textrArea field, remove all special characters
-    // and make an array ($words), convert all words to lowercase 
-    $textArea = mysqli_real_escape_string($con, $_POST['textArea']);
-    $words = preg_split('/\P{L}+/u', $textArea);
-    $words = array_map('strtolower', $words);
-    
-    // Delete all dublicate words in the array and sort in descending order
-    $words = array_count_values($words);
-    arsort($words);
+// The functions to get json data from 
+// Yandex dict and translate APIs
+function remote_get_contents($url)
+{
+    if (function_exists('curl_get_contents') AND function_exists('curl_init'))
+    {  
+        return curl_get_contents($url);
+    }
+    else
+    {  
+        // A litte slower, but (usually) gets the job done
+        return file_get_contents($url);
+    }
+}
+
+function curl_get_contents($url)
+{
+    // Initiate the curl session
+    $ch = curl_init();
+
+    // Set the URL
+    curl_setopt($ch, CURLOPT_URL, $url);
+
+    // Removes the headers from the output
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+
+    // Return the output instead of displaying it directly
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+    // Execute the curl session
+    $output = curl_exec($ch);
+
+    // Close the curl session
+    curl_close($ch);
+
+    // Return the output as a variable
+    return $output;
 }
 
 ?>
