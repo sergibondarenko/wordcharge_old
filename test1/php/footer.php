@@ -1,3 +1,4 @@
+<br>
 <footer>
 <p id="myCopyright">&copy; <?php echo date("Y"); ?> <a href="mailto:sergibondarenko@gmail.com">Sergey Bondarenko</a> All rights reserved.
 <br>

@@ -11,7 +11,7 @@
   <?php include("php/header.php"); ?>
   <div id="wrapper-main">
     <h2>WordCharge</h2>
-    <p>The goal of the WordCharge project is to help learning new words in different foreign languages.</p>
+    <h3>This page is ander construction!</h3>
     <?php include("php/footer.php"); ?>
   </div>
 
