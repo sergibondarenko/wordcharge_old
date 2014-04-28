@@ -32,7 +32,7 @@ $(document).ready(function(){
             //alert("Data: " + data + "\nStatus: " + status);
             //alert(data);
             //$("#test1").html("<b>" + data + "</b>");
-            $("#test1").html("<i>"+ data +"</i>");
+            $("#wordSaveStatus").html("<i>"+ data +"</i>");
           }); 
           
         

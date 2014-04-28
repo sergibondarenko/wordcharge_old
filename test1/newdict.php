@@ -20,7 +20,7 @@
         <!-- Progress information -->
         <div id="information" style="width"></div>
         
-        <p id="test1"></p>
+        <p id="wordSaveStatus"><i>Click "yes" to mark a word as a known.</i></p>
         
         <?php
             include("php/vars.php");
@@ -125,19 +125,19 @@
             while($row = mysqli_fetch_array($sqlSelect)) {
               echo "<tr>";
               echo "<td>" . "<span class=\"iKnowTheWord\"><a href=\"\">yes</a></span>" . "</td>";
-              echo "<td>" . "<span class=\"tdFreq\"><b>" . $row['freq'] . "</b></span>" . "</td>";
+              echo "<td>" . "<span class=\"tdFreq\">" . $row['freq'] . "</span>" . "</td>";
               //echo "<td>" . $row['word'] . "</td>";
               echo "<td>" . "<span class=\"tdWord\"><b>" . $row['word'] . "</b></span>" . "</td>";
-              echo "<td>" . "<span class=\"tdText\"><b>" . $row['text'] . "</b></span>" . "</td>";
+              echo "<td>" . "<span class=\"tdText\">" . $row['text'] . "</span>" . "</td>";
               echo "</tr>";
             }
             
             echo "</table><br>";
             
             // To check MySQL charset
-            /*$charset = mysqli_character_set_name($con);
+            $charset = mysqli_character_set_name($con);
             printf ("Current Mysql charset - %s\n",$charset);
-            echo "<br>";*/
+            echo "<br>";
             
             // Close MySQL connection
             mysqli_close($con);

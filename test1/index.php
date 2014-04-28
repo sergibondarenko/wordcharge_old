@@ -22,12 +22,13 @@
         <div id="wrapper-langSelect">
             Select a language:
             <select id="langId" name="langId">
-                <option value="de-en">German</option>
                 <option value="es-en">Spanish</option>
-                <option value="it-en">Italian</option>
                 <option value="fr-en">French</option>
-                <!--<option value="ru-en">Russian</option>-->
-                <option value="en-ru" selected>En-Ru</option>
+                <option value="de-en">German</option>
+                <option value="it-en">Italian</option>
+                <option value="ru-en">Russian</option>
+                <option value="uk-en">Ukrainian</option>
+                <option value="en-ru" selected>English-Russian</option>
             </select>
         </div>
         <div id="wrapper-textArea">
