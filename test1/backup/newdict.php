@@ -17,7 +17,6 @@
         
         <?php
             include("php/vars.php");
-            include("php/functions.php");
             
             $textArea = $_POST['textArea'];
             $langId = $_POST['langId'];
@@ -25,10 +24,14 @@
             // 1.=====
             // Get data from html form textrArea field, remove all special characters
             // and make an array ($words), convert all words to lowercase 
+            $words = preg_split('/\P{L}+/u', $textArea, 0, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
+            $words = array_map('strtolower', $words);
+            
             // Delete all dublicate words in the array and sort in descending order
-            $words = split_text_into_words($textArea);
+            $words = array_count_values($words);
+            arsort($words);
 
-            // Count unique words in the array of the words
+            // Count unique words in the array
             $total = count($words);
             echo "Unique words: ".$total;
             
@@ -81,13 +84,44 @@
                 $sqlInsert = mysqli_query($con, "INSERT INTO $UserNW (freq, word) VALUES ('$onlyFreq[$i]', '$onlyWords[$i]')");
 
                 // 3.=====
-                // Translate every word in the $onlyWords[] array
-                // Get word translation from Yandex Translate API
-                // Get translation from Yandex Dict API
+                // Translate words
+                    // Get word translation from Yandex Translate API
+                    $jsonurlTr = $trnsl_api."?key=".$trnsl_key."&lang=".$langId."&format=html&text=".$onlyWords[$i];
+                    $jsonTr = json_decode(file_get_contents($jsonurlTr), true);
+                
+                    $dataTr = array();
+                    $nTr = 0;
+                    foreach($jsonTr["text"] as $keyTr=>$wordTr){
+                        $dataTr[$nTr] = $wordTr;
+                        $nTr++;
+                    }
+
+                    // Get translation from Yandex Dict API
+                    $jsonurlDict = $dict_api."?key=".$dict_key."&lang=".$langId."&format=html&text=".$onlyWords[$i];
+                    $jsonDict = json_decode(file_get_contents($jsonurlDict), true);
+                    // Parse Yandex Dict API JSON string
+                    $dataDict = array();
+                    $nDict = 0;
+                    foreach($jsonDict["def"] as $def){
+                        foreach($def["tr"] as $text){
+                            //$dataDict = array($text["text"]);
+                            $dataDict[$nDict] = $text["text"];
+                            $nDict++;
+                            foreach($text["syn"] as $syn){
+                                //$nDict++;
+                                $dataDict[$nDict] = $syn["text"];
+                                $nDict++;
+                            }
+                        }
+                    }
+                
                 // Merge Translate and Dict arrays into third array 
                 // and delete all dublicate values in the third array 
+                $mergedTrDict = array_unique(array_merge($dataTr, $dataDict));               
+ 
                 //Implode the merged third array into string of values separated by coma
-                $strDict = get_yandex_api_translation_dictionary($onlyWords[$i], $langId, $trnsl_api, $trnsl_key, $dict_api, $dict_key);
+                $strDict = implode(", ", $mergedTrDict);
+                //$strDict = implode(", ", $dataTr);
                 
                 // Sql query to update translation for the word
                 $sqlUpdate = mysqli_query($con, "UPDATE $UserNW SET text='$strDict' WHERE word='$onlyWords[$i]' AND freq='$onlyFreq[$i]'");

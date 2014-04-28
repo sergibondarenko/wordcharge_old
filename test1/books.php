@@ -11,7 +11,7 @@
   <?php include("php/header.php"); ?>
   <div id="wrapper-main">
     <h2>WordCharge</h2>
-    <h3>This page is ander construction!</h3>
+    <?php include("php/underc.php"); ?>
     <?php include("php/footer.php"); ?>
   </div>
 
