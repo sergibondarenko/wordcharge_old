@@ -14,11 +14,13 @@
     <?php include("php/header.php"); ?>
     <div id="wrapper-main">
         <h2>WordCharge</h2>
-
+    
         <!-- Progress bar holder -->
         <div id="progress" style="width:500px;border:1px solid #ccc;"></div>
         <!-- Progress information -->
         <div id="information" style="width"></div>
+        
+        <p id="test1"></p>
         
         <?php
             include("php/vars.php");
@@ -123,9 +125,10 @@
             while($row = mysqli_fetch_array($sqlSelect)) {
               echo "<tr>";
               echo "<td>" . "<span class=\"iKnowTheWord\"><a href=\"\">yes</a></span>" . "</td>";
-              echo "<td>" . $row['freq'] . "</td>";
-              echo "<td>" . $row['word'] . "</td>";
-              echo "<td>" . $row['text'] . "</td>";
+              echo "<td>" . "<span class=\"tdFreq\"><b>" . $row['freq'] . "</b></span>" . "</td>";
+              //echo "<td>" . $row['word'] . "</td>";
+              echo "<td>" . "<span class=\"tdWord\"><b>" . $row['word'] . "</b></span>" . "</td>";
+              echo "<td>" . "<span class=\"tdText\"><b>" . $row['text'] . "</b></span>" . "</td>";
               echo "</tr>";
             }
             
