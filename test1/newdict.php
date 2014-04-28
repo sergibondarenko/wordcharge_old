@@ -4,6 +4,11 @@
     <title>WordCharge</title>
     <meta charset="utf-8">
     <link href="css/site.css" rel="stylesheet">
+    <!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />-->
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+    <!-- functions.js - 1.Save known words;  -->
+    <script src="js/functions.js"></script>
 </head>
 <body>
     <?php include("php/header.php"); ?>
@@ -109,6 +114,7 @@
             echo "Dictionary: " . $langId . "<br>";
             echo "<table border='1'>
             <tr>
+            <th>I know</th>
             <th>freq</th>
             <th>word</th>
             <th>text</th>
@@ -116,6 +122,7 @@
             
             while($row = mysqli_fetch_array($sqlSelect)) {
               echo "<tr>";
+              echo "<td>" . "<span class=\"iKnowTheWord\"><a href=\"\">yes</a></span>" . "</td>";
               echo "<td>" . $row['freq'] . "</td>";
               echo "<td>" . $row['word'] . "</td>";
               echo "<td>" . $row['text'] . "</td>";
