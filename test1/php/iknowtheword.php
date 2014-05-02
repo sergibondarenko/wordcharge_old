@@ -1,7 +1,9 @@
 <?php
+
+// Use instead class based module iknowtheword1.php
+
 include("vars.php");
 
-//$word = "word";
 $word = $_POST['word'];
 $freq = $_POST['freq'];
 $text = $_POST['text'];
@@ -14,15 +16,42 @@ if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
-// Mysql query to delete the word marked as known in newdict.php
-//$sqlDelete = mysqli_query($con,"DELETE FROM $UserNW WHERE word='$word' AND freq='$freq'");
-if(!mysqli_query($con, "DELETE FROM $UserNW WHERE word='$word' AND freq='$freq'")){
-  printf("Error to delete the word: %s\n", mysqli_error($con));
+// change character set to utf8
+if (!mysqli_set_charset($con, "utf8")) {
+    printf("Error loading character set utf8: %s\n", mysqli_error($con));
 }
 
+// Mysql query to delete the word marked as known in newdict.php
+$sqlDelete = mysqli_query($con,"DELETE FROM $UserNW WHERE word='$word' AND freq='$freq'");
+if(!$sqlDelete){
+  die('iknowtheword.php - Error after Delete: ' . mysqli_error($con));
+}
+mysqli_free_result($sqlDelete);
+
+// Mysql query to delete the word marked as known in newdict.php
+// use IGNORE to prevent dublicate values errors notifications
+$sqlInsert = mysqli_query($con,"INSERT INTO $UserKNW (word, text) VALUES ('$word', '$text')");
+//if(!$sqlInsert){
+//  die('iknowtheword.php - Error after Insert: ' . mysqli_error($con));
+//}
+mysqli_free_result($sqlInsert);
+
+if ($resultCnt = mysqli_query($con, "SELECT word FROM $UserKNW ORDER BY word")) {
+  /* determine number of rows result set */
+  $rowCnt = mysqli_num_rows($resultCnt);
+  /* close result set */
+  mysqli_free_result($resultCnt);
+}
+
+// To check MySQL charset
+/*$charset = mysqli_character_set_name($con);
+printf ("Current Mysql charset - %s\n",$charset);
+echo "<br>";
+*/
 // Close MySQL connection
 mysqli_close($con);
 
-////echo "Now you know the "."\"".$word."\"! Freq is ".$freq.". Translation: ".$text; 
-echo "Now you know the "."\"".$word."\"! Translation: ".$text; 
+//echo "Now you know the "."\"".$word."\"! Translation: ".$text; 
+echo "Word: <b>".$word."</b>;"." Now you know: ".$rowCnt." words;"; 
+//echo $rowCnt;
 ?>

@@ -58,31 +58,24 @@ if (!mysqli_set_charset($con, "utf8")) {
     printf("Error loading character set utf8: %s\n", mysqli_error($con));
 }
 
-// Create an empty array for known words
 $knownWords = array();
 $n = 0;
-
-// Query $UserKNW table of new words and look for all words in the table
 $query = "SELECT word FROM $UserKNW";
+//$query = "SELECT word FROM sergibondarenko_knw";
+
 $sqlNewWord = mysqli_query($con,$query);
 if(!$sqlNewWord){
   die('functions.php - Error in function look_for_the_new_words(): ' . mysqli_error($con));
 }
 
-// Fetch words from $UserKNW table and fill the 
-// $knownWords associative array with these words
 while ($row = mysqli_fetch_assoc($sqlNewWord)) {
   $knownWords[$n] = $row["word"];
   $n++;
 }
-// Free the variable
+
 mysqli_free_result($sqlNewWord);
 
-// Flip array, keys become values and values become keys
 $knownWords = array_flip($knownWords);
-
-// Take difference between keys of this two arrays
-// Take only new words (words that are not in $UserKNW table)
 $newWords = array_diff_key($words, $knownWords);
 
 return $newWords;
