@@ -46,7 +46,7 @@ function curl_get_contents($url)
 // Return only new words
 function look_for_the_new_words($words,$MysqlUser,$MysqlUPass,$MysqlDB,$UserKNW)
 {
-$conF=mysqli_connect("localhost",$MysqlUser,$MysqlUPass,$MysqlDB);
+$con=mysqli_connect("localhost",$MysqlUser,$MysqlUPass,$MysqlDB);
 
 // Check connection
 if (mysqli_connect_errno()) {
@@ -54,8 +54,8 @@ if (mysqli_connect_errno()) {
 }
 
 /* change character set to utf8 */
-if (!mysqli_set_charset($conF, "utf8")) {
-    printf("Error loading character set utf8: %s\n", mysqli_error($conF));
+if (!mysqli_set_charset($con, "utf8")) {
+    printf("Error loading character set utf8: %s\n", mysqli_error($con));
 }
 
 // Create an empty array for known words
@@ -64,9 +64,9 @@ $n = 0;
 
 // Query $UserKNW table of new words and look for all words in the table
 $query = "SELECT word FROM $UserKNW";
-$sqlNewWord = mysqli_query($conF,$query);
+$sqlNewWord = mysqli_query($con,$query);
 if(!$sqlNewWord){
-  die('functions.php - Error in function look_for_the_new_words(): ' . mysqli_error($conF));
+  die('functions.php - Error in function look_for_the_new_words(): ' . mysqli_error($con));
 }
 
 // Fetch words from $UserKNW table and fill the 
@@ -87,7 +87,7 @@ $newWords = array_diff_key($words, $knownWords);
 
 return $newWords;
 
-mysqli_close($conF);
+mysqli_close($con);
 }
 
 // Get data from html form textrArea field, remove all special characters
