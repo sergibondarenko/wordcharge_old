@@ -1,8 +1,4 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
-
 <html>
 <head>
   <title>WordCharge</title>
@@ -13,18 +9,14 @@ session_start();
 
   <?php include("php/header.php"); ?>
   <div id="wrapper-main">
-    <div id="wrapper-login">
-      <?php include_once("php/wrapper-login.php");?>
-    </div>
-
     <h2>WordCharge</h2>
-    <h3>New Words</h3>
+    <p>Test</p>
     <?php 
-        include("php/vars.php");
-        include("php/latestdict.php"); 
-    ?>
+       include("php/vars.php");
+       include("testmake2.php"); ?>
     <?php include("php/footer.php"); ?>
   </div>
 
 </body>
 </html>
+

@@ -1,7 +1,3 @@
-<?php
-session_start();
-//echo $_SESSION["myusername"];
-?>
 <!DOCTYPE html>
 
 <html>
@@ -14,10 +10,10 @@ session_start();
 
   <?php include("php/header.php"); ?>
   <div id="wrapper-main">
-    <div id="wrapper-login">
-      <?php include_once("php/wrapper-login.php");?>
+    <!--<h1>Welcome to W3Schools</h1>--> 
+    <div id="wrapper-login-reg">
+      <a href="login.php">Login</a>&nbsp;|&nbsp;<a href="join.php">Register</a>
     </div>
-
     <h2>WordCharge</h2>
     <p>You can learn words from a news or books.</p>
     <p>You can make a custom dictionary:</p>

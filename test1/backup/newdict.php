@@ -1,22 +1,37 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<?php
+session_start();
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>WordCharge</title>
     <meta charset="utf-8">
     <link href="css/site.css" rel="stylesheet">
+    <!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />-->
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+    <!-- functions.js - 1.Save known words;  -->
+    <script src="js/functions.js"></script>
 </head>
 <body>
     <?php include("php/header.php"); ?>
     <div id="wrapper-main">
-        <h2>WordCharge</h2>
+      <div id="wrapper-login">
+        <?php include_once("php/wrapper-login.php");?>
+      </div>
 
+        <h2>WordCharge</h2>
+    
         <!-- Progress bar holder -->
         <div id="progress" style="width:500px;border:1px solid #ccc;"></div>
         <!-- Progress information -->
         <div id="information" style="width"></div>
         
+        <p id="wordSaveStatus">Click "yes" to mark a word as a known.</p>
+        
         <?php
             include("php/vars.php");
+            include("php/functions.php");
             
             $textArea = $_POST['textArea'];
             $langId = $_POST['langId'];
@@ -24,16 +39,18 @@
             // 1.=====
             // Get data from html form textrArea field, remove all special characters
             // and make an array ($words), convert all words to lowercase 
-            $words = preg_split('/\P{L}+/u', $textArea, 0, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
-            $words = array_map('strtolower', $words);
-            
             // Delete all dublicate words in the array and sort in descending order
-            $words = array_count_values($words);
-            arsort($words);
+            $words = split_text_into_words($textArea);
+            $totalWords = count($words);
+           
+            // Select only new words
+            $words = look_for_the_new_words($words,$MysqlUser,$MysqlUPass,$MysqlDB,$UserKNW);
 
-            // Count unique words in the array
-            $total = count($words);
-            echo "Unique words: ".$total;
+            // Count words stat
+            $totalNew = count($words);
+            $youKnow = $totalWords - $totalNew;
+            $yPercent = ($youKnow * 100)/$totalWords;
+            echo "Total: ".$totalWords."; New: ".$totalNew."; You know: ".$youKnow." (".$yPercent."%);";
             
             // 2.=====
             // Set MySQL connection and fill the database with new words
@@ -55,11 +72,12 @@
                 printf("Error loading character set utf8: %s\n", mysqli_error($con));
             }
             
+             //$totalNew = maximum number of new words found
             // Loop through the words in $words array and run the Progress Bar
-            for($i=0; $i<$total; $i++){
+            for($i=0; $i<$totalNew; $i++){
 
                 // Progress Bar: Calculate the percentation
-                $percent = intval($i/$total * 100)."%";
+                $percent = intval($i/$totalNew * 100)."%";
                 
                 // Progress Bar: Javascript for updating the progress bar and information
                 echo '<script language="javascript">
@@ -82,51 +100,29 @@
                 
                 // Insert word and its frequency into database
                 $sqlInsert = mysqli_query($con, "INSERT INTO $UserNW (freq, word) VALUES ('$onlyFreq[$i]', '$onlyWords[$i]')");
+                if(!$sqlInsert){
+                  die('newdict.php - Error after Insert: ' . mysqli_error($con)); 
+                }
+                /* free result set */
+                mysqli_free_result($sqlInsert);
 
                 // 3.=====
-                // Translate words
-                    // Get word translation from Yandex Translate API
-                    $jsonurlTr = $trnsl_api."?key=".$trnsl_key."&lang=".$langId."&format=html&text=".$onlyWords[$i];
-                    $jsonTr = json_decode(file_get_contents($jsonurlTr), true);
-                
-                    $dataTr = array();
-                    $nTr = 0;
-                    foreach($jsonTr["text"] as $keyTr=>$wordTr){
-                        $dataTr[$nTr] = $wordTr;
-                        $nTr++;
-                    }
-
-                    // Get translation from Yandex Dict API
-                    $jsonurlDict = $dict_api."?key=".$dict_key."&lang=".$langId."&format=html&text=".$onlyWords[$i];
-                    $jsonDict = json_decode(file_get_contents($jsonurlDict), true);
-                    // Parse Yandex Dict API JSON string
-                    $dataDict = array();
-                    $nDict = 0;
-                    foreach($jsonDict["def"] as $def){
-                        foreach($def["tr"] as $text){
-                            //$dataDict = array($text["text"]);
-                            $dataDict[$nDict] = $text["text"];
-                            $nDict++;
-                            foreach($text["syn"] as $syn){
-                                //$nDict++;
-                                $dataDict[$nDict] = $syn["text"];
-                                $nDict++;
-                            }
-                        }
-                    }
-                
+                // Translate every word in the $onlyWords[] array
+                // Get word translation from Yandex Translate API
+                // Get translation from Yandex Dict API
                 // Merge Translate and Dict arrays into third array 
                 // and delete all dublicate values in the third array 
-                $mergedTrDict = array_unique(array_merge($dataTr, $dataDict));               
- 
                 //Implode the merged third array into string of values separated by coma
-                $strDict = implode(", ", $mergedTrDict);
-                //$strDict = implode(", ", $dataTr);
+                $strDict = get_yandex_api_translation_dictionary($onlyWords[$i], $langId, $trnsl_api, $trnsl_key, $dict_api, $dict_key);
                 
                 // Sql query to update translation for the word
                 $sqlUpdate = mysqli_query($con, "UPDATE $UserNW SET text='$strDict' WHERE word='$onlyWords[$i]' AND freq='$onlyFreq[$i]'");
-                
-                
+                if(!$sqlUpdate){
+                  die('newdict.php - Error after Update: ' . mysqli_error($con)); 
+                }
+                /* free result set */
+                mysqli_free_result($sqlUpdate);
+
             }
 
             // Progress Bar: Tell user that the process is completed
@@ -136,13 +132,18 @@
             // Display words
 
             // Mysql query to display the table content 
+            //$UserNW = mysqli_real_escape_string($con, $UserNW);
             $sqlSelect = mysqli_query($con,"SELECT * FROM $UserNW");
+            if(!$sqlSelect){
+              die('newdict.php - Error after Select: ' . mysqli_error($con)); 
+            }
             
             // Display user dictinary in form of the html table
             echo "<br>";
             echo "Dictionary: " . $langId . "<br>";
             echo "<table border='1'>
             <tr>
+            <th>I know</th>
             <th>freq</th>
             <th>word</th>
             <th>text</th>
@@ -150,18 +151,23 @@
             
             while($row = mysqli_fetch_array($sqlSelect)) {
               echo "<tr>";
-              echo "<td>" . $row['freq'] . "</td>";
-              echo "<td>" . $row['word'] . "</td>";
-              echo "<td>" . $row['text'] . "</td>";
+              echo "<td>" . "<span class=\"iKnowTheWord\"><a href=\"\">yes</a></span>" . "</td>";
+              echo "<td>" . "<span class=\"tdFreq\">" . $row['freq'] . "</span>" . "</td>";
+              //echo "<td>" . $row['word'] . "</td>";
+              echo "<td>" . "<span class=\"tdWord\">" . $row['word'] . "</span>" . "</td>";
+              echo "<td>" . "<span class=\"tdText\">" . $row['text'] . "</span>" . "</td>";
               echo "</tr>";
             }
             
             echo "</table><br>";
-            
+           
             // To check MySQL charset
             /*$charset = mysqli_character_set_name($con);
             printf ("Current Mysql charset - %s\n",$charset);
             echo "<br>";*/
+
+            /* free result set */
+            mysqli_free_result($sqlSelect);
             
             // Close MySQL connection
             mysqli_close($con);

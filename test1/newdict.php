@@ -1,4 +1,7 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<?php
+session_start();
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>WordCharge</title>
@@ -13,6 +16,10 @@
 <body>
     <?php include("php/header.php"); ?>
     <div id="wrapper-main">
+      <div id="wrapper-login">
+        <?php include_once("php/wrapper-login.php");?>
+      </div>
+
         <h2>WordCharge</h2>
     
         <!-- Progress bar holder -->

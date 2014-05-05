@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 
 <html>
@@ -10,6 +13,10 @@
 
   <?php include("php/header.php"); ?>
   <div id="wrapper-main">
+    <div id="wrapper-login">
+      <?php include_once("php/wrapper-login.php");?>
+    </div>
+
     <h2>WordCharge</h2>
     <p>The goal of the WordCharge project is to help learning new words in different foreign languages.</p>
     <?php include("php/footer.php"); ?>
