@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
 
 //
@@ -8,7 +9,7 @@ $(document).ready(function(){
     //$('span.iKnowTheWord').click(function() {  
       
       //var aWord = $(this).html();
-      //alert(aWord);
+      //alert(theSessionUser);
       // Take values from a table and post it into iknowtheword.php
       // to fill the MySQL table of known words                    
       var aWord = $(this).closest('tr').find('span.tdWord').html();                    
@@ -32,7 +33,8 @@ $(document).ready(function(){
           {
             word:aWord,
             freq:aFreq,
-            text:aText
+            text:aText,
+            theSessionUser:theSessionUser
           },
           function(data,status){
             //alert("Data: " + data + "\nStatus: " + status);

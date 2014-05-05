@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,6 +12,13 @@ session_start();
     <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
     <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
     <!-- functions.js - 1.Save known words;  -->
+    <script>
+      // Transfer $_SESSION["myusername"] to JQuery functions.js and iknowtheword.php 
+      <?php
+        $theSessionUser = $_SESSION["myusername"];
+        echo "var theSessionUser = '{$theSessionUser}';";
+      ?>
+    </script>
     <script src="js/functions.js"></script>
 </head>
 <body>
@@ -35,7 +43,11 @@ session_start();
             
             $textArea = $_POST['textArea'];
             $langId = $_POST['langId'];
-            
+
+            // Take the loged user name as a tables name           
+            $UserNW=$theSessionUser."_NW"; //New words
+            $UserKNW=$theSessionUser."_KNW"; //Known words
+ 
             // 1.=====
             // Get data from html form textrArea field, remove all special characters
             // and make an array ($words), convert all words to lowercase 
@@ -51,6 +63,7 @@ session_start();
             $youKnow = $totalWords - $totalNew;
             $yPercent = ($youKnow * 100)/$totalWords;
             echo "Total: ".$totalWords."; New: ".$totalNew."; You know: ".$youKnow." (".$yPercent."%);";
+            //echo $theSessionUser;
             
             // 2.=====
             // Set MySQL connection and fill the database with new words
@@ -60,12 +73,30 @@ session_start();
             if (mysqli_connect_errno()) {
               echo "Failed to connect to MySQL: " . mysqli_connect_error();
             }
+           
+            // Create user Mysql tables if not exists   
+            //$UserNW=$theSessionUser."_NW";
+            //$UserKNW=$theSessionUser."_KNW";
             
-            // Mysql query to delete old data from UserNW table
+            $sqlCreate = "CREATE TABLE IF NOT EXISTS $UserNW( ".
+                   "id INT(20) NOT NULL AUTO_INCREMENT, ".
+                   "lang VARCHAR(10) NOT NULL, ".
+                   "freq BIGINT(20) NOT NULL, ".
+                   "word VARCHAR(40) NOT NULL, ".
+                   "text VARCHAR(255) NOT NULL, ".
+                   "PRIMARY KEY ( id )) ".
+                   "ENGINE=InnoDB DEFAULT CHARSET=utf8";
+            if (!mysqli_query($con,$sqlCreate)) {
+              die('Error after Create: ' . mysqli_error($con));
+            }
+            mysqli_free_result($sqlCreate);
+ 
+            // Mysql query to delete old data from the new words table
             $sqlDelete = "TRUNCATE TABLE $UserNW";
             if (!mysqli_query($con,$sqlDelete)) {
               die('Error after Delete: ' . mysqli_error($con));
             }
+            mysqli_free_result($sqlDelete);
             
             // change character set to utf8
             if (!mysqli_set_charset($con, "utf8")) {

@@ -18,6 +18,7 @@ if (!mysqli_set_charset($con, "utf8")) {
     printf("Error loading character set utf8: %s\n", mysqli_error($con));
 }
 
+$UserNW = $theSessionUser."_NW";
 // Mysql query to display the table content 
 $sqlSelect = mysqli_query($con,"SELECT * FROM $UserNW");
 

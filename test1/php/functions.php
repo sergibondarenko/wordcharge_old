@@ -58,6 +58,19 @@ if (!mysqli_set_charset($conF, "utf8")) {
     printf("Error loading character set utf8: %s\n", mysqli_error($conF));
 }
 
+// Create a table of known words if not exist
+$sqlCreate = "CREATE TABLE IF NOT EXISTS $UserKNW( ".
+                   "lang VARCHAR(10) NOT NULL, ".
+                   "word VARCHAR(40) NOT NULL, ".
+                   "text VARCHAR(255) NOT NULL, ".
+                   "PRIMARY KEY ( word )) ".
+                   "ENGINE=InnoDB DEFAULT CHARSET=utf8";
+if (!mysqli_query($conF,$sqlCreate)) {
+  die('function look_for_the_new_words(): Error after Create Table: ' . mysqli_error($conF));
+}
+mysqli_free_result($sqlCreate);
+
+
 // Create an empty array for known words
 $knownWords = array();
 $n = 0;

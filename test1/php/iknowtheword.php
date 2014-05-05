@@ -7,6 +7,11 @@ include("vars.php");
 $word = $_POST['word'];
 $freq = $_POST['freq'];
 $text = $_POST['text'];
+$theSessionUser = $_POST['theSessionUser'];
+
+// Take the loged user name as a tables name           
+$UserNW=$theSessionUser."_NW"; //New words
+$UserKNW=$theSessionUser."_KNW"; //Known words
 
 // Set MySQL connection and fill the database with new words
 $con=mysqli_connect("localhost",$MysqlUser,$MysqlUPass,$MysqlDB);
@@ -24,7 +29,7 @@ if (!mysqli_set_charset($con, "utf8")) {
 // Mysql query to delete the word marked as known in newdict.php
 $sqlDelete = mysqli_query($con,"DELETE FROM $UserNW WHERE word='$word' AND freq='$freq'");
 if(!$sqlDelete){
-  die('iknowtheword.php - Error after Delete: ' . mysqli_error($con));
+  die('iknowtheword.php - Error after Delete: ' . mysqli_error($con). '; Session user is '. $theSessionUser);
 }
 mysqli_free_result($sqlDelete);
 
