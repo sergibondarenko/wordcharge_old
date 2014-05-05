@@ -7,6 +7,7 @@ include("vars.php");
 $word = $_POST['word'];
 $freq = $_POST['freq'];
 $text = $_POST['text'];
+$langId = $_POST['langId'];
 $theSessionUser = $_POST['theSessionUser'];
 
 // Take the loged user name as a tables name           
@@ -27,7 +28,7 @@ if (!mysqli_set_charset($con, "utf8")) {
 }
 
 // Mysql query to delete the word marked as known in newdict.php
-$sqlDelete = mysqli_query($con,"DELETE FROM $UserNW WHERE word='$word' AND freq='$freq'");
+$sqlDelete = mysqli_query($con,"DELETE FROM $UserNW WHERE word='$word' AND freq='$freq' AND lang='$langId'");
 if(!$sqlDelete){
   die('iknowtheword.php - Error after Delete: ' . mysqli_error($con). '; Session user is '. $theSessionUser);
 }
@@ -35,7 +36,7 @@ mysqli_free_result($sqlDelete);
 
 // Mysql query to delete the word marked as known in newdict.php
 // use IGNORE to prevent dublicate values errors notifications
-$sqlInsert = mysqli_query($con,"INSERT INTO $UserKNW (word, text) VALUES ('$word', '$text')");
+$sqlInsert = mysqli_query($con,"INSERT INTO $UserKNW (lang, word, text) VALUES ('$langId', '$word', '$text')");
 //if(!$sqlInsert){
 //  die('iknowtheword.php - Error after Insert: ' . mysqli_error($con));
 //}

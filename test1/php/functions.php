@@ -44,7 +44,7 @@ function curl_get_contents($url)
 
 // Compare with database of known words
 // Return only new words
-function look_for_the_new_words($words,$MysqlUser,$MysqlUPass,$MysqlDB,$UserKNW)
+function look_for_the_new_words($words,$langId,$MysqlUser,$MysqlUPass,$MysqlDB,$UserKNW)
 {
 $conF=mysqli_connect("localhost",$MysqlUser,$MysqlUPass,$MysqlDB);
 
@@ -76,7 +76,7 @@ $knownWords = array();
 $n = 0;
 
 // Query $UserKNW table of new words and look for all words in the table
-$query = "SELECT word FROM $UserKNW";
+$query = "SELECT word FROM $UserKNW WHERE lang='$langId'";
 $sqlNewWord = mysqli_query($conF,$query);
 if(!$sqlNewWord){
   die('functions.php - Error in function look_for_the_new_words(): ' . mysqli_error($conF));

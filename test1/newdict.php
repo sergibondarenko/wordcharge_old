@@ -13,10 +13,12 @@ session_start();
     <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
     <!-- functions.js - 1.Save known words;  -->
     <script>
-      // Transfer $_SESSION["myusername"] to JQuery functions.js and iknowtheword.php 
+      // Transfer $_SESSION["myusername"] and $langId to JQuery functions.js and iknowtheword.php 
       <?php
         $theSessionUser = $_SESSION["myusername"];
         echo "var theSessionUser = '{$theSessionUser}';";
+        $langId = $_POST['langId'];
+        echo "var langId = '{$langId}';";
       ?>
     </script>
     <script src="js/functions.js"></script>
@@ -56,7 +58,7 @@ session_start();
             $totalWords = count($words);
            
             // Select only new words
-            $words = look_for_the_new_words($words,$MysqlUser,$MysqlUPass,$MysqlDB,$UserKNW);
+            $words = look_for_the_new_words($words,$langId,$MysqlUser,$MysqlUPass,$MysqlDB,$UserKNW);
 
             // Count words stat
             $totalNew = count($words);
@@ -130,7 +132,7 @@ session_start();
                 $onlyFreq = array_values($words);
                 
                 // Insert word and its frequency into database
-                $sqlInsert = mysqli_query($con, "INSERT INTO $UserNW (freq, word) VALUES ('$onlyFreq[$i]', '$onlyWords[$i]')");
+                $sqlInsert = mysqli_query($con, "INSERT INTO $UserNW (lang,freq,word) VALUES ('$langId','$onlyFreq[$i]', '$onlyWords[$i]')");
                 if(!$sqlInsert){
                   die('newdict.php - Error after Insert: ' . mysqli_error($con)); 
                 }
@@ -147,7 +149,7 @@ session_start();
                 $strDict = get_yandex_api_translation_dictionary($onlyWords[$i], $langId, $trnsl_api, $trnsl_key, $dict_api, $dict_key);
                 
                 // Sql query to update translation for the word
-                $sqlUpdate = mysqli_query($con, "UPDATE $UserNW SET text='$strDict' WHERE word='$onlyWords[$i]' AND freq='$onlyFreq[$i]'");
+                $sqlUpdate = mysqli_query($con, "UPDATE $UserNW SET text='$strDict' WHERE word='$onlyWords[$i]' AND freq='$onlyFreq[$i]' AND lang='$langId'");
                 if(!$sqlUpdate){
                   die('newdict.php - Error after Update: ' . mysqli_error($con)); 
                 }

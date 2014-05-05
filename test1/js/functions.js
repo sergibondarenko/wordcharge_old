@@ -34,6 +34,7 @@ $(document).ready(function(){
             word:aWord,
             freq:aFreq,
             text:aText,
+            langId:langId,
             theSessionUser:theSessionUser
           },
           function(data,status){

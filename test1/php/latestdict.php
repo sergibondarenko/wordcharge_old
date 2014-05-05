@@ -24,9 +24,10 @@ $sqlSelect = mysqli_query($con,"SELECT * FROM $UserNW");
 
 // Display user dictinary in index.html via jQuery AJAX from dislaydict.js
 echo "<br>";
-echo "Dictionary: " . $langId . "<br>";
+//echo "Dictionary: " . $langId . "<br>";
 echo "<table border='1'>
 <tr>
+<th>lang</th>
 <th>freq</th>
 <th>word</th>
 <th>text</th>
@@ -34,6 +35,7 @@ echo "<table border='1'>
 
 while($row = mysqli_fetch_array($sqlSelect)) {
   echo "<tr>";
+  echo "<td>" . $row['lang'] . "</td>";
   echo "<td>" . $row['freq'] . "</td>";
   echo "<td>" . $row['word'] . "</td>";
   echo "<td>" . $row['text'] . "</td>";
