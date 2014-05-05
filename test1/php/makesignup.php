@@ -43,6 +43,8 @@ if(!empty($_POST['myusername']) && !empty($_POST['mypassword'])){
   if($count==1){
   
     // Register $myusername, $mypassword and redirect to file "login_success.php"
+    session_start();
+    $_SESSION["myusername"] = $myusername;
     header("location:index.php");
   } else {
     echo "Wrong Username or Password or E-mail. Try again.";
