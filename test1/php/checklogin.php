@@ -1,5 +1,6 @@
 <?php
 require_once("vars.php");
+require_once("functions.php");
 
 //if(isset($_POST['myusername'] && isset($_POST['mypassword'])){
 if(!empty($_POST['myusername']) && !empty($_POST['mypassword'])){
@@ -18,12 +19,19 @@ if(!empty($_POST['myusername']) && !empty($_POST['mypassword'])){
   
   
   // To protect MySQL injection (more detail about MySQL injection)
-  $myusername = stripslashes($myusername);
-  $mypassword = stripslashes($mypassword);
+  //$myusername = strip_tags(stripslashes($myusername));
+  //$mypassword = strip_tags(stripslashes($mypassword));
   //$myusername = mysql_real_escape_string($myusername);
   //$mypassword = mysql_real_escape_string($mypassword);
+  $myusername = sanitize_input($myusername);
+  $mypassword = sanitize_input($mypassword);
+  $myusername = preg_replace('/[^a-z0-9 ]/i', '', $myusername);
+  $mypassword = preg_replace('/[^a-z0-9]/i', '', $mypassword);
+
   $myusername = mysqli_real_escape_string($con, $myusername);
   $mypassword = mysqli_real_escape_string($con, $mypassword);
+
+  $mypassword = md5($mypassword);
   $sql="SELECT * FROM $MysqlUserDB WHERE username='$myusername' and password='$mypassword'";
   //$result=mysql_query($sql);
   $result=mysqli_query($con, $sql);

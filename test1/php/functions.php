@@ -3,6 +3,15 @@
 //include ($_SERVER['DOCUMENT_ROOT'] . "vars.php");
 //include ("test1/php/vars.php");
 
+// Sanitize input
+function sanitize_input($data)
+{ 
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+
 // The functions to get json data from 
 // Yandex dict and translate APIs
 function remote_get_contents($url)

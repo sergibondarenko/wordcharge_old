@@ -16,10 +16,11 @@
     </div>
 
     <h2>WordCharge</h2>
+    <?php include("php/checklogin.php"); ?>
     
     <table width="300" border="0" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
       <tr>
-      <form name="form1" method="post" action="">
+      <form name="form1" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <td>
         <table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF">
           <tr>
@@ -33,7 +34,7 @@
           <tr>
              <td>Password</td>
              <td>:</td>
-             <td><input name="mypassword" type="text" id="mypassword"></td>
+             <td><input name="mypassword" type="password" id="mypassword"></td>
           </tr>
           <tr>
             <td>&nbsp;</td>
@@ -46,7 +47,6 @@
       </tr>
     </table>  
   
-    <?php include("php/checklogin.php"); ?>
     <?php include("php/footer.php"); ?>
   </div>
 
