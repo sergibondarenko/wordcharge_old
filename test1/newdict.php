@@ -6,7 +6,8 @@ session_start();
 <html lang="en">
 <head>
     <title>WordCharge</title>
-    <meta charset="utf-8">
+    <!--<meta charset="utf-8">-->
+    <meta charset="UTF-8">
     <link href="css/site.css" rel="stylesheet">
     <!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />-->
     <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
@@ -43,6 +44,8 @@ session_start();
             include("php/vars.php");
             include("php/functions.php");
             
+            header('Content-Type: text/html; charset=utf-8');
+
             $textArea = $_POST['textArea'];
             $langId = $_POST['langId'];
 
@@ -64,7 +67,7 @@ session_start();
             $totalNew = count($words);
             $youKnow = $totalWords - $totalNew;
             $yPercent = ($youKnow * 100)/$totalWords;
-            echo "Total: ".$totalWords."; New: ".$totalNew."; You know: ".$youKnow." (".$yPercent."%);";
+            echo "<div id=\"wordsStat\">"."Total: ".$totalWords."; New: ".$totalNew."; You know: ".$youKnow." (".$yPercent."%);"."<div>";
             //echo $theSessionUser;
             
             // 2.=====

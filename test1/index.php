@@ -62,7 +62,8 @@ session_start();
                     <option value="it-en">Italian</option>
                     <option value="ru-en">Russian</option>
                     <option value="uk-en">Ukrainian</option>
-                    <option value="en-ru" selected>English-Russian</option>
+                    <option value="en-ru">English-Russian</option>
+                    <option value="it-ru" selected>Italian-Russian</option>
                 </select>
               </div>      
             </td>

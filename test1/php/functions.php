@@ -72,7 +72,7 @@ $sqlCreate = "CREATE TABLE IF NOT EXISTS $UserKNW( ".
                    "lang VARCHAR(10) NOT NULL, ".
                    "word VARCHAR(40) NOT NULL, ".
                    "text VARCHAR(255) NOT NULL, ".
-                   "PRIMARY KEY ( word )) ".
+                   "PRIMARY KEY ( text )) ".
                    "ENGINE=InnoDB DEFAULT CHARSET=utf8";
 if (!mysqli_query($conF,$sqlCreate)) {
   die('function look_for_the_new_words(): Error after Create Table: ' . mysqli_error($conF));
@@ -120,6 +120,7 @@ function split_text_into_words($text)
 // Get data from html form textrArea field, remove all special characters
 // and make an array ($words), convert all words to lowercase 
 $words = preg_split('/\P{L}+/u', $text, 0, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
+//$words = preg_split('/\P{L}+\'’/u', $text, 0, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
 $words = array_map('strtolower', $words);
 
 // Delete all dublicate words in the array and sort in descending order
