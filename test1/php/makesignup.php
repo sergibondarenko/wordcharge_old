@@ -7,6 +7,8 @@ $signupErr = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if(empty($_POST['myusername']) || empty($_POST['mypassword']) || empty($_POST['myemail'])){
     $signupErr = "All fields are required!";
+  } elseif ($_POST['captcha'] != $_SESSION['digit']){
+    $signupErr = "You typed wrong digits in Turing test!";
   } else {
   //if(!empty($_POST['myusername']) && !empty($_POST['mypassword'] && !empty($_POST['myemail']))){
   //if(!empty($_POST['myusername']) && !empty($_POST['mypassword'])){
