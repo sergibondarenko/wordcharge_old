@@ -22,16 +22,11 @@ session_start();
         $langId = $_POST['langId'];
         echo "var langId = '{$langId}';";
       ?>
-      <?php 
-        // Transfer site language value $myLang 
-        // to JQuery functions.js and iknowtheword.php 
-        include("php/setsitelanguage.php"); 
-        echo "var myLang = '{$myLang}';";
-      ?>
     </script>
     <script src="js/functions.js"></script>
 </head>
 <body>
+    <?php include("php/setsitelanguage.php"); ?>
     <?php include("php/header.php"); ?>
     <div id="wrapper-main">
       <div id="wrapper-login">
@@ -45,7 +40,7 @@ session_start();
         <!-- Progress information -->
         <div id="information" style="width"></div>
         
-        <p id="wordSaveStatus"><?php echo $langArray["textWordSaveStatus"]; ?></p>
+        <p id="wordSaveStatus">Click "yes" to mark a word as a known.</p>
         
         <?php
             include("php/vars.php");
@@ -74,8 +69,7 @@ session_start();
             $totalNew = count($words);
             $youKnow = $totalWords - $totalNew;
             $yPercent = ($youKnow * 100)/$totalWords;
-            //echo "<div id=\"wordsStat\">"."Total number: ".$totalWords."; New: ".$totalNew."; You know: ".$youKnow." (".round($yPercent,2)."%);"."<div>";
-            echo "<div id=\"wordsStat\">".$langArray["textNewdictTotal"].": ".$totalWords."; ".$langArray["textNewdictNew"].": ".$totalNew."; ".$langArray["textNewdictYouknow"].": ".$youKnow." (".round($yPercent,2)."%);"."<div>";
+            echo "<div id=\"wordsStat\">"."Total number: ".$totalWords."; New: ".$totalNew."; You know: ".$youKnow." (".round($yPercent,2)."%);"."<div>";
             //echo $theSessionUser;
             
             // 2.=====
@@ -126,7 +120,7 @@ session_start();
                 // Progress Bar: Javascript for updating the progress bar and information
                 echo '<script language="javascript">
                 document.getElementById("progress").innerHTML="<div style=\"width:'.$percent.';background-color:#ddd;\">&nbsp;</div>";
-                document.getElementById("information").innerHTML="'.$i.' '.$langArray["textNewdictProcessBar"].'";
+                document.getElementById("information").innerHTML="'.$i.' word(s) processed.";
                 </script>';
                 
             
@@ -170,7 +164,7 @@ session_start();
             }
 
             // Progress Bar: Tell user that the process is completed
-            echo '<script language="javascript">document.getElementById("information").innerHTML="'.$langArray["textNewdictProcessBarComplete"].'"</script>'.'<br>';
+            echo '<script language="javascript">document.getElementById("information").innerHTML="Process completed"</script>'.'<br>';
             
             // 4.=====
             // Display words
@@ -184,19 +178,18 @@ session_start();
             
             // Display user dictinary in form of the html table
             echo "<br>";
-            //echo "Dictionary: " . $langId . "<br>";
-            echo $langArray["textNewdictDict"].": " . $langId . "<br>";
+            echo "Dictionary: " . $langId . "<br>";
             echo "<table border='1'>
             <tr>
-            <th>".$langArray["textTableIknow"]."</th>
-            <th>".$langArray["textTableFreq"]."</th>
-            <th>".$langArray["textTableWord"]."</th>
-            <th>".$langArray["textTableText"]."</th>
+            <th>I know</th>
+            <th>freq</th>
+            <th>word</th>
+            <th>text</th>
             </tr>";
             
             while($row = mysqli_fetch_array($sqlSelect)) {
               echo "<tr>";
-              echo "<td>" . "<span class=\"iKnowTheWord\"><a href=\"\">".$langArray["textTableYes"]."</a></span>" . "</td>";
+              echo "<td>" . "<span class=\"iKnowTheWord\"><a href=\"\">yes</a></span>" . "</td>";
               echo "<td>" . "<span class=\"tdFreq\">" . $row['freq'] . "</span>" . "</td>";
               //echo "<td>" . $row['word'] . "</td>";
               echo "<td>" . "<span class=\"tdWord\">" . $row['word'] . "</span>" . "</td>";

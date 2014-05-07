@@ -3,12 +3,16 @@
 // Use instead class based module iknowtheword1.php
 
 include("vars.php");
+//include_once("setsitelanguage1.php");
 
 $word = $_POST['word'];
 $freq = $_POST['freq'];
 $text = $_POST['text'];
 $langId = $_POST['langId'];
 $theSessionUser = $_POST['theSessionUser'];
+
+$myLang = $_POST['myLang'];
+$langArray = parse_ini_file("../languages/".$myLang.".ini");
 
 // Take the loged user name as a tables name           
 $UserNW=$theSessionUser."_NW"; //New words
@@ -59,6 +63,7 @@ echo "<br>";
 mysqli_close($con);
 
 //echo "Now you know the "."\"".$word."\"! Translation: ".$text; 
-echo "Word: <b>".$word."</b>;"." Now you know: ".$rowCnt." words;"; 
-//echo $rowCnt;
+echo $langArray["textIknowWord"].": <b>".$word."</b>;"." ".$langArray["textIknowNowYouKn"].": ".$rowCnt." ".$langArray["textIknowWords"].";"; 
+
+//echo $myLang;
 ?>

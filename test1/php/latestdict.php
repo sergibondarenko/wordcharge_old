@@ -27,10 +27,10 @@ echo "<br>";
 //echo "Dictionary: " . $langId . "<br>";
 echo "<table border='1'>
 <tr>
-<th>lang</th>
-<th>freq</th>
-<th>word</th>
-<th>text</th>
+<th>".$langArray["textTableLang"]."</th>
+<th>".$langArray["textTableFreq"]."</th>
+<th>".$langArray["textTableWord"]."</th>
+<th>".$langArray["textTableText"]."</th>
 </tr>";
 
 while($row = mysqli_fetch_array($sqlSelect)) {

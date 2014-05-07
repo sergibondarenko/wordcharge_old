@@ -35,6 +35,7 @@ $(document).ready(function(){
             freq:aFreq,
             text:aText,
             langId:langId,
+            myLang:myLang,
             theSessionUser:theSessionUser
           },
           function(data,status){
