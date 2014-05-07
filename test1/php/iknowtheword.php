@@ -34,7 +34,7 @@ if(!$sqlDelete){
 }
 mysqli_free_result($sqlDelete);
 
-// Mysql query to delete the word marked as known in newdict.php
+// Mysql query to insert the word marked as known in newdict.php
 // use IGNORE to prevent dublicate values errors notifications
 $sqlInsert = mysqli_query($con,"INSERT INTO $UserKNW (lang, word, text) VALUES ('$langId', '$word', '$text')");
 //if(!$sqlInsert){

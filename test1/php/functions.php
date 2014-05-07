@@ -69,10 +69,11 @@ if (!mysqli_set_charset($conF, "utf8")) {
 
 // Create a table of known words if not exist
 $sqlCreate = "CREATE TABLE IF NOT EXISTS $UserKNW( ".
+                   //"id INT(11) NOT NULL AUTO_INCREMENT,".
                    "lang VARCHAR(10) NOT NULL, ".
                    "word VARCHAR(40) NOT NULL, ".
                    "text VARCHAR(255) NOT NULL, ".
-                   "PRIMARY KEY ( text )) ".
+                   "PRIMARY KEY ( word,text )) ".
                    "ENGINE=InnoDB DEFAULT CHARSET=utf8";
 if (!mysqli_query($conF,$sqlCreate)) {
   die('function look_for_the_new_words(): Error after Create Table: ' . mysqli_error($conF));
