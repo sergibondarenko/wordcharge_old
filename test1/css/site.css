@@ -5,6 +5,40 @@ background-color: #5c87b2;
 color: #696969;
 }
 
+/*div, span, p{
+    border: 1px solid red;
+}
+*/
+#super-main 
+{
+position:relative; /*The parent must be relative if children want to overlap*/
+}
+
+#wrapper-langs
+{
+position:absolute;
+right:15px;
+z-index:1; /*Stack value to overlap elements*/ 
+/*float:right;*/
+}
+
+#wrapper-langs a:link
+{
+color:#FFFFFF;
+text-decoration:none;
+}
+
+#wrapper-langs a:visited 
+{
+text-decoration:none;
+color:#FFFFFF;
+}
+#wrapper-langs a:hover 
+{
+text-decoration:underline;
+color:#000000;
+}
+
 a:link 
 {
 text-decoration:none;
@@ -36,11 +70,6 @@ padding: 20px;
 background-color: #ffffff;
 border-radius: 0 4px 4px 4px;
 }
-
-/*#wrapper-signup
-{
-float:right;
-}*/
 
 #wrapper-login
 {
@@ -81,3 +110,4 @@ ul#menu li a:hover
 {
 background-color: #e8eef4;
 }
+
