@@ -67,7 +67,7 @@ session_start();
             $totalNew = count($words);
             $youKnow = $totalWords - $totalNew;
             $yPercent = ($youKnow * 100)/$totalWords;
-            echo "<div id=\"wordsStat\">"."Total: ".$totalWords."; New: ".$totalNew."; You know: ".$youKnow." (".$yPercent."%);"."<div>";
+            echo "<div id=\"wordsStat\">"."Total: ".$totalWords."; New: ".$totalNew."; You know: ".$youKnow." (".round($yPercent,2)."%);"."<div>";
             //echo $theSessionUser;
             
             // 2.=====
