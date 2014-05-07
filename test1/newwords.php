@@ -10,7 +10,7 @@ session_start();
   <link href="css/site.css" rel="stylesheet">
 </head>
 <body>
-
+  <?php include("php/setsitelanguage.php"); ?>
   <?php include("php/header.php"); ?>
   <div id="wrapper-main">
     <div id="wrapper-login">
@@ -18,7 +18,7 @@ session_start();
     </div>
 
     <h2>WordCharge</h2>
-    <h3>New Words</h3>
+    <h3><?php echo $langArray["textNewwords"]; ?></h3>
     <?php 
         include("php/vars.php");
         include("php/latestdict.php"); 

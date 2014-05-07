@@ -82,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Register $myusername, $mypassword and redirect to file "login_success.php"
         session_start();
         $_SESSION["myusername"] = $myusername;
-        header("location:index.php");
+        header("location:index.php?myLang=$myLang");
       } else {
         echo "Wrong Username or Password or E-mail. Try again. Don't use special characters in username and password fields";
       }

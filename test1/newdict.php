@@ -14,8 +14,9 @@ session_start();
     <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
     <!-- functions.js - 1.Save known words;  -->
     <script>
-      // Transfer $_SESSION["myusername"] and $langId to JQuery functions.js and iknowtheword.php 
       <?php
+        // Transfer $_SESSION["myusername"] and $langId 
+        // to JQuery functions.js and iknowtheword.php 
         $theSessionUser = $_SESSION["myusername"];
         echo "var theSessionUser = '{$theSessionUser}';";
         $langId = $_POST['langId'];
@@ -25,6 +26,7 @@ session_start();
     <script src="js/functions.js"></script>
 </head>
 <body>
+    <?php include("php/setsitelanguage.php"); ?>
     <?php include("php/header.php"); ?>
     <div id="wrapper-main">
       <div id="wrapper-login">

@@ -7,6 +7,7 @@ if(!empty($_POST['myusername']) && !empty($_POST['mypassword'])){
   // Connect to server and select databse.
   //mysql_connect("localhost", "$MysqlUser", "$MysqlUPass")or die("Error: Cannot connect to Mysql!!!"); 
   //mysql_select_db("$MysqlDB")or die("cannot select DB");
+
   $con = mysqli_connect("localhost",$MysqlUser,$MysqlUPass,$MysqlDB);
   // Check connection
   if (mysqli_connect_errno()) {
@@ -54,7 +55,9 @@ if(!empty($_POST['myusername']) && !empty($_POST['mypassword'])){
     //session_register("mypassword"); 
     session_start();
     $_SESSION["myusername"] = $myusername;
-    header("location:index.php");
+
+    header("location:index.php?myLang=$myLang");    
+
   } else {
     echo "Wrong Username or Password. Try again.";
   }

@@ -10,6 +10,8 @@ session_start();
     <link href="css/site.css" rel="stylesheet">
 </head>
 <body>
+<div id="super-main">
+  <?php include("php/setsitelanguage.php"); ?>
 
   <?php include("php/header.php"); ?>
   <div id="wrapper-main">
@@ -18,9 +20,10 @@ session_start();
     </div>
 
     <h2>WordCharge</h2>
-    <p>The goal of the WordCharge project is to help learning new words in different foreign languages.</p>
+    <p><?php echo $langArray["textAboutMain"]; ?></p>
     <?php include("php/footer.php"); ?>
   </div>
+</div>
 
 </body>
 </html>
