@@ -42,7 +42,8 @@ $sqlInsert = mysqli_query($con,"INSERT INTO $UserKNW (lang, word, text) VALUES (
 //}
 mysqli_free_result($sqlInsert);
 
-if ($resultCnt = mysqli_query($con, "SELECT word FROM $UserKNW ORDER BY word")) {
+//if ($resultCnt = mysqli_query($con, "SELECT word FROM $UserKNW ORDER BY word")) {
+if ($resultCnt = mysqli_query($con, "SELECT word FROM $UserKNW WHERE lang='$langId'")) {
   /* determine number of rows result set */
   $rowCnt = mysqli_num_rows($resultCnt);
   /* close result set */
