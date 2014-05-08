@@ -171,6 +171,7 @@ $jsonTr = json_decode(remote_get_contents($jsonurlTr), true);
 $dataTr = array();
 $nTr = 0;
 foreach($jsonTr["text"] as $keyTr=>$wordTr){
+    $wordTr = str_replace("'", "`", $wordTr); // to screen special character "'"
     $dataTr[$nTr] = $wordTr;
     $nTr++;
 }
@@ -183,10 +184,12 @@ $nDict = 0;
 foreach($jsonDict["def"] as $def){
     foreach($def["tr"] as $text){
         //$dataDict = array($text["text"]);
+        $text["text"] = str_replace("'", "`", $text["text"]); // to screen special character "'"
         $dataDict[$nDict] = $text["text"];
         $nDict++;
         foreach($text["syn"] as $syn){
             //$nDict++;
+            $syn["text"] = str_replace("'", "`", $syn["text"]); // to screen special character "'"
             $dataDict[$nDict] = $syn["text"];
             $nDict++;
         }

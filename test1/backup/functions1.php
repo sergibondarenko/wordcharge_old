@@ -3,6 +3,15 @@
 //include ($_SERVER['DOCUMENT_ROOT'] . "vars.php");
 //include ("test1/php/vars.php");
 
+// Sanitize input
+function sanitize_input($data)
+{ 
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+
 // The functions to get json data from 
 // Yandex dict and translate APIs
 function remote_get_contents($url)
@@ -44,9 +53,9 @@ function curl_get_contents($url)
 
 // Compare with database of known words
 // Return only new words
-function look_for_the_new_words($words,$MysqlUser,$MysqlUPass,$MysqlDB,$UserKNW)
+function look_for_the_new_words($words,$langId,$MysqlUser,$MysqlUPass,$MysqlDB,$UserKNW)
 {
-$con=mysqli_connect("localhost",$MysqlUser,$MysqlUPass,$MysqlDB);
+$conF=mysqli_connect("localhost",$MysqlUser,$MysqlUPass,$MysqlDB);
 
 // Check connection
 if (mysqli_connect_errno()) {
@@ -54,33 +63,54 @@ if (mysqli_connect_errno()) {
 }
 
 /* change character set to utf8 */
-if (!mysqli_set_charset($con, "utf8")) {
-    printf("Error loading character set utf8: %s\n", mysqli_error($con));
+if (!mysqli_set_charset($conF, "utf8")) {
+    printf("Error loading character set utf8: %s\n", mysqli_error($conF));
 }
 
+// Create a table of known words if not exist
+$sqlCreate = "CREATE TABLE IF NOT EXISTS $UserKNW( ".
+                   //"id INT(11) NOT NULL AUTO_INCREMENT,".
+                   "lang VARCHAR(10) NOT NULL, ".
+                   "word VARCHAR(40) NOT NULL, ".
+                   "text VARCHAR(255) NOT NULL, ".
+                   "PRIMARY KEY ( word,text )) ".
+                   "ENGINE=InnoDB DEFAULT CHARSET=utf8";
+if (!mysqli_query($conF,$sqlCreate)) {
+  die('function look_for_the_new_words(): Error after Create Table: ' . mysqli_error($conF));
+}
+mysqli_free_result($sqlCreate);
+
+
+// Create an empty array for known words
 $knownWords = array();
 $n = 0;
-$query = "SELECT word FROM $UserKNW";
-//$query = "SELECT word FROM sergibondarenko_knw";
 
-$sqlNewWord = mysqli_query($con,$query);
+// Query $UserKNW table of new words and look for all words in the table
+$query = "SELECT word FROM $UserKNW WHERE lang='$langId'";
+$sqlNewWord = mysqli_query($conF,$query);
 if(!$sqlNewWord){
-  die('functions.php - Error in function look_for_the_new_words(): ' . mysqli_error($con));
+  die('functions.php - Error in function look_for_the_new_words(): ' . mysqli_error($conF));
 }
 
+// Fetch words from $UserKNW table and fill the 
+// $knownWords associative array with these words
 while ($row = mysqli_fetch_assoc($sqlNewWord)) {
   $knownWords[$n] = $row["word"];
   $n++;
 }
-
+// Free the variable
 mysqli_free_result($sqlNewWord);
 
+// Flip array, keys become values and values become keys
 $knownWords = array_flip($knownWords);
+
+// Take difference between keys of this two arrays
+// Take only new words (words that are not in $UserKNW table)
 $newWords = array_diff_key($words, $knownWords);
 
 return $newWords;
 
-mysqli_close($con);
+mysqli_close($conF);
 }
 
 // Get data from html form textrArea field, remove all special characters
@@ -91,17 +121,15 @@ function split_text_into_words($text)
 // Get data from html form textrArea field, remove all special characters
 // and make an array ($words), convert all words to lowercase 
 $words = preg_split('/\P{L}+/u', $text, 0, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
+//$words = preg_split('/\P{L}+\'’/u', $text, 0, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
 $words = array_map('strtolower', $words);
 
 // Delete all dublicate words in the array and sort in descending order
 $words = array_count_values($words);
 arsort($words);
 
-//$newWords = look_for_the_new_words($words,$MysqlUser,$MysqlUPass,$MysqlDB);
-//$newWords = $words;
 
 return $words;
-//return $newWords;
 
 }
 
