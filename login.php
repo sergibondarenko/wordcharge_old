@@ -20,11 +20,11 @@
       include_once("php/checklogin.php"); 
     ?>
     
-    <table width="300" border="0" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
+    <table id="mainTable">
       <tr>
       <form name="form1" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]).'?myLang='.$myLang;?>">
         <td><!--<span id=""></span>-->
-        <table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF">
+        <table id="mainTableIn">
           <tr>
             <td colspan="3"><strong><?php echo $langArray["textMamberlogin"]; ?> </strong></td>
           </tr>

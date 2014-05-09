@@ -29,12 +29,12 @@ session_start();
       </div>
 
       <h2>WordCharge</h2>
-      
-      <table width="300" border="0" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
+
+      <table id="mainTable">
         <tr>
         <form name="formIndex" method="post" action="newdict.php?myLang=<?php echo $myLang; ?>">
           <td>
-          <table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF">
+          <table id="mainTableIn">
             <tr>
               <td colspan="3"><strong><?php echo $langArray["textMakeCustomDic"]; ?> </strong></td>
             </tr>

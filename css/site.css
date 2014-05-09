@@ -111,3 +111,32 @@ ul#menu li a:hover
 background-color: #e8eef4;
 }
 
+table#mainTable
+{
+width:300px;
+border-style:solid;
+border-width:1px;
+border-spacing: 1px;
+padding:3px;
+border-color:#CCCCCC;
+background-color:#FFFFFF;
+}
+
+table#mainTableIn 
+{
+width:100%;
+border:0px;
+border-spacing: 1px;
+padding:3px;
+background-color:#FFFFFF;
+}
+
+table#mainTableIn td
+{
+padding:3px;
+}
+
+/*
+table#mainTableIn td#w1 
+{
+}*/
