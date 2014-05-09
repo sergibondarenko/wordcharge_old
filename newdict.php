@@ -186,7 +186,7 @@ session_start();
             echo "<br>";
             //echo "Dictionary: " . $langId . "<br>";
             echo $langArray["textNewdictDict"].": " . $langId . "<br>";
-            echo "<table border='1'>
+            echo "<table id='tableDict'>
             <tr>
             <th>".$langArray["textTableIknow"]."</th>
             <th>".$langArray["textTableFreq"]."</th>

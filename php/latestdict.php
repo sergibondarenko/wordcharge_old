@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>WordCharge</title>
+<meta charset="UTF-8">
+<link href="../css/site.css" rel="stylesheet">
 <?php
 //header('Content-type: text/plain; charset=utf-8');
 
@@ -25,7 +31,7 @@ $sqlSelect = mysqli_query($con,"SELECT * FROM $UserNW");
 // Display user dictinary in index.html via jQuery AJAX from dislaydict.js
 echo "<br>";
 //echo "Dictionary: " . $langId . "<br>";
-echo "<table border='1'>
+echo "<table id=\"tableDict\">
 <tr>
 <th>".$langArray["textTableLang"]."</th>
 <th>".$langArray["textTableFreq"]."</th>
@@ -51,4 +57,7 @@ echo "<br>";
 mysqli_close($con);
 
 ?>
-
+</head>
+<body>
+</body>
+</html>

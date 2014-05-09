@@ -136,7 +136,28 @@ table#mainTableIn td
 padding:3px;
 }
 
-/*
-table#mainTableIn td#w1 
+table#tableDict
 {
-}*/
+width:100%;
+border:1px solid black;
+}
+
+table#tableDict th
+{
+height:40px;
+text-align:center;
+padding:3px;
+border:1px solid black;
+}
+
+table#tableDict td
+{
+text-align:left;
+padding:3px;
+border:1px solid black;
+}
+
+table#tableDict tr:hover
+{
+background-color:#CCCCCC;
+}
