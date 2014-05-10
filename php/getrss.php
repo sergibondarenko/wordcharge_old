@@ -4,11 +4,35 @@ $q=$_GET["q"];
 $myLang=$_GET["myLang"];
 $foreignLang = $q;
 
-//find out which feed was selected
-if($q=="en") {
-  $xml=("http://news.google.com/news?ned=us&topic=h&output=rss");
-} elseif($q=="it") {
-  $xml=("http://news.google.com/news?ned=it&topic=h&output=rss");
+////find out which feed was selected
+//if($q=="en") {
+//  $xml=("http://news.google.com/news?ned=us&topic=h&output=rss");
+//} elseif($q=="it") {
+//  $xml=("http://news.google.com/news?ned=it&topic=h&output=rss");
+//}
+
+switch ($q){
+  case $q=="en":
+    $xml=("http://news.google.com/news?ned=us&topic=h&output=rss");
+    break;
+  case $q=="it":
+    $xml=("http://news.google.com/news?ned=it&topic=h&output=rss");
+    break;
+  case $q=="fr":
+    $xml=("http://news.google.com/news?ned=fr&topic=h&output=rss");
+    break;
+  case $q=="es":
+    $xml=("http://news.google.com/news?ned=es&topic=h&output=rss");
+    break;
+  case $q=="de":
+    $xml=("http://news.google.com/news?ned=de&topic=h&output=rss");
+    break;
+  case $q=="ru":
+    $xml=("http://news.google.com/news?ned=ru&topic=h&output=rss");
+    break;
+  default:
+    $xml=("http://news.google.com/news?ned=us&topic=h&output=rss");
+    break;
 }
 
 $xmlDoc = new DOMDocument();
@@ -44,9 +68,9 @@ for ($i=0; $i<=7; $i++) {
   //echo ("<p><a href='" . $news_link_transl
   //. "?url="$item_link"' target='_blank'>" . "CLICK HERE to make dictionary from: "  . $item_title . "</a>");
   //. "?myUrl=$item_link"."' target='_blank'>" . "CLICK to make dictionary from: "  . $item_title . "</a>");
-  echo ("<form action='../getnewsdict.php' method='post' target='_blank'>".
-        "<input type='url' name='myUrl' value='$item_link'>".
-        "<input type='text' name='myLang' value='$foreignLang-$myLang'>".
+  echo ("<form action='../getnewsdict.php?myLang=$myLang' method='post' target='_blank'>".
+        "<input type='hidden' name='myUrl' value='$item_link'>".
+        "<input type='hidden' name='myLang' value='$foreignLang-$myLang'>".
         "<input type='submit' name='myDict' value='Make Dictionary'>".
         "</form>");
   echo ("<br>");

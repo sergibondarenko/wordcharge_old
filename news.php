@@ -35,6 +35,9 @@ session_start();
 </head>
 <body>
 <div id="super-main">
+    <div id="wrapper-langs">
+      <?php include_once("php/wrapper-languages.php"); ?>
+    </div>
 
   <?php include("php/header.php"); ?>
   <div id="wrapper-main">
@@ -42,16 +45,19 @@ session_start();
       <?php include_once("php/wrapper-login.php");?>
     </div>
     <h2>WordCharge</h2>
-
+    
+    <p><?php echo $langArray["textNewsText"];?></>
+    
     <form>
     <select onchange="showRSS(this.value)">
-    <option value="">Select News Language:</option>
-    <option value="en">English News</option>
+    <option value=""><?php echo $langArray["textNewsDDL"];?></option>
+    <?php include_once("php/newsdropdown.php");?>
+    <!--<option value="en">English News</option>
     <option value="it">Italian News</option>
-    </select>
+    </select>-->
     </form>
     <br>
-    <div id="rssOutput">News feed will be listed here...</div>
+    <div id="rssOutput"><?php echo $langArray["textNewsField"];?></div>
 
     <?php include("php/footer.php"); ?>
   </div>

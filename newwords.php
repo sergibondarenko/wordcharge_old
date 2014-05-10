@@ -10,7 +10,12 @@ session_start();
   <link href="css/site.css" rel="stylesheet">
 </head>
 <body>
+<div id="super-main">
   <?php include("php/setsitelanguage.php"); ?>
+    <div id="wrapper-langs">
+      <?php include_once("php/wrapper-languages.php"); ?>
+    </div>
+
   <?php include("php/header.php"); ?>
   <div id="wrapper-main">
     <div id="wrapper-login">
@@ -25,6 +30,7 @@ session_start();
     ?>
     <?php include("php/footer.php"); ?>
   </div>
+</div>
 
 </body>
 </html>

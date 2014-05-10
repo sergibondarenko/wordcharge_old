@@ -19,7 +19,10 @@ session_start();
         // to JQuery functions.js and iknowtheword.php 
         $theSessionUser = $_SESSION["myusername"];
         echo "var theSessionUser = '{$theSessionUser}';";
-        $langId = $_POST['langId'];
+
+        $myLang = $_POST["myLang"];
+        $langId = $myLang;
+        //$langId = $_POST['langId'];
         echo "var langId = '{$langId}';";
       ?>
       <?php 
@@ -68,8 +71,6 @@ session_start();
 
             //$textArea = $_POST['textArea'];
             //$langId = $_POST['langId'];
-            $myLang = $_POST["myLang"];
-            $langId = $myLang;
             $myUrl = $_POST["myUrl"];
 
             // Take the loged user name as a tables name           
