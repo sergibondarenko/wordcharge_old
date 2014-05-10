@@ -1,19 +1,60 @@
-<!DOCTYPE html>
+<?php
+session_start();
+?>
+<?php include("php/setsitelanguage.php"); ?>
 
+<!DOCTYPE html>
 <html>
 <head>
-    <title>WordCharge</title>
-    <meta charset="utf-8">
-    <link href="css/site.css" rel="stylesheet">
+  <title>WordCharge</title>
+  <meta charset="utf-8">
+  <link href="css/site.css" rel="stylesheet">
+
+  <script>
+  function showRSS(str) {
+    if (str.length==0) { 
+      document.getElementById("rssOutput").innerHTML="";
+      return;
+    }
+    if (window.XMLHttpRequest) {
+      // code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp=new XMLHttpRequest();
+    } else {  // code for IE6, IE5
+      xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange=function() {
+      if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+        document.getElementById("rssOutput").innerHTML=xmlhttp.responseText;
+      }
+    }
+    //xmlhttp.open("GET","php/getrss.php?q="+str,true);
+    xmlhttp.open("GET","php/getrss.php?myLang=<?php echo $myLang; ?>&q="+str,true);
+    xmlhttp.send();
+  }
+  </script>
 </head>
 <body>
+<div id="super-main">
 
   <?php include("php/header.php"); ?>
   <div id="wrapper-main">
+    <div id="wrapper-login">
+      <?php include_once("php/wrapper-login.php");?>
+    </div>
     <h2>WordCharge</h2>
-    <?php include("php/underc.php"); ?>
+
+    <form>
+    <select onchange="showRSS(this.value)">
+    <option value="">Select News Language:</option>
+    <option value="en">English News</option>
+    <option value="it">Italian News</option>
+    </select>
+    </form>
+    <br>
+    <div id="rssOutput">News feed will be listed here...</div>
+
     <?php include("php/footer.php"); ?>
   </div>
-
+</div>
 </body>
 </html>

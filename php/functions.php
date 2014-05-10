@@ -1,5 +1,67 @@
 <?php
 
+function mysql_db_connect($MysqlUser,$MysqlUPass,$MysqlDB,$UserNW)
+{
+// 2.=====
+// Set MySQL connection and fill the database with new words
+$con=mysqli_connect("localhost",$MysqlUser,$MysqlUPass,$MysqlDB);
+
+// Check connection
+if (mysqli_connect_errno()) {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+}
+
+$sqlCreate = "CREATE TABLE IF NOT EXISTS $UserNW( ".
+       "id INT(20) NOT NULL AUTO_INCREMENT, ".
+       "lang VARCHAR(10) NOT NULL, ".
+       "freq BIGINT(20) NOT NULL, ".
+       "word VARCHAR(40) NOT NULL, ".
+       "text VARCHAR(255) NOT NULL, ".
+       "PRIMARY KEY ( id )) ".
+       "ENGINE=InnoDB DEFAULT CHARSET=utf8";
+
+if (!mysqli_query($con,$sqlCreate)) {
+  die('Error after Create: ' . mysqli_error($con));
+}
+mysqli_free_result($sqlCreate);
+
+// Mysql query to delete old data from the new words table
+$sqlDelete = "TRUNCATE TABLE $UserNW";
+if (!mysqli_query($con,$sqlDelete)) {
+  die('Error after Delete: ' . mysqli_error($con));
+}
+mysqli_free_result($sqlDelete);
+
+// change character set to utf8
+if (!mysqli_set_charset($con, "utf8")) {
+    printf("Error loading character set utf8: %s\n", mysqli_error($con));
+}
+
+$charset = mysqli_character_set_name($con);
+return $con;
+//printf ("Current Mysql charset - %s\n",$charset);
+//echo "<br>";
+
+}
+
+
+// Get redirected url
+// for Google News
+function get_redirected_url($url)
+{
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_HEADER, true);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Must be set to true so that PHP follows any "Location:" header
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+$a = curl_exec($ch); // $a will contain all headers
+
+$url = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL); // This is what you need, it will return you the last effective URL
+return $url;
+}
+
+
 //include ($_SERVER['DOCUMENT_ROOT'] . "vars.php");
 //include ("test1/php/vars.php");
 
@@ -112,6 +174,19 @@ return $newWords;
 
 mysqli_close($conF);
 }
+
+/*
+function strip_html_js_tags($text)
+{
+$search = array('@<script[^>]*?>.*?</script>@si',  // Strip out javascript 
+                '@<style[^>]*?>.*?</style>@siU',    // Strip style tags properly 
+                '@<[\/\!]*?[^<>]*?>@si',            // Strip out HTML tags 
+                '@<![\s\S]*?–[ \t\n\r]*>@',         // Strip multi-line comments including CDATA 
+                '/\s{2,}/',
+                );
+$text = preg_replace($search, "\n", html_entity_decode($text));
+return $text;
+}*/
 
 // Get data from html form textrArea field, remove all special characters
 // and make an array ($words), convert all words to lowercase 
