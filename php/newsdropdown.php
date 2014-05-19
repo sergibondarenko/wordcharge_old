@@ -16,8 +16,8 @@ if ($myLang == "uk") {
        //'<option value="uk">Украинский</option>'.
        '</select>';
 } else {
-  echo '<option value="ru">Russian</option>'.
-       '<option value="it">Italian</option>'.
+  //echo '<option value="ru">Russian</option>'.
+  echo '<option value="it">Italian</option>'.
        '<option value="es">Spanish</option>'.
        '<option value="fr">French</option>'.
        '<option value="de">German</option>'.

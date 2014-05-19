@@ -163,7 +163,7 @@ session_start();
                 // Get keys and values from $words and separate them
                 $onlyWords = array_keys($words);
                 $onlyFreq = array_values($words);
-                
+               
                 // Insert word and its frequency into database
                 $sqlInsert = mysqli_query($con, "INSERT INTO $UserNW (lang,freq,word) VALUES ('$langId','$onlyFreq[$i]', '$onlyWords[$i]')");
                 if(!$sqlInsert){

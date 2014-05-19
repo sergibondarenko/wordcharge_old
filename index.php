@@ -10,7 +10,7 @@ session_start();
     <meta charset="utf-8">
     <link href="css/site.css" rel="stylesheet">
 </head>
-<body>
+<body id="bodyIndex">
   <div id="super-main">
     <?php include_once("php/setsitelanguage.php");?>
 

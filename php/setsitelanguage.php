@@ -5,7 +5,7 @@
 //  }else{
 //    $myLang = 'en'; // default lang
 //  }
-  if(isset($_GET['myLang'])){
+  if(isset($_GET["myLang"])){
     $myLang = $_GET["myLang"];
 //    setcookie ("lang_site", $myLang, time() + 3600*24, "/");
   } else {

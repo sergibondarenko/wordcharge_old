@@ -11,7 +11,30 @@ session_start();
   <link href="css/site.css" rel="stylesheet">
 
   <script>
+  // Select News Type by clicking radio button
+  function selectNewsType(){
+    if (document.getElementById('topNews').checked) {
+      var newsType = document.getElementById('topNews').value;
+      document.getElementById('topNews').checked = true;
+    }
+    if (document.getElementById('sciTech').checked) {
+      var newsType = document.getElementById('sciTech').value;
+      document.getElementById('sciTech').checked = true;
+    } 
+    if (document.getElementById('polNews').checked) {
+      var newsType = document.getElementById('polNews').value;
+      document.getElementById('polNews').checked = true;
+    } 
+    if (document.getElementById('busNews').checked) {
+      var newsType = document.getElementById('busNews').value;
+      document.getElementById('busNews').checked = true;
+    } 
+    //document.getElementById("newsTypeOutput").innerHTML = newsType;
+    document.getElementById("newsTypeOutput").value = newsType;
+  }
+  // Get News RSS feed
   function showRSS(str) {
+    var newsType = document.getElementById('newsTypeOutput').value;
     if (str.length==0) { 
       document.getElementById("rssOutput").innerHTML="";
       return;
@@ -28,12 +51,12 @@ session_start();
       }
     }
     //xmlhttp.open("GET","php/getrss.php?q="+str,true);
-    xmlhttp.open("GET","php/getrss.php?myLang=<?php echo $myLang; ?>&q="+str,true);
+    xmlhttp.open("GET","php/getrss.php?myLang=<?php echo $myLang;?>&newsT="+newsType+"&q="+str,true);
     xmlhttp.send();
   }
   </script>
 </head>
-<body>
+<body id="bodyNews">
 <div id="super-main">
     <div id="wrapper-langs">
       <?php include_once("php/wrapper-languages.php"); ?>
@@ -49,14 +72,26 @@ session_start();
     <p><?php echo $langArray["textNewsText"];?></>
     
     <form>
-    <select onchange="showRSS(this.value)">
-    <option value=""><?php echo $langArray["textNewsDDL"];?></option>
-    <?php include_once("php/newsdropdown.php");?>
-    <!--<option value="en">English News</option>
-    <option value="it">Italian News</option>
-    </select>-->
+      <label for="male"><?php echo $langArray["textNewsRadTop"];?></label>
+      <input type="radio" class='radio-button' name="typeNewsRadio" id="topNews" value="w" onclick="selectNewsType()" checked>
+      <label for="male"><?php echo $langArray["textNewsRadSciTech"];?></label>
+      <input type="radio" class='radio-button' name="typeNewsRadio" id="sciTech" value="t" onclick="selectNewsType()">
+      <label for="male"><?php echo $langArray["textNewsRadPol"];?></label>
+      <input type="radio" class='radio-button' name="typeNewsRadio" id="polNews" value="p" onclick="selectNewsType()">
+      <label for="male"><?php echo $langArray["textNewsRadBus"];?></label>
+      <input type="radio" class='radio-button' name="typeNewsRadio" id="busNews" value="b" onclick="selectNewsType()">
+
+      <select onchange="showRSS(this.value)">
+      <option value=""><?php echo $langArray["textNewsDDL"];?></option>
+      <?php include_once("php/newsdropdown.php");?>
+      <!--<option value="en">English News</option>
+      <option value="it">Italian News</option>
+      </select>-->
     </form>
     <br>
+    <!--For news type variable-->
+    <input type="hidden" id="newsTypeOutput">
+
     <div id="rssOutput"><?php echo $langArray["textNewsField"];?></div>
 
     <?php include("php/footer.php"); ?>

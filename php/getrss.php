@@ -1,8 +1,13 @@
 <?php
 //get the q parameter from URL
+
 $q=$_GET["q"];
+$newsType=$_GET["newsT"];
 $myLang=$_GET["myLang"];
 $foreignLang = $q;
+
+//for translation
+$langArray = parse_ini_file("../languages/".$myLang.".ini");
 
 ////find out which feed was selected
 //if($q=="en") {
@@ -13,25 +18,25 @@ $foreignLang = $q;
 
 switch ($q){
   case $q=="en":
-    $xml=("http://news.google.com/news?ned=us&topic=h&output=rss");
+    $xml=("http://news.google.com/news?ned=us&topic=$newsType&output=rss");
     break;
   case $q=="it":
-    $xml=("http://news.google.com/news?ned=it&topic=h&output=rss");
+    $xml=("http://news.google.com/news?ned=it&topic=$newsType&output=rss");
     break;
   case $q=="fr":
-    $xml=("http://news.google.com/news?ned=fr&topic=h&output=rss");
+    $xml=("http://news.google.com/news?ned=fr&topic=$newsType&output=rss");
     break;
   case $q=="es":
-    $xml=("http://news.google.com/news?ned=es&topic=h&output=rss");
+    $xml=("http://news.google.com/news?ned=es&topic=$newsType&output=rss");
     break;
   case $q=="de":
-    $xml=("http://news.google.com/news?ned=de&topic=h&output=rss");
+    $xml=("http://news.google.com/news?ned=de&topic=$newsType&output=rss");
     break;
   case $q=="ru":
-    $xml=("http://news.google.com/news?ned=ru&topic=h&output=rss");
+    $xml=("http://news.google.com/news?ned=ru&topic=$newsType&output=rss");
     break;
   default:
-    $xml=("http://news.google.com/news?ned=us&topic=h&output=rss");
+    $xml=("http://news.google.com/news?ned=us&topic=$newsType&output=rss");
     break;
 }
 
@@ -53,10 +58,11 @@ $channel_desc = $channel->getElementsByTagName('description')
 //echo("<br>");
 //echo($channel_desc . "</p>");
 
-$news_link_transl = "../test.php";
+//$news_link_transl = "../test.php";
+$makeDict = $langArray["textButtonMakeDict"];
 //get and output "<item>" elements
 $x=$xmlDoc->getElementsByTagName('item');
-for ($i=0; $i<=7; $i++) {
+for ($i=0; $i<=10; $i++) {
   $item_title=$x->item($i)->getElementsByTagName('title')
   ->item(0)->childNodes->item(0)->nodeValue;
   $item_link=$x->item($i)->getElementsByTagName('link')
@@ -68,10 +74,12 @@ for ($i=0; $i<=7; $i++) {
   //echo ("<p><a href='" . $news_link_transl
   //. "?url="$item_link"' target='_blank'>" . "CLICK HERE to make dictionary from: "  . $item_title . "</a>");
   //. "?myUrl=$item_link"."' target='_blank'>" . "CLICK to make dictionary from: "  . $item_title . "</a>");
+
   echo ("<form action='../getnewsdict.php?myLang=$myLang' method='post' target='_blank'>".
         "<input type='hidden' name='myUrl' value='$item_link'>".
         "<input type='hidden' name='myLang' value='$foreignLang-$myLang'>".
-        "<input type='submit' name='myDict' value='Make Dictionary'>".
+        //"<input type='submit' name='myDict' value='$langArray[\"textButtonMakeDict\"]'>".
+        "<input type='submit' name='myDict' value='$makeDict'>".
         "</form>");
   echo ("<br>");
   echo ($item_desc . "</p>");
