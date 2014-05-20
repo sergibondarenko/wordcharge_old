@@ -184,3 +184,36 @@ table#tableDict tr:hover
 {
 background-color:#CCCCCC;
 }
+
+div.bookCover
+{
+margin:5px;
+padding: 5px;
+border:1px solid #c3c3c3;
+height:auto;
+width:auto;
+float:left;
+text-align:center;
+}
+div.bookCover img
+{
+display:inline;
+margin:5px;
+border:1px solid #ffffff;
+}
+div.bookCover a:hover img
+{
+border:1px solid #0000ff;
+}
+div.bookDesc
+{
+text-align:center;
+font-weight:normal;
+width:120px;
+margin:5px;
+}
+.text_line
+{
+clear:both;
+margin-bottom:2px;
+}

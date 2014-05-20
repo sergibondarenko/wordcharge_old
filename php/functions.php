@@ -200,6 +200,13 @@ $words = preg_split('/\P{L}+/u', $text, 0, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_
 //$words = preg_split("/([\(\)’'\",.?!\r\n]+)/", $text, 0, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
 $words = array_map('strtolower', $words);
 
+//Delete all words which len==1
+//foreach($words as $word){
+//  if(strlen($word)==1){
+//    unset $word;
+//  }
+//}
+
 //for($i=0; $i<sizeof($words); $i++){
 //  $words[$i] = preg_replace("'", "", $words[$i]);
 //}
