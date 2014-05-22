@@ -133,6 +133,11 @@ body#bodyNews ul#menu li#newsMenu a
 background-color: #e8eef4;
 }
 
+body#bodyBooks ul#menu li#booksMenu a
+{
+background-color: #e8eef4;
+}
+
 table#mainTable
 {
 width:300px;

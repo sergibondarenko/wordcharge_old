@@ -11,7 +11,7 @@ include("php/setsitelanguage.php");
     <meta charset="utf-8">
     <link href="css/site.css" rel="stylesheet">
 </head>
-<body>
+<body id="bodyBooks">
   <div id="wrapper-langs">
     <?php include_once("php/wrapper-languages.php"); ?>
   </div>

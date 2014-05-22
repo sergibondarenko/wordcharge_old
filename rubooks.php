@@ -23,7 +23,7 @@ $langId="ru"."-".$myLang;
 </script>
 
 </head>
-<body>
+<body id="bodyBooks">
   <div id="wrapper-langs">
     <?php include_once("php/wrapper-languages.php"); ?>
   </div>
