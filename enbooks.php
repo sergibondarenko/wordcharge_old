@@ -14,12 +14,12 @@ $langId="en"."-".$myLang;
     <script src="js/functions.js"></script>
 
 <script>
-$(document).ready(function(){
+/*$(document).ready(function(){
   $(".makeDict").click(function(){
     var linkBook = $(this).siblings("a").attr("href");
     $("#myUrl").val(linkBook);
   });
-});
+});*/
 </script>
 
 </head>
@@ -39,7 +39,7 @@ $(document).ready(function(){
 
     <div class="bookCover">
       <form action="getuniversaldict.php?myLang=<?php echo $myLang;?>" method='post' target='_blank'>
-      <input type="hidden" name="myUrl" id="myUrl" value="wrongValue">
+      <input type="hidden" name="myUrl" id="myUrl" value="http://wordcharge.com/books/en/hamlet.txt">
       <input type="hidden" name="langId" value="<?php echo $langId;?>">
       <input type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
       </br>
@@ -62,6 +62,45 @@ $(document).ready(function(){
       </form>
       <div class="bookDesc">King Lear. The Tragedy written by William Shakespeare at an uncertain date between 1603 and 1606.
     </div>
+    </div>
+    <div class="bookCover">
+      <form action="getuniversaldict.php?myLang=<?php echo $myLang;?>" method='post' target='_blank'>
+      <input type="hidden" name="myUrl" id="myUrl" value="http://wordcharge.com/books/en/macbeth.txt">
+      <input type="hidden" name="langId" value="<?php echo $langId;?>">
+      <input type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
+      </br>
+      <a target="_blank" href="http://wordcharge.com/books/en/macbeth.txt">
+        <img src="bookscovers/macbeth.jpg" alt="The Tragedy of Macbeth" width="100" height="140">
+      </a>
+      </form>
+      <div class="bookDesc">The Tragedy of Macbeth. Written by William Shakespeare at an uncertain date between 1599 and 1606.
+      </div>
+    </div>
+    <div class="bookCover">
+      <form action="getuniversaldict.php?myLang=<?php echo $myLang;?>" method='post' target='_blank'>
+      <input type="hidden" name="myUrl" id="myUrl" value="http://wordcharge.com/books/en/merchantofvenice.txt">
+      <input type="hidden" name="langId" value="<?php echo $langId;?>">
+      <input type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
+      </br>
+      <a target="_blank" href="http://wordcharge.com/books/en/merchantofvenice.txt">
+        <img src="bookscovers/merchantofvenice.jpg" alt="The Merchant of Venice" width="100" height="140">
+      </a>
+      </form>
+      <div class="bookDesc">The Merchant of Venice. Written by William Shakespeare at an uncertain date between 1596 and 1598.
+      </div>
+    </div>
+    <div class="bookCover">
+      <form action="getuniversaldict.php?myLang=<?php echo $myLang;?>" method='post' target='_blank'>
+      <input type="hidden" name="myUrl" id="myUrl" value="http://wordcharge.com/books/en/midsummernightdream.txt">
+      <input type="hidden" name="langId" value="<?php echo $langId;?>">
+      <input type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
+      </br>
+      <a target="_blank" href="http://wordcharge.com/books/en/midsummernightdream.txt">
+        <img src="bookscovers/midsummernightdream.jpg" alt="A Midsummer Night's Dream" width="100" height="140">
+      </a>
+      </form>
+      <div class="bookDesc">A Midsummer Night's Dream is a comedy written by William Shakespeare at an uncertain date between 1590 and 1596.
+      </div>
     </div>
 
     </div>

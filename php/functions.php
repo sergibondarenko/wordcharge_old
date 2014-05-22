@@ -198,19 +198,17 @@ function split_text_into_words($text)
 $words = preg_split('/\P{L}+/u', $text, 0, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
 //$words = preg_split('/\W+/', $text, 0, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
 //$words = preg_split("/([\(\)’'\",.?!\r\n]+)/", $text, 0, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
-$words = array_map('strtolower', $words);
 
 //Delete all words which len==1
-//foreach($words as $word){
-//  if(strlen($word)==1){
-//    unset $word;
-//  }
-//}
+foreach ($words as $key=>$word) 
+{
+  if (strlen($words[$key]) < 2){
+    unset($words[$key]);
+  }
+}
 
-//for($i=0; $i<sizeof($words); $i++){
-//  $words[$i] = preg_replace("'", "", $words[$i]);
-//}
 
+$words = array_map('strtolower', $words);
 // Delete all dublicate words in the array and sort in descending order
 $words = array_count_values($words);
 arsort($words);
