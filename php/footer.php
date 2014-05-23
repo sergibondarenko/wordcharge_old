@@ -1,6 +1,6 @@
 <br>
 <footer>
-<p id="myCopyright">&copy; <?php echo date("Y"); ?> <a href="mailto:sergibondarenko@gmail.com"><?php echo $langArray["textCopyrightOwner"]; ?></a> <?php echo $langArray["textCopyrightText"]; ?> 
+<p id="myCopyright">&copy; <?php echo date("Y"); ?> <a href="mailto:sergibondarenko@gmail.com"><?php echo $langArray["textCopyrightOwner"]."."; ?></a> <?php echo $langArray["textCopyrightText"]; ?> 
 <br>
 <br>
 <a href=http://onbiz.biz/ target="_blank"><?php echo $langArray["textTechCloud"]; ?></a>&nbsp;|&nbsp; 

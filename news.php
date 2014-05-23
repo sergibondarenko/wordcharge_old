@@ -73,9 +73,9 @@ session_start();
     
     <form>
       <label for="male"><?php echo $langArray["textNewsRadTop"];?></label>
-      <input type="radio" class='radio-button' name="typeNewsRadio" id="topNews" value="w" onclick="selectNewsType()" checked>
+      <input type="radio" class='radio-button' name="typeNewsRadio" id="topNews" value="w" onclick="selectNewsType()">
       <label for="male"><?php echo $langArray["textNewsRadSciTech"];?></label>
-      <input type="radio" class='radio-button' name="typeNewsRadio" id="sciTech" value="t" onclick="selectNewsType()">
+      <input type="radio" class='radio-button' name="typeNewsRadio" id="sciTech" value="t" onclick="selectNewsType()" checked>
       <label for="male"><?php echo $langArray["textNewsRadPol"];?></label>
       <input type="radio" class='radio-button' name="typeNewsRadio" id="polNews" value="p" onclick="selectNewsType()">
       <label for="male"><?php echo $langArray["textNewsRadBus"];?></label>

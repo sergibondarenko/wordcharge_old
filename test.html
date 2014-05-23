@@ -1,7 +1,4 @@
 <!DOCTYPE html>
-<?php
-session_start();
-?>
 
 <html>
 <head>
@@ -25,7 +22,12 @@ session_start();
     <h2>WordCharge</h2>
     <p><?php echo $langArray["textAboutMain"]; ?></p>
 
-    <iframe width="420" height="315" src="//www.youtube.com/embed/apXgLCAgjYs" frameborder="0" allowfullscreen></iframe>
+   <iframe src="https://www.youtube.com/watch?v=apXgLCAgjYs&feature=youtu.be" width="320" height="190"></iframe>
+    <embed
+    width="420" height="345"
+    src="https://www.youtube.com/watch?v=apXgLCAgjYs&feature=youtu.be"
+    type="application/x-shockwave-flash">
+    </embed>
 
     <?php include("php/footer.php"); ?>
   </div>
