@@ -19,11 +19,11 @@ if ($myLang == "uk") {
        '</select>';
 } else {
   echo '<select id="langId" name="langId">'.
-       '<option value="ru-en" selected>Russian</option>'.
        '<option value="es-en">Spanish</option>'.
        '<option value="fr-en">French</option>'.
        '<option value="de-en">German</option>'.
        '<option value="it-en">Italian</option>'.
+       '<option value="ru-en" selected>Russian</option>'.
        '<option value="uk-en">Ukrainian</option>'.
        '</select>';
 }

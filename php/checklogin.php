@@ -13,6 +13,10 @@ if(!empty($_POST['myusername']) && !empty($_POST['mypassword'])){
   if (mysqli_connect_errno()) {
     echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
+  // change character set to utf8
+  if (!mysqli_set_charset($con, "utf8")) {
+      printf("Error loading character set utf8: %s\n", mysqli_error($con));
+  }
   
   // username and password sent from form 
   $myusername=$_POST['myusername']; 

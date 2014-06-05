@@ -26,9 +26,12 @@
             <td colspan="3"><strong><?php echo $langArray["textSignup"]; ?> </strong></td>
           </tr>
           <tr>
+            <td colspan="3"><small><?php echo $langArray["textSignupName"]."!!!"; ?></small></td>
+          </tr>
+          <tr>
             <td width="78"><?php echo $langArray["textUsername"]; ?></td>
             <td width="6">:</td>
-            <td width="294"><input name="myusername" type="text" id="myusername"></td>
+            <td width="194"><input name="myusername" type="text" id="myusername"></td>
           </tr>
           <tr>
              <td><?php echo $langArray["textPass"]; ?></td>
