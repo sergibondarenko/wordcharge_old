@@ -48,10 +48,10 @@ session_start();
         <p id="wordSaveStatus"><?php echo $langArray["textWordSaveStatus"]; ?></p>
         
         <?php
+            header('Content-Type: text/html; charset=utf-8');
+
             include("php/vars.php");
             include("php/functions.php");
-            
-            header('Content-Type: text/html; charset=utf-8');
 
             $textArea = $_POST['textArea'];
             $langId = $_POST['langId'];

@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
 
 function mysql_db_connect($MysqlUser,$MysqlUPass,$MysqlDB,$UserNW)
 {
@@ -231,7 +232,7 @@ function get_yandex_api_translation_dictionary($aWord, $langId, $trnsl_api, $trn
 {
 
 // 1.For ru-* variants you must use urlencode('слово')
-if($langId == "ru-en" || $langId == "uk-en"){
+//if($langId == "ru-en" || $langId == "uk-en"){
   
   // Get word translation from Yandex Translate API (JSON format)
   $jsonurlTr = $trnsl_api."?key=".$trnsl_key."&lang=".$langId."&format=html&text=".urlencode($aWord);
@@ -239,16 +240,16 @@ if($langId == "ru-en" || $langId == "uk-en"){
   // Get translation from Yandex Dict API (JSON format)
   $jsonurlDict = $dict_api."?key=".$dict_key."&lang=".$langId."&format=html&text=".urlencode($aWord);
 
-} else {
+//} else {
 
   // 2.Other languages
   // Get word translation from Yandex Translate API
-  $jsonurlTr = $trnsl_api."?key=".$trnsl_key."&lang=".$langId."&format=html&text=".$aWord;
+  //$jsonurlTr = $trnsl_api."?key=".$trnsl_key."&lang=".$langId."&format=html&text=".$aWord;
   
   // Get translation from Yandex Dict API
-  $jsonurlDict = $dict_api."?key=".$dict_key."&lang=".$langId."&format=html&text=".$aWord;
+  //$jsonurlDict = $dict_api."?key=".$dict_key."&lang=".$langId."&format=html&text=".$aWord;
 
-}
+//}
 
 // Get word translation from Yandex Translate API
 $jsonTr = json_decode(remote_get_contents($jsonurlTr), true);
