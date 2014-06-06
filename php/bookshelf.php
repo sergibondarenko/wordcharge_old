@@ -9,6 +9,11 @@ if ($myLang == "uk") {
        '<li><a href="enbooks.php?myLang=ru">Английская литература</a></li>'.
        '<li><a href="itbooks.php?myLang=ru">Итальянская литература</a></li>'.
        '</ul>';
+} elseif ($myLang == "it") {
+  echo '<ul>'.
+       '<li><a href="enbooks.php?myLang=it">Letteratura inglese</a></li>'.
+       '<li><a href="rubooks.php?myLang=it">Letteratura russa</a></li>'.
+       '</ul>';
 } else {
   echo '<ul>'.
        '<li><a href="rubooks.php?myLang='.$myLang.'">Russian books</a></li>'.

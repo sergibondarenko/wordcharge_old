@@ -17,6 +17,15 @@ if ($myLang == "uk") {
        '<option value="it-ru">Итальянский</option>'.
        //'<option value="uk-ru">Украинский</option>'.
        '</select>';
+} elseif ($myLang == "it") {
+  echo '<select id="langId" name="langId">'.
+       '<option value="en-it" selected>Inglese</option>'.
+       '<option value="es-it">Spagnolo</option>'.
+       '<option value="fr-it">Francese</option>'.
+       '<option value="de-it">Tedesco</option>'.
+       '<option value="ru-it">Ruso</option>'.
+       '<option value="uk-it">Ucraino</option>'.
+       '</select>';
 } else {
   echo '<select id="langId" name="langId">'.
        '<option value="es-en">Spanish</option>'.
