@@ -17,18 +17,21 @@
     <h2>WordCharge</h2>
     <?php include("php/makesignup.php"); ?>
     
-    <table width="300" border="0" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
+    <table id="mainTable">
       <tr>
       <form name="form1" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]).'?myLang='.$myLang;?>">
         <td>
-        <table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF">
+        <table id="mainTableIn">
           <tr>
             <td colspan="3"><strong><?php echo $langArray["textSignup"]; ?> </strong></td>
           </tr>
           <tr>
+            <td colspan="3"><small><?php echo $langArray["textSignupName"]."!!!"; ?></small></td>
+          </tr>
+          <tr>
             <td width="78"><?php echo $langArray["textUsername"]; ?></td>
             <td width="6">:</td>
-            <td width="294"><input name="myusername" type="text" id="myusername"></td>
+            <td width="194"><input name="myusername" type="text" id="myusername"></td>
           </tr>
           <tr>
              <td><?php echo $langArray["textPass"]; ?></td>

@@ -23,10 +23,10 @@
         <td>
         <table id="mainTableIn">
           <tr>
-            <td colspan="3"><strong><?php echo $langArray["textSignup"]; ?> </strong></td>
+            <td colspan="4"><strong><?php echo $langArray["textSignup"]; ?> </strong></td>
           </tr>
           <tr>
-            <td colspan="3"><small><?php echo $langArray["textSignupName"]."!!!"; ?></small></td>
+            <td colspan="4"><i><?php echo $nameErr; ?></i></td>
           </tr>
           <tr>
             <td width="78"><?php echo $langArray["textUsername"]; ?></td>
@@ -66,7 +66,7 @@
           <tr>
             <td></td>
             <td></td>
-            <td><span class="error"><?php echo $signupErr;?></span></td>
+            <td><span class="error"><i><?php echo $signupErr;?></i></span></td>
           </tr>
         </table>
         </td>
