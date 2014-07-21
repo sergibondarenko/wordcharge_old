@@ -2,6 +2,7 @@
 session_start();
 //echo $_SESSION["myusername"];
 ?>
+<?php include_once("php/setsitelanguage.php");?>
 <!DOCTYPE html>
 
 <html>
@@ -12,7 +13,6 @@ session_start();
 </head>
 <body id="bodyIndex">
   <div id="super-main">
-    <?php include_once("php/setsitelanguage.php");?>
 
     <div id="wrapper-langs">
       <?php include_once("php/wrapper-languages.php"); ?>
