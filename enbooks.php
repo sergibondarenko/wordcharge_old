@@ -103,6 +103,20 @@ $langId="en"."-".$myLang;
       </div>
     </div>
 
+    <div class="bookCover">
+      <form action="getuniversaldict.php?myLang=<?php echo $myLang;?>" method='post' target='_blank'>
+      <input type="hidden" name="myUrl" id="myUrl" value="http://wordcharge.com/books/en/taleoftwocities.txt">
+      <input type="hidden" name="langId" value="<?php echo $langId;?>">
+      <input type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
+      </br>
+      <a target="_blank" href="http://wordcharge.com/books/en/taleoftwocities.txt">
+        <img src="bookscovers/taleoftwocities.jpg" alt="A Midsummer Night's Dream" width="100" height="140">
+      </a>
+      </form>
+      <div class="bookDesc">A Tale of Two Cities (1859) is a novel by Charles Dickens, set in London and Paris before and during the French Revolution..
+      </div>
+    </div>
+
     </div>
 
     <h3 class="text_line"></h3>

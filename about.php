@@ -25,6 +25,7 @@ session_start();
     <h2>WordCharge</h2>
     <p><?php echo $langArray["textAboutMain"]; ?></p>
 
+    <iframe width="420" height="315" src="//www.youtube.com/embed/zyV37RKoELw" frameborder="0" allowfullscreen></iframe>
     <iframe width="420" height="315" src="//www.youtube.com/embed/apXgLCAgjYs" frameborder="0" allowfullscreen></iframe>
 
     <?php include("php/footer.php"); ?>

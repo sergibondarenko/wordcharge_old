@@ -1,0 +1,56 @@
+<html>
+<head>
+<script>
+function showRSS(str) {
+  if (str.length==0) { 
+    document.getElementById("rssOutput").innerHTML="";
+    return;
+  }
+  if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+  } else {  // code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+      document.getElementById("rssOutput").innerHTML=xmlhttp.responseText;
+    }
+  }
+  xmlhttp.open("GET","getitunesrss.php?q="+str,true);
+  xmlhttp.send();
+}
+</script>
+</head>
+<body>
+
+<form>
+<select onchange="showRSS(this.value)">
+<option value="">Select Top Music:</option>
+<option value="Top Albums">Top Albums</option>
+<option value="Top Songs">Top Songs</option>
+<option value="New Releases">New Releases</option>
+<option value="Just Added">Just Added</option>
+</select>
+</form>
+<br>
+<form>
+<select onchange="showRSS(this.value)">
+<option value="">Select Music Genre:</option>
+<option value="Alternative">Alternative</option>
+<option value="Blues">Blues</option>
+<option value="Classical">Classical</option>
+<option value="Country">Country</option>
+<option value="Dance">Dance</option>
+<option value="Electronic">Electronic</option>
+<option value="Hip-Hop">Hip-Hop</option>
+<option value="Jazz">Jazz</option>
+<option value="R&B">R&B</option>
+<option value="Reggae">Reggae</option>
+<option value="Rock">Rock</option>
+</select>
+</form>
+<br>
+<div id="rssOutput">Music-feed will be listed here...</div>
+</body>
+</html>
