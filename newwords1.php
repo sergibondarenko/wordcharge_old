@@ -1,4 +1,6 @@
-
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -98,38 +100,92 @@
         </div>
 
         <div class="row">
-          <div class="col-lg-4 form-group">
-            <label for="select" class="col-lg-2 control-label">Text language</label>
-            <div class="col-lg-6">
-              <select class="form-control" id="select">
-                <option>Italian</option>
-                <option>German</option>
-                <option>French</option>
-                <option>Spanish</option>
-                <option>Russian</option>
-                <option>Ukrainian</option>
-              </select>
-            </div>
-          </div>
+          
  
           <div class="col-lg-12">
             <div class="well bs-component">
               <form class="form-horizontal">
                 <fieldset>
-                  <!--<legend>Custom dictionary:</legend>-->
                   
                   <div class="form-group">
-                    <label for="textArea" class="col-lg-2 control-label">Text</label>
                     <div class="col-lg-10">
-                      <textarea class="form-control" rows="9" id="textArea" placeholder="Paste your text here!"></textarea>
+
+							<!--Dictionary Table-->
+   						 <?php 
+   						     include("php/vars.php");
+   						     include("php/latestdict.php"); 
+   						 ?>
+							<div class="bs-docs-section">
+							
+							  <div class="row">
+							    <div class="col-lg-12">
+							      <div class="page-header">
+							        <h2 id="tables">New Words</h2>
+							      </div>
+							
+							      <div class="bs-component">
+							        <table class="table table-striped table-hover ">
+							          <thead>
+							            <tr>
+							              <th>#</th>
+							              <th>Column heading</th>
+							              <th>Column heading</th>
+							              <th>Column heading</th>
+							            </tr>
+							          </thead>
+							          <tbody>
+							            <tr>
+							              <td>1</td>
+							              <td>Column content</td>
+							              <td>Column content</td>
+							              <td>Column content</td>
+							            </tr>
+							            <tr>
+							              <td>2</td>
+							              <td>Column content</td>
+							              <td>Column content</td>
+							              <td>Column content</td>
+							            </tr>
+							            <tr class="info">
+							              <td>3</td>
+							              <td>Column content</td>
+							              <td>Column content</td>
+							              <td>Column content</td>
+							            </tr>
+							            <tr class="success">
+							              <td>4</td>
+							              <td>Column content</td>
+							              <td>Column content</td>
+							              <td>Column content</td>
+							            </tr>
+							            <tr class="danger">
+							              <td>5</td>
+							              <td>Column content</td>
+							              <td>Column content</td>
+							              <td>Column content</td>
+							            </tr>
+							            <tr class="warning">
+							              <td>6</td>
+							              <td>Column content</td>
+							              <td>Column content</td>
+							              <td>Column content</td>
+							            </tr>
+							            <tr class="active">
+							              <td>7</td>
+							              <td>Column content</td>
+							              <td>Column content</td>
+							              <td>Column content</td>
+							            </tr>
+							          </tbody>
+							        </table> 
+							      </div><!-- /example -->
+							    </div>
+							  </div>
+							      </div>
+
                     </div>
                   </div>
                   
-                  <div class="form-group">
-                    <div class="col-lg-10 col-lg-offset-2">
-                      <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                  </div>
                 </fieldset>
               </form>
             </div>

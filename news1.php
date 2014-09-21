@@ -98,38 +98,20 @@
         </div>
 
         <div class="row">
-          <div class="col-lg-4 form-group">
-            <label for="select" class="col-lg-2 control-label">Text language</label>
-            <div class="col-lg-6">
-              <select class="form-control" id="select">
-                <option>Italian</option>
-                <option>German</option>
-                <option>French</option>
-                <option>Spanish</option>
-                <option>Russian</option>
-                <option>Ukrainian</option>
-              </select>
-            </div>
-          </div>
+          
  
           <div class="col-lg-12">
             <div class="well bs-component">
               <form class="form-horizontal">
                 <fieldset>
-                  <!--<legend>Custom dictionary:</legend>-->
                   
                   <div class="form-group">
-                    <label for="textArea" class="col-lg-2 control-label">Text</label>
                     <div class="col-lg-10">
-                      <textarea class="form-control" rows="9" id="textArea" placeholder="Paste your text here!"></textarea>
+		<!--Dictionary Table-->
+
                     </div>
                   </div>
                   
-                  <div class="form-group">
-                    <div class="col-lg-10 col-lg-offset-2">
-                      <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                  </div>
                 </fieldset>
               </form>
             </div>
