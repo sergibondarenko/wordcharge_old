@@ -1,5 +1,4 @@
 <?php session_start();?>
-<?php include_once("php/setsitelanguage.php");?> <!--Script to set site language-->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,6 +27,7 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+		<?php include_once("php/setsitelanguage.php");?> <!--Script to set site language-->
   </head>
 
   <body>
@@ -42,11 +42,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#"><?php echo $projectName; ?></a>
+          <a class="navbar-brand" href="#"><?php echo $projectName;?></a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#"><?php echo $textHome; ?></a></li>
+            <li class="active"><a href="#">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
             <li class="dropdown">
@@ -77,7 +77,6 @@
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
         <h1>Navbar example</h1>
-				<p><?php echo $testVar; ?></p>
         <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
         <p>To see the difference between static and fixed top navbars, just scroll.</p>
         <p>
