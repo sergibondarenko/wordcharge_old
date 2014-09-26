@@ -1,4 +1,4 @@
-<?php session_start();?>
+<?php session_start();?> <!--Session for a signed in user-->
 <?php include_once("php/setsitelanguage.php");?> <!--Script to set site language-->
 
 <!DOCTYPE html>
@@ -7,11 +7,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
+    <meta name="description" content="WordCharge is a service for learning foreign languages. Learn new wordsi.">
     <meta name="author" content="Sergey Bondarenko">
     <link rel="icon" href="favicon.ico">
 
-    <title>Static Top Navbar Example for Bootstrap</title>
+    <title><?php echo $langArray["projectName"]; ?></title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -42,25 +42,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#"><?php echo $projectName; ?></a>
+          <a class="navbar-brand" href="#"><?php echo $langArray["projectName"]; ?></a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#"><?php echo $textHome; ?></a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li>
+            <li class="active"><a href="#"><?php echo $langArray["textHome"]; ?></a></li>
+            <li><a href="#about"><?php echo $langArray["textNewwords"]; ?></a></li>
+            <li><a href="#about"><?php echo $langArray["textNews"]; ?></a></li>
+            <li><a href="#about"><?php echo $langArray["textBooks"]; ?></a></li>
+            <li><a href="#about"><?php echo $langArray["textAbout"]; ?></a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="../navbar/">Default</a></li>
