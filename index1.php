@@ -46,7 +46,8 @@
         </div>
         <div class="navbar-collapse collapse" id="navbar-main">
           <ul class="nav navbar-nav">
-            <li>
+            <?php include("php/header-1.php"); ?>
+            <!--<li>
               <a href="index1.php">Home</a>
             </li>
             <li>
@@ -60,22 +61,19 @@
             </li>
             <li>
               <a href="about1.php">About</a>
-            </li>
+            </li>-->
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Your Language<span class="caret"></span></a>
               <ul class="dropdown-menu" aria-labelledby="themes">
-                <li><a href="#">EN</a></li>
+                <?php include_once("php/wrapper-languages-1.php"); ?>
+                <!--<li><a href="#">EN</a></li>
                 <li><a href="#">IT</a></li>
                 <li><a href="#">RU</a></li>
-                <li><a href="#">UA</a></li>
+                <li><a href="#">UA</a></li>-->
               </ul>
             </li>
-            <!--<li><a href="#" target="_blank">EN</a></li>
-            <li><a href="#" target="_blank">IT</a></li>
-            <li><a href="#" target="_blank">RU</a></li>
-            <li><a href="#" target="_blank">UA</a></li>-->
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li>
@@ -120,9 +118,13 @@
                   
                   <div class="form-group">
                     <label for="textArea" class="col-lg-2 control-label">Text</label>
+
+                    <!--Text area-->
                     <div class="col-lg-10">
                       <textarea class="form-control" rows="9" id="textArea" placeholder="Paste your text here!"></textarea>
                     </div>
+                    <!--END Text area-->
+
                   </div>
                   
                   <div class="form-group">
@@ -134,11 +136,7 @@
               </form>
             </div>
           </div>
-          <div class="col-lg-4 col-lg-offset-1">
 
-              
-
-          </div>
         </div>
       </div>
 		<!--END of Custom Dictionary Form-->
@@ -155,7 +153,6 @@
 		<!--END of Footer-->
 
     </div>
-
 
   </body>
 </html>
