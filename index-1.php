@@ -46,17 +46,24 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#"><?php echo $langArray["textHome"]; ?></a></li>
-            <li><a href="#about"><?php echo $langArray["textNewwords"]; ?></a></li>
-            <li><a href="#about"><?php echo $langArray["textNews"]; ?></a></li>
-            <li><a href="#about"><?php echo $langArray["textBooks"]; ?></a></li>
-            <li><a href="#about"><?php echo $langArray["textAbout"]; ?></a></li>
+						<?php include("php/header-1.php"); ?>
           </ul>
+
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar/">Default</a></li>
-            <li class="active"><a href="./">Static top</a></li>
-            <li><a href="../navbar-fixed-top/">Fixed top</a></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" 
+									id="themes"><?php echo $langArray["textLanguage"]; ?><span class="caret"></span></a>
+              <ul class="dropdown-menu" aria-labelledby="themes">
+                <?php include_once("php/wrapper-languages-1.php"); ?>
+              </ul>
+            </li>
           </ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#"><?php echo $langArray["textLogin"]; ?></a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#"><?php echo $langArray["textSignup"]; ?></a></li>
+					</ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
@@ -64,18 +71,33 @@
 
     <div class="container">
 
-      <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1>Navbar example</h1>
-				<p><?php echo $testVar; ?></p>
-        <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-        <p>To see the difference between static and fixed top navbars, just scroll.</p>
+        <h4><?php echo $langArray["textMakeCustomDic"]; ?></h4>
+				<p>
+          <div class="col-lg-4 form-group">
+            <!--<label for="select" class="col-lg-4 control-label"></label>-->
+            <div class="col-lg-7">
+              <select class="form-control" id="langId">
+								<?php include_once("php/languagedropdown-1.php");?>
+              </select>
+            </div>
+          </div>
+				</p>
         <p>
-          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
+					<textarea class="form-control" rows="9" id="textArea" 
+										placeholder="<?php echo $langArray["textTextArea"]; ?>"></textarea>
+				</p>
+        <p>
+          <a class="btn btn-lg btn-primary" href="../../components/#navbar" 
+							role="button"><?php echo $langArray["textButtonMakeDict"]; ?></a>
         </p>
       </div>
-
-    </div> <!-- /container -->
+			
+    	<!--Footer-->
+			<?php include_once("php/footer-1.php");?>
+    	<!--END of Footer-->
+    
+		</div> <!-- /container -->
 
 
     <!-- Bootstrap core JavaScript

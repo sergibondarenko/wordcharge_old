@@ -1,7 +1,5 @@
-<?php
-echo '<li><a href="index1.php">Home</a></li>
-<li><a href="newwords1.php">New Words</a></li>
-<li><a href="news1.php">News</a></li>
-<li><a href="books1.php">Books</a></li>
-<li><a href="about1.php">About</a></li>';
-?>
+<li id="indexMenu"><a id="indexManu" href="index.php?myLang=<?php echo $myLang; ?>"><?php echo $langArray["textHome"]; ?></a></li>
+<li id="newwordsMenu"><a href="newwords.php?myLang=<?php echo $myLang; ?>"><?php echo $langArray["textNewwords"]; ?></a></li> 
+<li id="newsMenu"><a href="news.php?myLang=<?php echo $myLang; ?>"><?php echo $langArray["textNews"]; ?></a></li> 
+<li id="booksMenu"><a href="books.php?myLang=<?php echo $myLang; ?>"><?php echo $langArray["textBooks"]; ?></a></li> 
+<li id="aboutMenu"><a href="about.php?myLang=<?php echo $myLang; ?>"><?php echo $langArray["textAbout"]; ?></a></li> 
