@@ -1,5 +1,5 @@
 <?php session_start();?> <!--Session for a signed in user-->
-<?php include_once("php/setsitelanguage.php");?> <!--Script to set site language-->
+<?php include_once("php/setsitelanguage-1.php");?> <!--Script to set site language-->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +33,8 @@
   <body>
 
     <!-- Static navbar -->
-    <div class="navbar navbar-default navbar-static-top" role="navigation">
+<!--    <div class="navbar navbar-default navbar-static-top" role="navigation">-->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -70,13 +71,13 @@
 
 
     <div class="container">
-
+			
       <div class="jumbotron">
         <h4><?php echo $langArray["textMakeCustomDic"]; ?></h4>
 				<p>
-          <div class="col-lg-4 form-group">
-            <!--<label for="select" class="col-lg-4 control-label"></label>-->
-            <div class="col-lg-7">
+          <div class="row form-group">
+            <div class="col-xs-5 col-sm-4 col-md-3 col-lg-2">
+              <!--<select class="form-control" id="langId">-->
               <select class="form-control" id="langId">
 								<?php include_once("php/languagedropdown-1.php");?>
               </select>
@@ -88,8 +89,12 @@
 										placeholder="<?php echo $langArray["textTextArea"]; ?>"></textarea>
 				</p>
         <p>
-          <a class="btn btn-lg btn-primary" href="../../components/#navbar" 
-							role="button"><?php echo $langArray["textButtonMakeDict"]; ?></a>
+					<!--<button type="button" class="btn btn-default btn-lg">
+					  <span class="glyphicon glyphicon-book"></span> <?php echo $langArray["textButtonMakeDict"]; ?>
+					</button>-->
+					<a class="btn btn-default btn-md" href="#">
+					  <span class="glyphicon glyphicon-book"></span> <?php echo $langArray["textButtonMakeDict"]; ?>
+					</a>
         </p>
       </div>
 			

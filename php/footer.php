@@ -1,6 +1,6 @@
 <br>
 <footer>
-<p id="myCopyright">&copy; <?php echo date("Y"); ?> <a href="mailto:sergibondarenko@gmail.com"><?php echo $langArray["textCopyrightOwner"]."."; ?></a>&nbsp;&nbsp;<a href="http://wordcharge.com/copyright.php"><?php echo $langArray["textCopyrightText"]; ?></a> 
+<p id="myCopyright">&copy; <?php echo date("Y"); ?><?php echo $langArray["textCopyrightOwner"]."."; ?>&nbsp;&nbsp;<a href="http://wordcharge.com/copyright.php"><?php echo $langArray["textCopyrightText"]; ?></a> 
 <br>
 <br>
 <a href=http://onbiz.biz/ target="_blank"><?php echo $langArray["textTechCloud"]; ?></a>&nbsp;|&nbsp; 
