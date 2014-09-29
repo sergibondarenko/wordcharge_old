@@ -76,7 +76,7 @@
         <h4><?php echo $langArray["textMakeCustomDic"]; ?></h4>
 				<p>
           <div class="row form-group">
-            <div class="col-xs-5 col-sm-4 col-md-3 col-lg-2">
+            <div class="col-xs-7 col-sm-5 col-md-4 col-lg-3">
               <!--<select class="form-control" id="langId">-->
               <select class="form-control" id="langId">
 								<?php include_once("php/languagedropdown-1.php");?>
