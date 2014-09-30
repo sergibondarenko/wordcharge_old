@@ -1,4 +1,5 @@
-<?php session_start();?>
+<?php session_start();?> <!--Session for a signed in user-->
+<?php include_once("php/setsitelanguage-1.php");?> <!--Script to set site language-->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,11 +7,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
+    <meta name="description" content="WordCharge is a service for learning foreign languages. Learn new wordsi.">
     <meta name="author" content="Sergey Bondarenko">
-    <link rel="icon" href="favicon.ico">
+    <link rel="icon" href="img/favicon.ico" sizes="16x16 32x32 64x64 110x110 114x114" type="image/vnd.microsoft.icon">
 
-    <title>Static Top Navbar Example for Bootstrap</title>
+    <title><?php echo $langArray["projectName"]; ?></title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -27,13 +28,13 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-		<?php include_once("php/setsitelanguage.php");?> <!--Script to set site language-->
   </head>
 
   <body>
 
     <!-- Static navbar -->
-    <div class="navbar navbar-default navbar-static-top" role="navigation">
+<!--    <div class="navbar navbar-default navbar-static-top" role="navigation">-->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -42,49 +43,66 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#"><?php echo $projectName;?></a>
+          <a class="navbar-brand" href="#"><?php echo $langArray["projectName"]; ?></a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+						<?php include("php/header-1.php"); ?>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" 
+									id="themes"><?php echo $langArray["textLanguage"]; ?><span class="caret"></span></a>
+              <ul class="dropdown-menu" aria-labelledby="themes">
+                <?php include_once("php/wrapper-languages-1.php"); ?>
               </ul>
             </li>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar/">Default</a></li>
-            <li class="active"><a href="./">Static top</a></li>
-            <li><a href="../navbar-fixed-top/">Fixed top</a></li>
-          </ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#"><?php echo $langArray["textLogin"]; ?></a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#"><?php echo $langArray["textSignup"]; ?></a></li>
+					</ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
 
 
     <div class="container">
-
-      <!-- Main component for a primary marketing message or call to action -->
+			
       <div class="jumbotron">
-        <h1>Navbar example</h1>
-        <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-        <p>To see the difference between static and fixed top navbars, just scroll.</p>
+        <h4><?php echo $langArray["textMakeCustomDic"]; ?></h4>
+				<p>
+          <div class="row form-group">
+            <div class="col-xs-6 col-sm-5 col-md-4 col-lg-3">
+              <!--<select class="form-control" id="langId">-->
+              <select class="form-control" id="langId">
+								<?php include_once("php/languagedropdown-1.php");?>
+              </select>
+            </div>
+          </div>
+				</p>
         <p>
-          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
+					<textarea class="form-control" rows="9" id="textArea" 
+										placeholder="<?php echo $langArray["textTextArea"]; ?>"></textarea>
+				</p>
+        <p>
+					<!--<button type="button" class="btn btn-default btn-lg">
+					  <span class="glyphicon glyphicon-book"></span> <?php echo $langArray["textButtonMakeDict"]; ?>
+					</button>-->
+					<a class="btn btn-default btn-md" href="#">
+					  <span class="glyphicon glyphicon-book"></span> <?php echo $langArray["textButtonMakeDict"]; ?>
+					</a>
         </p>
       </div>
-
-    </div> <!-- /container -->
+			
+    	<!--Footer-->
+			<?php include_once("php/footer-1.php");?>
+    	<!--END of Footer-->
+    
+		</div> <!-- /container -->
 
 
     <!-- Bootstrap core JavaScript
