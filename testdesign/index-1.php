@@ -74,28 +74,34 @@
 			
       <div class="jumbotron">
         <h4><?php echo $langArray["textMakeCustomDic"]; ?></h4>
-				<p>
-          <div class="row form-group">
-            <div class="col-xs-6 col-sm-5 col-md-4 col-lg-3">
-              <!--<select class="form-control" id="langId">-->
-              <select class="form-control" id="langId">
-								<?php include_once("php/languagedropdown-1.php");?>
-              </select>
-            </div>
-          </div>
-				</p>
-        <p>
-					<textarea class="form-control" rows="9" id="textArea" 
-										placeholder="<?php echo $langArray["textTextArea"]; ?>"></textarea>
-				</p>
-        <p>
-					<!--<button type="button" class="btn btn-default btn-lg">
-					  <span class="glyphicon glyphicon-book"></span> <?php echo $langArray["textButtonMakeDict"]; ?>
-					</button>-->
-					<a class="btn btn-default btn-md" href="#">
-					  <span class="glyphicon glyphicon-book"></span> <?php echo $langArray["textButtonMakeDict"]; ?>
-					</a>
-        </p>
+
+				<form name="formIndex" method="post" action="newdict-1.php?myLang=<?php echo $myLang; ?>">
+					<p>
+        	  <div class="row form-group">
+        	    <div class="col-xs-6 col-sm-5 col-md-4 col-lg-3">
+						<?php include_once("php/languagedropdown-1.php");?>
+        	      <!--<select class="form-control" id="langId">
+									<?php //include_once("php/languagedropdown-1.php");?>
+        	      </select>-->
+        	    </div>
+        	  </div>
+					</p>
+        			<p>
+						<textarea class="form-control" rows="9" name="textArea" id="textArea" 
+											placeholder="<?php echo $langArray["textTextArea"]; ?>"></textarea>
+					</p>
+        			<p>
+						<!--<button type="button" class="btn btn-default btn-lg">
+						  <span class="glyphicon glyphicon-book"></span> <?php //echo $langArray["textButtonMakeDict"]; ?>
+						</button>-->
+						<!--<a class="btn btn-default btn-md" href="#">
+						  <span class="glyphicon glyphicon-book"></span> <?php //echo $langArray["textButtonMakeDict"]; ?>
+						</a>-->
+           	  <input class="btn btn-default btn-md" type="submit" 
+											value="<?php echo $langArray["textButtonMakeDict"]; ?>">
+        	</p>
+				</form>
+
       </div>
 			
     	<!--Footer-->

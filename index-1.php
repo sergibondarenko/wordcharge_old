@@ -99,7 +99,6 @@
 						</a>-->
            	  <input class="btn btn-default btn-md" type="submit" 
 											value="<?php echo $langArray["textButtonMakeDict"]; ?>">
-           	</div>
         	</p>
 				</form>
 
