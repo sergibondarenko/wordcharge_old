@@ -87,17 +87,16 @@
         	  </div>
 					</p>
         			<p>
-						<textarea class="form-control" rows="9" id="textArea" 
+						<textarea class="form-control" rows="9" name="textArea" id="textArea" 
 											placeholder="<?php echo $langArray["textTextArea"]; ?>"></textarea>
 					</p>
         			<p>
 						<!--<button type="button" class="btn btn-default btn-lg">
-						  <span class="glyphicon glyphicon-book"></span> <?php echo $langArray["textButtonMakeDict"]; ?>
+						  <span class="glyphicon glyphicon-book"></span> <?php //echo $langArray["textButtonMakeDict"]; ?>
 						</button>-->
 						<!--<a class="btn btn-default btn-md" href="#">
-						  <span class="glyphicon glyphicon-book"></span> <?php echo $langArray["textButtonMakeDict"]; ?>
+						  <span class="glyphicon glyphicon-book"></span> <?php //echo $langArray["textButtonMakeDict"]; ?>
 						</a>-->
-           	<div id="wrapper-makeDict">
            	  <input class="btn btn-default btn-md" type="submit" 
 											value="<?php echo $langArray["textButtonMakeDict"]; ?>">
            	</div>
