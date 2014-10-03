@@ -277,7 +277,6 @@
         ?>
 
       </div>
-      </div>
 			
     	<!--Footer-->
 			<?php include_once("php/footer-1.php");?>
