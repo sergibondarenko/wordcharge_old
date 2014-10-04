@@ -1,10 +1,4 @@
 <?php session_start();?> <!--Session for a signed in user-->
-<?php 
-  // Transfer site language value $myLang 
-  // to JQuery functions.js and iknowtheword.php 
-  include("php/setsitelanguage-1.php"); 
-  echo "var myLang = '{$myLang}';";
-?> <!--Script to set site language-->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,11 +31,13 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js">
+
     <script src="js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
     
-	<script src="js/functions.js"></script> <!--Dictrionary specific functions-->
+	  <script src="js/functions-1.js"></script> <!--Dictrionary specific functions-->
     <?php
       // Transfer $_SESSION["myusername"] and $langId 
       // to JQuery functions.js and iknowtheword.php 
@@ -49,6 +45,8 @@
       echo "var theSessionUser = '{$theSessionUser}';";
       $langId = $_POST['langId'];
       echo "var langId = '{$langId}';";
+      include("php/setsitelanguage-1.php"); 
+      echo "var myLang = '{$myLang}';";
     ?>
   </head>
 
