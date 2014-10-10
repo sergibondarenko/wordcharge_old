@@ -1,6 +1,5 @@
 <?php
 
-// Use instead class based module iknowtheword1.php
 
 include("vars.php");
 //include_once("setsitelanguage1.php");
