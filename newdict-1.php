@@ -40,6 +40,17 @@
         include("php/setsitelanguage-1.php"); 
         echo "var myLang = '{$myLang}';";
       ?>
+
+	  <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script src="js/jquery.min.js"></script>
+	  <script src="js/jquery-ui.min.js"></script>
+    <!--<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script> -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+
+    <!--jQuery scripts-->
     <script src="js/functions-1.js"></script>
 </head>
 <body>
@@ -236,14 +247,5 @@
 
     </div> <!--container-->
     
-	<!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
-    <!--<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script> -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </HTML>
