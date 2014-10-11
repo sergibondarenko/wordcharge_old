@@ -40,13 +40,14 @@
         include("php/setsitelanguage-1.php"); 
         echo "var myLang = '{$myLang}';";
       ?>
-    <script src="js/functions.js"></script>
+    <script src="js/functions-1.js"></script>
 </head>
 <body>
 
 	<?php include_once("navbar.php"); ?>
 
     <div class="container">
+    	<div class="jumbotron">
 
       <div id="wrapper-login">
         <?php include_once("php/wrapper-login.php");?>
@@ -230,7 +231,8 @@
    <!--Footer-->
 		<?php include_once("php/footer-1.php");?>
    <!--END of Footer-->
-    </div> <!--Container-->
+    	</div> <!--jumbotron-->
+    </div> <!--container-->
     
 	<!-- Bootstrap core JavaScript
     ================================================== -->
