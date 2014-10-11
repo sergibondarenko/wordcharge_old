@@ -228,10 +228,12 @@
         
         ?>
 
+    	</div> <!--jumbotron-->
+
    <!--Footer-->
 		<?php include_once("php/footer-1.php");?>
    <!--END of Footer-->
-    	</div> <!--jumbotron-->
+
     </div> <!--container-->
     
 	<!-- Bootstrap core JavaScript
