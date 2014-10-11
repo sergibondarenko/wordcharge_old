@@ -17,57 +17,54 @@
     <!-- Custom styles for this template -->
     <link href="css/navbar-static-top.css" rel="stylesheet">
 
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="js/ie-emulation-modes-warning.js"></script>
-
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
       <?php
+        include_once("php/vars.php");
+        include_once("php/functions.php");
+        include_once("php/setsitelanguage-1.php"); 
+
         // Transfer $_SESSION["myusername"] and $langId 
-        // to JQuery functions.js and iknowtheword.php 
+        $textArea = $_POST['textArea'];
         $theSessionUser = $_SESSION["myusername"];
-        echo "var theSessionUser = '{$theSessionUser}';";
         $langId = $_POST['langId'];
-        echo "var langId = '{$langId}';";
-      ?>
-      <?php 
-        // Transfer site language value $myLang 
-        // to JQuery functions.js and iknowtheword.php 
-        include("php/setsitelanguage-1.php"); 
-        echo "var myLang = '{$myLang}';";
       ?>
 
 	  <!-- Bootstrap core JavaScript
     ================================================== -->
     <script src="js/jquery.min.js"></script>
 	  <script src="js/jquery-ui.min.js"></script>
-    <!--<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script> -->
     <script src="js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
 
     <!--jQuery scripts-->
-    <script src="js/functions-1.js"></script>
+    <script>
+      var langId = <?php echo json_encode($langId); ?>;
+      var myLang = <?php echo json_encode($myLang); ?>;
+      var theSessionUser = <?php echo json_encode($theSessionUser); ?>;
+    </script>
+    <script src="js/makeWordsKnown.js"></script>
 </head>
 <body>
 
 	<?php include_once("navbar.php"); ?>
 
     <div class="container">
+
     	<div class="jumbotron">
 
-      <div id="wrapper-login">
-        <?php include_once("php/wrapper-login.php");?>
-      </div>
+      <!--<div id="wrapper-login">
+        <?php //include_once("php/wrapper-login.php");?>
+      </div>-->
 
-        <h2>WordCharge</h2>
-    
         <!-- Progress bar holder -->
-        <div id="progress" style="width:500px;border:1px solid #ccc;"></div>
+        <div class="progress">
+          <div class="progress-bar" id="progress" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 100%"> </div>
+        </div>
         <!-- Progress information -->
         <div id="information" style="width"></div>
         
@@ -76,11 +73,7 @@
         <?php
             header('Content-Type: text/html; charset=utf-8');
 
-            include("php/vars.php");
-            include("php/functions.php");
-
-            $textArea = $_POST['textArea'];
-            $langId = $_POST['langId'];
+            //$langId = $_POST['langId'];
 
             // Take the loged user name as a tables name           
             $UserNW=$theSessionUser."_NW"; //New words
@@ -143,12 +136,16 @@
             
              //$totalNew = maximum number of new words found
             // Loop through the words in $words array and run the Progress Bar
-            for($i=0; $i<$totalNew; $i++){
+            for($i = 0; $i <= $totalNew; $i++){
 
                 // Progress Bar: Calculate the percentation
                 $percent = intval($i/$totalNew * 100)."%";
                 
-                
+                // Progress Bar: Javascript for updating the progress bar and information
+                echo '<script language="javascript">
+                document.getElementById("progress").innerHTML="<div style=\"width:'.$percent.';background-color:#ccffcc;\">&nbsp;</div>";
+                document.getElementById("information").innerHTML="'.$i.' '.$langArray["textNewdictProcessBar"].'";
+                </script>';
             
                 // Progress Bar: This is for the buffer achieve the minimum size in order to flush data
                 echo str_repeat(' ',1024*64);

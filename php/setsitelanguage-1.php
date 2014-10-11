@@ -2,6 +2,7 @@
   //$myLang = isset($_GET["myLang"])? $_GET["myLang"]: "en";
 
   if(isset($_GET["myLang"])){
+    //$myLang = sanitize_input($_GET["myLang"]);
     $myLang = $_GET["myLang"];
     #setcookie ("lang_site", $myLang, time()+60*60*24*30);
   } else {
