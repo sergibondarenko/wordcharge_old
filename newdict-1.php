@@ -1,19 +1,31 @@
-<?php
-session_start();
-
-?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>WordCharge</title>
-    <!--<meta charset="utf-8">-->
-    <meta charset="UTF-8">
-    <link href="css/site.css" rel="stylesheet">
-    <!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />-->
-    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
-    <!-- functions.js - 1.Save known words;  -->
-    <script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="WordCharge is a service for learning foreign languages. Learn new wordsi.">
+    <meta name="author" content="Sergey Bondarenko">
+    <link rel="icon" href="img/favicon.ico" sizes="16x16 32x32 64x64 110x110 114x114" type="image/vnd.microsoft.icon">
+
+    <title><?php echo $langArray["projectName"]; ?></title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/navbar-static-top.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
       <?php
         // Transfer $_SESSION["myusername"] and $langId 
         // to JQuery functions.js and iknowtheword.php 
@@ -25,15 +37,17 @@ session_start();
       <?php 
         // Transfer site language value $myLang 
         // to JQuery functions.js and iknowtheword.php 
-        include("php/setsitelanguage.php"); 
+        include("php/setsitelanguage-1.php"); 
         echo "var myLang = '{$myLang}';";
       ?>
-    </script>
     <script src="js/functions.js"></script>
 </head>
 <body>
-    <?php include("php/header.php"); ?>
-    <div id="wrapper-main">
+
+	<?php include_once("navbar.php"); ?>
+
+    <div class="container">
+
       <div id="wrapper-login">
         <?php include_once("php/wrapper-login.php");?>
       </div>
@@ -74,8 +88,7 @@ session_start();
             $totalNew = count($words);
             $youKnow = $totalWords - $totalNew;
             $yPercent = ($youKnow * 100)/$totalWords;
-            //echo "<div id=\"wordsStat\">"."Total number: ".$totalWords."; New: ".$totalNew."; You know: ".$youKnow." (".round($yPercent,2)."%);"."<div>";
-            echo "<div id=\"wordsStat\">".$langArray["textNewdictTotal"].": ".$totalWords."; ".$langArray["textNewdictNew"].": ".$totalNew."; ".$langArray["textNewdictYouknow"].": ".$youKnow." (".round($yPercent,2)."%);"."<div>";
+            echo "<div id=\"wordsStat\">".$langArray["textNewdictTotal"].": ".$totalWords."; ".$langArray["textNewdictNew"].": ".$totalNew."; ".$langArray["textNewdictYouknow"].": ".$youKnow." (".round($yPercent,2)."%);"."</div>";
             //echo $theSessionUser;
             
             // 2.=====
@@ -123,11 +136,6 @@ session_start();
                 // Progress Bar: Calculate the percentation
                 $percent = intval($i/$totalNew * 100)."%";
                 
-                // Progress Bar: Javascript for updating the progress bar and information
-                echo '<script language="javascript">
-                document.getElementById("progress").innerHTML="<div style=\"width:'.$percent.';background-color:#ddd;\">&nbsp;</div>";
-                document.getElementById("information").innerHTML="'.$i.' '.$langArray["textNewdictProcessBar"].'";
-                </script>';
                 
             
                 // Progress Bar: This is for the buffer achieve the minimum size in order to flush data
@@ -218,7 +226,19 @@ session_start();
             mysqli_close($con);
         
         ?>
-        <?php include("php/footer.php"); ?>
-    </div>
+
+   <!--Footer-->
+		<?php include_once("php/footer-1.php");?>
+   <!--END of Footer-->
+    </div> <!--Container-->
+    
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>

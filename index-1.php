@@ -39,7 +39,7 @@
       <div class="jumbotron">
         <h4><?php echo $langArray["textMakeCustomDic"]; ?></h4>
 
-				<form name="formIndex" method="post" action="newdict-1.php?myLang=<?php echo $myLang; ?>">
+			<form name="formIndex" method="post" action="newdict-1.php?myLang=<?php echo $myLang; ?>">
 					<p>
         	  <div class="row form-group">
         	    <div class="col-xs-6 col-sm-5 col-md-4 col-lg-3">

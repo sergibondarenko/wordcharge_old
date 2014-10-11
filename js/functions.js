@@ -44,8 +44,6 @@ $(document).ready(function(){
 */
           // Remove the known word from the html table
           $(this).parents('tr:first').remove();                    
-         
-          
         
         });    
       
