@@ -1,12 +1,12 @@
-
 $(document).ready(function(){
   $("span.iKnowTheWord").on("click", function() {
       // Take values from a table and post it into iknowtheword.php
       // to fill the MySQL table of known words                    
-      var aWord = $(this).closest('tr').find('span.tdWord').html();                    
-      var aFreq = $(this).closest('tr').find('span.tdFreq').html();                    
-      var aText = $(this).closest('tr').find('span.tdText').html();                    
-      alert( aText );
+      //var aWord = $(this).closest('tr').find('span.tdWord').html();                    
+      //var aFreq = $(this).closest('tr').find('span.tdFreq').html();                    
+      //var aText = $(this).closest('tr').find('span.tdText').html();                    
+      //alert( aText );
+		alert("Hello");
 
 //      // Fill the MySQL table of known words
 //      $.post("php/iknowtheword.php",
