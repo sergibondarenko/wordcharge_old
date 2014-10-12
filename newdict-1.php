@@ -62,14 +62,14 @@
       </div>-->
 
         <!-- Progress bar holder -->
-        <!--<div class="progress">
-          <div class="progress-bar" id="progress" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 100%"> </div>
-        </div>-->
-				<div class="progress">
-				    <div class="progress-bar progress-bar-custom" id="progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+        <div class="progress">
+          <div class="progress-bar progress-bar-custom" id="progress" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 100%"> </div>
+        </div>
+				<!--<div class="progress">
+				    <div class="progress-bar" id="progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 5%;">
 				        <span class="sr-only">0% Complete</span>
 				    </div>
-				</div>
+				</div>-->
         <!-- Progress information -->
         <div id="information" style="width"></div>
         
@@ -148,7 +148,7 @@
                 
                 // Progress Bar: Javascript for updating the progress bar and information
                 echo '<script language="javascript">
-                document.getElementById("progress").innerHTML="<div style=\"width:'.$percent.';background-color:#ccffcc;\">&nbsp;</div>";
+                document.getElementById("progress").innerHTML="<div style=\"width:'.$percent.';background-color:#428bca;\">&nbsp;</div>";
                 document.getElementById("information").innerHTML="'.$i.' '.$langArray["textNewdictProcessBar"].'";
                 </script>';
             
