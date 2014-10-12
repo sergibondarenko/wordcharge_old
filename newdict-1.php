@@ -62,9 +62,14 @@
       </div>-->
 
         <!-- Progress bar holder -->
-        <div class="progress">
+        <!--<div class="progress">
           <div class="progress-bar" id="progress" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 100%"> </div>
-        </div>
+        </div>-->
+				<div class="progress">
+				    <div class="progress-bar progress-bar-custom" id="progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+				        <span class="sr-only">0% Complete</span>
+				    </div>
+				</div>
         <!-- Progress information -->
         <div id="information" style="width"></div>
         
