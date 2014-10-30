@@ -32,7 +32,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <script src="js/jquery.min.js"></script>
-	  <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
@@ -40,20 +40,20 @@
 
   <body>
 
-	<?php include_once("navbar.php"); ?>
+  <?php include_once("navbar.php"); ?>
 
     <div class="container">
-			
+      
       <div class="jumbotron">
-        <?php include_once("php/bookshelf.php"); ?>
+        <?php include_once("php/bookshelf-1.php"); ?>
 
       </div>
-			
-    	<!--Footer-->
-			<?php include_once("php/footer-1.php");?>
-    	<!--END of Footer-->
+      
+      <!--Footer-->
+      <?php include_once("php/footer-1.php");?>
+      <!--END of Footer-->
     
-		</div> <!-- /container -->
+    </div> <!-- /container -->
 
 
   </body>

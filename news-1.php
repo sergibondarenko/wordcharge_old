@@ -77,7 +77,7 @@
           }
         }
         //xmlhttp.open("GET","php/getrss.php?q="+str,true);
-        xmlhttp.open("GET","php/getrss.php?myLang=<?php echo $myLang;?>&newsT="+newsType+"&q="+str,true);
+        xmlhttp.open("GET","php/getrss-1.php?myLang=<?php echo $myLang;?>&newsT="+newsType+"&q="+str,true);
         xmlhttp.send();
       }
      </script>

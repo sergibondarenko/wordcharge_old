@@ -1,38 +1,35 @@
-<?php session_start(); ?>
+<?php
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="WordCharge is a service for learning foreign languages. Learn new wordsi.">
-    <meta name="author" content="Sergey Bondarenko">
-    <link rel="icon" href="img/favicon.ico" sizes="16x16 32x32 64x64 110x110 114x114" type="image/vnd.microsoft.icon">
-
-    <title><?php echo $langArray["projectName"]; ?></title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="css/navbar-static-top.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <title>WordCharge</title>
+    <!--<meta charset="utf-8">-->
+    <meta charset="UTF-8">
+    <link href="css/site.css" rel="stylesheet">
+    <!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />-->
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+    <!-- functions.js - 1.Save known words;  -->
+    <script>
       <?php
-        include_once("php/vars.php");
-        include_once("php/functions.php");
-        include_once("php/setsitelanguage-1.php"); 
-
         // Transfer $_SESSION["myusername"] and $langId 
-        //$textArea = $_POST['textArea'];
+        // to JQuery functions.js and iknowtheword.php 
         $theSessionUser = $_SESSION["myusername"];
-        //$langId = $_POST['langId'];
-        $myLang = $_POST['myLang'];
+        echo "var theSessionUser = '{$theSessionUser}';";
+
+        $myLang = $_POST["myLang"];
         $langId = $myLang;
+        //$langId = $_POST['langId'];
+        echo "var langId = '{$langId}';";
+      ?>
+      <?php 
+        // Transfer site language value $myLang 
+        // to JQuery functions.js and iknowtheword.php 
+        include("php/setsitelanguage.php"); 
+        echo "var myLang = '{$myLang}';";
       ?>
       <?php
         function strip_html_js_tags($text)
@@ -47,44 +44,32 @@
           return $text;
         }
       ?>
-
-	  <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <script src="js/jquery.min.js"></script>
-	  <script src="js/jquery-ui.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="js/ie10-viewport-bug-workaround.js"></script>
-
-    <!--jQuery scripts-->
-    <script>
-      var langId = <?php echo json_encode($langId); ?>;
-      var myLang = <?php echo json_encode($myLang); ?>;
-      var theSessionUser = <?php echo json_encode($theSessionUser); ?>;
     </script>
-    <script src="js/makeWordsKnown.js"></script>
+    <script src="js/functions.js"></script>
 </head>
 <body>
+    <?php include("php/header.php"); ?>
+    <div id="wrapper-main">
+      <div id="wrapper-login">
+        <?php include_once("php/wrapper-login.php");?>
+      </div>
 
-	<?php include_once("navbar.php"); ?>
-
-    <div class="container">
-
-    	<div class="jumbotron">
-
+        <h2>WordCharge</h2>
+    
         <!-- Progress bar holder -->
-        <div class="progress">
-          <div class="progress-bar progress-bar-custom" id="progress" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 100%"> </div>
-        </div>
-
+        <div id="progress" style="width:500px;border:1px solid #ccc;"></div>
         <!-- Progress information -->
         <div id="information" style="width"></div>
         
         <p id="wordSaveStatus"><?php echo $langArray["textWordSaveStatus"]; ?></p>
         
         <?php
+            include("php/vars.php");
+            include("php/functions.php");
+            
             header('Content-Type: text/html; charset=utf-8');
 
+            //$textArea = $_POST['textArea'];
             //$langId = $_POST['langId'];
             $myUrl = $_POST["myUrl"];
 
@@ -97,9 +82,11 @@
             // and make an array ($words), convert all words to lowercase 
             // Delete all dublicate words in the array and sort in descending order
             $myUrl = get_redirected_url($myUrl);
+            
             $content = remote_get_contents($myUrl);
             $text = strip_html_js_tags($content);
             $words = split_text_into_words($text);
+            //$words = split_text_into_words($textArea);
             $totalWords = count($words);
            
             // Select only new words
@@ -109,7 +96,8 @@
             $totalNew = count($words);
             $youKnow = $totalWords - $totalNew;
             $yPercent = ($youKnow * 100)/$totalWords;
-            echo "<div id=\"wordsStat\">".$langArray["textNewdictTotal"].": ".$totalWords."; ".$langArray["textNewdictNew"].": ".$totalNew."; ".$langArray["textNewdictYouknow"].": ".$youKnow." (".round($yPercent,2)."%);"."</div>";
+            //echo "<div id=\"wordsStat\">"."Total number: ".$totalWords."; New: ".$totalNew."; You know: ".$youKnow." (".round($yPercent,2)."%);"."<div>";
+            echo "<div id=\"wordsStat\">".$langArray["textNewdictTotal"].": ".$totalWords."; ".$langArray["textNewdictNew"].": ".$totalNew."; ".$langArray["textNewdictYouknow"].": ".$youKnow." (".round($yPercent,2)."%);"."<div>";
             //echo $theSessionUser;
             
             // 2.=====
@@ -152,16 +140,17 @@
             
              //$totalNew = maximum number of new words found
             // Loop through the words in $words array and run the Progress Bar
-            for($i = 0; $i <= $totalNew; $i++){
+            for($i=0; $i<$totalNew; $i++){
 
                 // Progress Bar: Calculate the percentation
                 $percent = intval($i/$totalNew * 100)."%";
                 
                 // Progress Bar: Javascript for updating the progress bar and information
                 echo '<script language="javascript">
-                document.getElementById("progress").innerHTML="<div style=\"width:'.$percent.';background-color:#428bca;\">&nbsp;</div>";
+                document.getElementById("progress").innerHTML="<div style=\"width:'.$percent.';background-color:#ddd;\">&nbsp;</div>";
                 document.getElementById("information").innerHTML="'.$i.' '.$langArray["textNewdictProcessBar"].'";
                 </script>';
+                
             
                 // Progress Bar: This is for the buffer achieve the minimum size in order to flush data
                 echo str_repeat(' ',1024*64);
@@ -174,7 +163,7 @@
                 // Get keys and values from $words and separate them
                 $onlyWords = array_keys($words);
                 $onlyFreq = array_values($words);
-                
+               
                 // Insert word and its frequency into database
                 $sqlInsert = mysqli_query($con, "INSERT INTO $UserNW (lang,freq,word) VALUES ('$langId','$onlyFreq[$i]', '$onlyWords[$i]')");
                 if(!$sqlInsert){
@@ -251,14 +240,7 @@
             mysqli_close($con);
         
         ?>
-
-    	</div> <!--jumbotron-->
-
-   <!--Footer-->
-		<?php include_once("php/footer-1.php");?>
-   <!--END of Footer-->
-
-    </div> <!--container-->
-    
+        <?php include("php/footer.php"); ?>
+    </div>
 </body>
-</HTML>
+</html>
