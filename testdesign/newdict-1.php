@@ -1,8 +1,7 @@
-<?php session_start();?> <!--Session for a signed in user-->
-
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,97 +17,68 @@
     <!-- Custom styles for this template -->
     <link href="css/navbar-static-top.css" rel="stylesheet">
 
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="js/ie-emulation-modes-warning.js"></script>
-
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js">
+      <?php
+        include_once("php/vars.php");
+        include_once("php/functions.php");
+        include_once("php/setsitelanguage-1.php"); 
 
+        // Transfer $_SESSION["myusername"] and $langId 
+        $textArea = $_POST['textArea'];
+        $theSessionUser = $_SESSION["myusername"];
+        $langId = $_POST['langId'];
+      ?>
+
+	  <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script src="js/jquery.min.js"></script>
+	  <script src="js/jquery-ui.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
-    
-    <?php
-      // Transfer $_SESSION["myusername"] and $langId 
-      // to JQuery functions.js and iknowtheword.php 
-      $theSessionUser = $_SESSION["myusername"];
-      echo "var theSessionUser = '{$theSessionUser}';";
-      $langId = $_POST['langId'];
-      echo "var langId = '{$langId}';";
-      include("php/setsitelanguage-1.php"); 
-      echo "var myLang = '{$myLang}';";
-    ?>
-	  <script src="js/functions-1.js"></script> <!--Dictrionary specific functions-->
-  </head>
 
-  <body>
+    <!--jQuery scripts-->
+    <script>
+      var langId = <?php echo json_encode($langId); ?>;
+      var myLang = <?php echo json_encode($myLang); ?>;
+      var theSessionUser = <?php echo json_encode($theSessionUser); ?>;
+    </script>
+    <script src="js/makeWordsKnown.js"></script>
+</head>
+<body>
 
-    <!-- Static navbar -->
-<!--    <div class="navbar navbar-default navbar-static-top" role="navigation">-->
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#"><?php echo $langArray["projectName"]; ?></a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-						<?php include("php/header-1.php"); ?>
-          </ul>
-
-          <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#" 
-									id="themes"><?php echo $langArray["textLanguage"]; ?><span class="caret"></span></a>
-              <ul class="dropdown-menu" aria-labelledby="themes">
-                <?php include_once("php/wrapper-languages-1.php"); ?>
-              </ul>
-            </li>
-          </ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#"><?php echo $langArray["textLogin"]; ?></a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#"><?php echo $langArray["textSignup"]; ?></a></li>
-					</ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </div>
-
+	<?php include_once("navbar.php"); ?>
 
     <div class="container">
-			
-      <div class="jumbotron">
+
+    	<div class="jumbotron">
+
+      <!--<div id="wrapper-login">
+        <?php //include_once("php/wrapper-login.php");?>
+      </div>-->
 
         <!-- Progress bar holder -->
-        <div id="progress" style="width:500px;border:1px solid #ccc;"></div>
+        <div class="progress">
+          <div class="progress-bar progress-bar-custom" id="progress" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 100%"> </div>
+        </div>
+				<!--<div class="progress">
+				    <div class="progress-bar" id="progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 5%;">
+				        <span class="sr-only">0% Complete</span>
+				    </div>
+				</div>-->
         <!-- Progress information -->
         <div id="information" style="width"></div>
         
         <p id="wordSaveStatus"><?php echo $langArray["textWordSaveStatus"]; ?></p>
         
-		  <?php
+        <?php
             header('Content-Type: text/html; charset=utf-8');
 
-            include("php/vars.php");
-            include("php/functions.php");
-
-            $textArea = $_POST['textArea'];
-            $langId = $_POST['langId'];
+            //$langId = $_POST['langId'];
 
             // Take the loged user name as a tables name           
             $UserNW=$theSessionUser."_NW"; //New words
@@ -128,8 +98,6 @@
             $totalNew = count($words);
             $youKnow = $totalWords - $totalNew;
             $yPercent = ($youKnow * 100)/$totalWords;
-				
-				//echo $_POST['langId']."<br>"; 
             echo "<div id=\"wordsStat\">".$langArray["textNewdictTotal"].": ".$totalWords."; ".$langArray["textNewdictNew"].": ".$totalNew."; ".$langArray["textNewdictYouknow"].": ".$youKnow." (".round($yPercent,2)."%);"."</div>";
             //echo $theSessionUser;
             
@@ -173,17 +141,16 @@
             
              //$totalNew = maximum number of new words found
             // Loop through the words in $words array and run the Progress Bar
-            for($i=0; $i<$totalNew; $i++){
+            for($i = 0; $i <= $totalNew; $i++){
 
                 // Progress Bar: Calculate the percentation
                 $percent = intval($i/$totalNew * 100)."%";
                 
                 // Progress Bar: Javascript for updating the progress bar and information
                 echo '<script language="javascript">
-                document.getElementById("progress").innerHTML="<div style=\"width:'.$percent.';background-color:#ddd;\">&nbsp;</div>";
+                document.getElementById("progress").innerHTML="<div style=\"width:'.$percent.';background-color:#428bca;\">&nbsp;</div>";
                 document.getElementById("information").innerHTML="'.$i.' '.$langArray["textNewdictProcessBar"].'";
                 </script>';
-                
             
                 // Progress Bar: This is for the buffer achieve the minimum size in order to flush data
                 echo str_repeat(' ',1024*64);
@@ -274,15 +241,13 @@
         
         ?>
 
-      </div>
-			
-    	<!--Footer-->
-			<?php include_once("php/footer-1.php");?>
-    	<!--END of Footer-->
+    	</div> <!--jumbotron-->
+
+   <!--Footer-->
+		<?php include_once("php/footer-1.php");?>
+   <!--END of Footer-->
+
+    </div> <!--container-->
     
-		</div> <!-- /container -->
-
-
-  </body>
-</html>
-
+</body>
+</HTML>

@@ -110,6 +110,7 @@ function curl_get_contents($url)
     // Close the curl session
     curl_close($ch);
 
+    $output = str_replace("'", " ", $output);
     // Return the output as a variable
     return $output;
 }

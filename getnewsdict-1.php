@@ -31,8 +31,9 @@
         //$textArea = $_POST['textArea'];
         $theSessionUser = $_SESSION["myusername"];
         //$langId = $_POST['langId'];
-        $myLang = $_POST['myLang'];
-        $langId = $myLang;
+        $myLang = $_GET['myLang']; //For user interface lang. Format: ru
+        $langId = $_POST['langId']; //For dict lang. Format: ru-en
+        
       ?>
       <?php
         function strip_html_js_tags($text)
@@ -219,7 +220,8 @@
             echo "<br>";
             //echo "Dictionary: " . $langId . "<br>";
             echo $langArray["textNewdictDict"].": " . $langId . "<br>";
-            echo "<table id='tableDict'>
+            //echo "<table id='tableDict'>  //Old design
+            echo "<table class='table table-striped table-hover'>
             <tr>
             <th>".$langArray["textTableIknow"]."</th>
             <th>".$langArray["textTableFreq"]."</th>
@@ -228,7 +230,8 @@
             </tr>";
             
             while($row = mysqli_fetch_array($sqlSelect)) {
-              echo "<tr>";
+              // echo "<tr>"; <!-- Old design --> 
+              echo "<tr class='active'>";
               echo "<td>" . "<span class=\"iKnowTheWord\"><a href=\"\">".$langArray["textTableYes"]."</a></span>" . "</td>";
               echo "<td>" . "<span class=\"tdFreq\">" . $row['freq'] . "</span>" . "</td>";
               //echo "<td>" . $row['word'] . "</td>";

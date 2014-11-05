@@ -77,7 +77,7 @@ for ($i=0; $i<=10; $i++) {
 
   echo ("<form action='../getnewsdict-1.php?myLang=$myLang' method='post' target='_blank'>".
         "<input type='hidden' name='myUrl' value='$item_link'>".
-        "<input type='hidden' name='myLang' value='$foreignLang-$myLang'>".
+        "<input type='hidden' name='langId' value='$foreignLang-$myLang'>".
         //"<input type='submit' name='myDict' value='$langArray[\"textButtonMakeDict\"]'>".
         "<input type='submit' name='myDict' value='$makeDict'>".
         "</form>");
