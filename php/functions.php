@@ -55,6 +55,7 @@ curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_HEADER, true);
 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Must be set to true so that PHP follows any "Location:" header
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
 
 $a = curl_exec($ch); // $a will contain all headers
 
@@ -110,7 +111,7 @@ function curl_get_contents($url)
     // Close the curl session
     curl_close($ch);
 
-    $output = str_replace("'", " ", $output);
+    //$output = str_replace("'", " ", $output);
     // Return the output as a variable
     return $output;
 }
@@ -190,6 +191,65 @@ $text = preg_replace($search, "\n", html_entity_decode($text));
 return $text;
 }*/
 
+//To remove all the hidden text not displayed on a webpage
+function my_strip_all_tags($str){
+    //$str = preg_replace('/(<|>)\1{2}/is', '', $str);
+    $str = preg_replace(
+        array(// Remove invisible content
+            '@<head[^>]*?>.*?</head>@siu',
+            '@<style[^>]*?>.*?</style>@siu',
+            '@<script[^>]*?.*?</script>@siu',
+            '@<noscript[^>]*?.*?</noscript>@siu',
+            ),
+        "", //replace above with nothing
+        $str );
+    //$str = replaceWhitespace($str);
+    //$str = strip_tags($str);
+    return $str;
+}
+
+function strip_html_tags( $text )
+{
+  // PHP's strip_tags() function will remove tags, but it
+  // doesn't remove scripts, styles, and other unwanted
+  // invisible text between tags.  Also, as a prelude to
+  // tokenizing the text, we need to insure that when
+  // block-level tags (such as <p> or <div>) are removed,
+  // neighboring words aren't joined.
+  $text = preg_replace(
+    array(
+      // Remove invisible content
+      '@<head[^>]*?>.*?</head>@siu',
+      '@<style[^>]*?>.*?</style>@siu',
+      '@<script[^>]*?.*?</script>@siu',
+      '@<object[^>]*?.*?</object>@siu',
+      '@<embed[^>]*?.*?</embed>@siu',
+      '@<applet[^>]*?.*?</applet>@siu',
+      '@<noframes[^>]*?.*?</noframes>@siu',
+      '@<noscript[^>]*?.*?</noscript>@siu',
+      '@<noembed[^>]*?.*?</noembed>@siu',
+
+      // Add line breaks before & after blocks
+      //'@<((br)|(hr))@iu',
+      //'@</?((address)|(blockquote)|(center)|(del))@iu',
+      //'@</?((div)|(h[1-9])|(ins)|(isindex)|(p)|(pre))@iu',
+      //'@</?((dir)|(dl)|(dt)|(dd)|(li)|(menu)|(ol)|(ul))@iu',
+      //'@</?((table)|(th)|(td)|(caption))@iu',
+      //'@</?((form)|(button)|(fieldset)|(legend)|(input))@iu',
+      //'@</?((label)|(select)|(optgroup)|(option)|(textarea))@iu',
+      //'@</?((frameset)|(frame)|(iframe))@iu',
+    ),
+    array(
+      ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+      "\n\$0", "\n\$0", "\n\$0", "\n\$0", "\n\$0", "\n\$0",
+      "\n\$0", "\n\$0",
+    ),
+    $text );
+
+  // Remove all remaining tags and comments and return.
+  return strip_tags( $text );
+}
+
 // Get data from html form textrArea field, remove all special characters
 // and make an array ($words), convert all words to lowercase 
 // Delete all dublicate words in the array and sort in descending order
@@ -197,7 +257,17 @@ function split_text_into_words($text)
 {
 // Get data from html form textrArea field, remove all special characters
 // and make an array ($words), convert all words to lowercase 
+//$words = preg_split('/\P{L}+/u', $text, 0, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
+//$words = preg_split('/\P{L}+/u', $text, 0, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
+
 $words = preg_split('/\P{L}+/u', $text, 0, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
+
+//$text = filter_var($text, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
+//$words = preg_split('/[\s,]+/', strtolower($text), 0, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
+//$words = preg_split('/^([\p{Cyrillic}\s]+|[\p{Latin}\s]+)$/u', strtolower($text), 0, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
+
+//$words = preg_split('/[^\w\'\xc0-\xfd-]+/', $text, -1, PREG_SPLIT_NO_EMPTY);
+
 //$words = preg_split('/\W+/', $text, 0, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
 //$words = preg_split("/([\(\)’'\",.?!\r\n]+)/", $text, 0, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
 

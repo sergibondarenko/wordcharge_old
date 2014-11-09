@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="WordCharge is a service for learning foreign languages. Learn new wordsi.">
     <meta name="author" content="Sergey Bondarenko">
-    <link rel="icon" href="img/favicon.ico" sizes="16x16 32x32 64x64 110x110 114x114" type="image/vnd.microsoft.icon">
+    <link rel="icon" href="img/favicon.png" type="image/png">
 
     <title><?php echo $langArray["projectName"]; ?></title>
 
@@ -34,19 +34,6 @@
         $myLang = $_GET['myLang']; //For user interface lang. Format: ru
         $langId = $_POST['langId']; //For dict lang. Format: ru-en
         
-      ?>
-      <?php
-        function strip_html_js_tags($text)
-        {
-          $search = array('@<script[^>]*?>.*?</script>@si',  // Strip out javascript 
-                          '@<style[^>]*?>.*?</style>@siU',    // Strip style tags properly 
-                          '@<[\/\!]*?[^<>]*?>@si',            // Strip out HTML tags 
-                          '@<![\s\S]*?–[ \t\n\r]*>@',         // Strip multi-line comments including CDATA 
-                          '/\s{2,}/',
-                          );
-          $text = preg_replace($search, "\n", html_entity_decode($text));
-          return $text;
-        }
       ?>
 
 	  <!-- Bootstrap core JavaScript
@@ -86,6 +73,9 @@
         <?php
             header('Content-Type: text/html; charset=utf-8');
 
+            function return_only_words($var){
+              return ctype_alpha($var);
+            }
             //$langId = $_POST['langId'];
             $myUrl = $_POST["myUrl"];
 
@@ -98,9 +88,33 @@
             // and make an array ($words), convert all words to lowercase 
             // Delete all dublicate words in the array and sort in descending order
             $myUrl = get_redirected_url($myUrl);
+            //print_r($myUrl);
             $content = remote_get_contents($myUrl);
-            $text = strip_html_js_tags($content);
-            $words = split_text_into_words($text);
+            //$content = file_get_contents($myUrl);
+            $dirtyWords = explode(" ", $content);
+            $words = array_filter($dirtyWords, "return_only_words");
+
+            //Delete all words which len==1
+            foreach ($words as $key=>$word)
+            {
+              if (strlen($words[$key]) < 2){
+                unset($words[$key]);
+              }
+            }
+            
+            $words = array_map('strtolower', $words);
+            // Delete all dublicate words in the array and sort in descending order
+            $words = array_count_values($words);
+            arsort($words);
+
+            //print_r($text);
+            //$words = split_newstext_into_words($text);
+            //print_r($words);
+
+            //$text = strip_html_js_tags($content);
+            //$text = strip_html_tags($content); 
+            //$text = my_strip_all_tags($content)  
+            //$words = split_text_into_words($text);
             $totalWords = count($words);
            
             // Select only new words

@@ -9,12 +9,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="WordCharge is a service for learning foreign languages. Learn new wordsi.">
     <meta name="author" content="Sergey Bondarenko">
-    <link rel="icon" href="img/favicon.ico" sizes="16x16 32x32 64x64 110x110 114x114" type="image/vnd.microsoft.icon">
+<!--    <link rel="icon" href="img/favicon.ico" type="image/vnd.microsoft.icon">-->
+    <link rel="icon" href="img/favicon.png" type="image/png">
 
     <title><?php echo $langArray["projectName"]; ?></title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-social.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/navbar-static-top.css" rel="stylesheet">
