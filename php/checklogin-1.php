@@ -60,7 +60,7 @@ if(!empty($_POST['myusername']) && !empty($_POST['mypassword'])){
     session_start();
     $_SESSION["myusername"] = $myusername;
 
-    header("location:index-1.php?myLang=$myLang");    
+    header("location:index.php?myLang=$myLang");    
 
   } else {
     echo "Wrong Username or Password. Try again.";
