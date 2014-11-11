@@ -8,6 +8,7 @@
 <body>
 <?php
 //header('Content-type: text/plain; charset=utf-8');
+header("Content-type: application/json; charset=utf-8");
 
 //include ($_SERVER['DOCUMENT_ROOT'] . "/php/vars.php");
 //include ($_SERVER['DOCUMENT_ROOT'] . "/php/func.php");
@@ -37,7 +38,7 @@ $sqlSelect = mysqli_query($con,"SELECT * FROM $UserNW");
 //$sqlSelect = mysqli_query($con,"SELECT * FROM $UserNW WHERE id = '".$wordId."'");
 
 $numRows = mysqli_num_rows($sqlSelect);
-echo "Total number of new words: $numRows <br><br><br>";
+echo "Total number of new words: $numRows";
 
 //$wordIndex = 0;
 //$row = mysqli_fetch_array($sqlSelect);
@@ -48,20 +49,20 @@ echo "Total number of new words: $numRows <br><br><br>";
 if (mysqli_num_rows($sqlSelect) > 0) {
   while($row = mysqli_fetch_assoc($sqlSelect)){
     //$flashWords[$row['id']]['id'] = $row['id']; 
-    $flashWords[$row['id']] = array('id'=>$row['id'], 'word'=>$row['word'], 'text'=>$row['text']);
+    $flashWordsPHP[$row['id']] = array('id'=>$row['id'], 'word'=>$row['word'], 'text'=>$row['text']);
     
   }
 } else {
   echo "0 results";
 }
-echo "<br>";
-
-print_r($flashWords[1]);
-echo "<br>";
-print_r($flashWords[2]);
-
-echo "<br><br>";
-print_r($flashWords);
+//echo "<br>";
+//
+//print_r($flashWords[1]);
+//echo "<br>";
+//print_r($flashWords[2]);
+//
+//echo "<br><br>";
+//print_r($flashWords);
 //echo "<br>$flashWords<br>";
 
 //if (mysqli_num_rows($sqlSelect) > 0) {

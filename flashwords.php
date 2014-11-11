@@ -50,6 +50,33 @@
             include_once("php/vars.php");
             include_once("php/flashdict.php"); 
         ?>
+        <script>
+          $(document).ready(function(){
+            $("#showText").click(function(){
+              $("#textField").html(flashWordsJS[wordIndex].text);
+            });
+            $("#showNext").click(function(){
+              wordIndex++;
+              $("#wordField").html(flashWordsJS[wordIndex].word);
+              $("#textField").html(" ");
+            });
+          });
+        </script>
+
+      <button id="showText">Show</button>
+      <button id="showNext">Next</button>
+      <br>
+      <p id="wordField"> </p>
+      <p id="textField"> </p>
+      
+        <script>
+          var wordIndex = 2;
+          var flashWordsJS = <?php echo json_encode($flashWordsPHP, JSON_PRETTY_PRINT) ?>;
+          console.log(flashWordsJS.length);
+          //console.log(flashWordsJS[5].word);
+          document.getElementById("wordField").innerHTML = flashWordsJS[wordIndex].word;
+          //document.getElementById("textField").innerHTML = flashWordsJS[wordIndex].text;
+        </script>
 
       </div>
 			
