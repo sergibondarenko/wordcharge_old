@@ -38,7 +38,7 @@ $sqlSelect = mysqli_query($con,"SELECT * FROM $UserNW");
 //$sqlSelect = mysqli_query($con,"SELECT * FROM $UserNW WHERE id = '".$wordId."'");
 
 $numRows = mysqli_num_rows($sqlSelect);
-echo "Total number of new words: $numRows";
+//echo "Total number of new words: $numRows";
 
 //$wordIndex = 0;
 //$row = mysqli_fetch_array($sqlSelect);

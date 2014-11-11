@@ -55,7 +55,7 @@
           $(document).ready(function(){
 
             var wordIndex = 2;
-            var wordsTotal = <?php echo $numRows ?>;
+            var wordsTotal = <?php echo $numRows; ?>;
             document.getElementById("wordsTotal").innerHTML = "<small><?php echo $langArray["WordsTestTotal"];?>" + wordsTotal + "</small>";
             var flashWordsJS = <?php echo json_encode($flashWordsPHP, JSON_PRETTY_PRINT) ?>;
             document.getElementById("wordField").innerHTML = flashWordsJS[wordIndex].word;

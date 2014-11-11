@@ -1,30 +1,30 @@
 $(document).ready(function(){
-  $("span.showFlasWord").on("click", function() {
-      // Take values from a table and post it into iknowtheword.php
-      // to fill the MySQL table of known words                    
-      //var aWord = $(this).closest('tr').find('span.tdWord').html();                    
-      //var aFreq = $(this).closest('tr').find('span.tdFreq').html();                    
-      //var aText = $(this).closest('tr').find('span.tdText').html();                    
-      var aWord = $("#aWord").html();
 
-      // Fill the MySQL table of known words
-      $.post("php/iknowtheword.php",
-      {
-        word:aWord,
-        freq:aFreq,
-        text:aText,
-        langId:langId,
-        myLang:myLang,
-        theSessionUser:theSessionUser
-      },
-      function(data,status){
-        $("#wordSaveStatus").html(data);
-      }); 
+  var wordIndex = 2;
+  var wordsTotal = <?php echo $numRows ?>;
+  document.getElementById("wordsTotal").innerHTML = "<small><?php echo $langArray["WordsTestTotal"];?>" + wordsTotal + "</small>";
+  var flashWordsJS = <?php echo json_encode($flashWordsPHP, JSON_PRETTY_PRINT) ?>;
+  document.getElementById("wordField").innerHTML = flashWordsJS[wordIndex].word;
+  document.getElementById("textField").innerHTML = "<?php echo $langArray["WordsTestText"]; ?>";
 
-      $(this).closest('tr').find('td').fadeOut(1000, function(){ 
-          // Remove the known word from the html table
-          $(this).parents('tr:first').remove();                    
-      });    
-      return false;
-    });
+  $("#showText").click(function(){
+    $("#textField").html(flashWordsJS[wordIndex].text);
+  });
+  $("#showNext").click(function(){
+    if(wordIndex <= wordsTotal){
+      wordIndex++;
+    } else {
+      wordIndex = 2;
+    }
+
+    //if(flashWordsJS[wordIndex].word === "undefined"){
+    //    wordIndex++;
+    //    console.log("Undefined flashWordsJS!!!");
+    //} 
+
+    $("#wordField").html(flashWordsJS[wordIndex].word);
+    $("#textField").html("<br>");
+    console.log(wordIndex);
+    
+  });
 });
