@@ -178,98 +178,21 @@ return $newWords;
 mysqli_close($conF);
 }
 
-/*
-function strip_html_js_tags($text)
-{
-$search = array('@<script[^>]*?>.*?</script>@si',  // Strip out javascript 
-                '@<style[^>]*?>.*?</style>@siU',    // Strip style tags properly 
-                '@<[\/\!]*?[^<>]*?>@si',            // Strip out HTML tags 
-                '@<![\s\S]*?–[ \t\n\r]*>@',         // Strip multi-line comments including CDATA 
-                '/\s{2,}/',
-                );
-$text = preg_replace($search, "\n", html_entity_decode($text));
-return $text;
-}*/
-
-//To remove all the hidden text not displayed on a webpage
-function my_strip_all_tags($str){
-    //$str = preg_replace('/(<|>)\1{2}/is', '', $str);
-    $str = preg_replace(
-        array(// Remove invisible content
-            '@<head[^>]*?>.*?</head>@siu',
-            '@<style[^>]*?>.*?</style>@siu',
-            '@<script[^>]*?.*?</script>@siu',
-            '@<noscript[^>]*?.*?</noscript>@siu',
-            ),
-        "", //replace above with nothing
-        $str );
-    //$str = replaceWhitespace($str);
-    //$str = strip_tags($str);
-    return $str;
-}
-
-function strip_html_tags( $text )
-{
-  // PHP's strip_tags() function will remove tags, but it
-  // doesn't remove scripts, styles, and other unwanted
-  // invisible text between tags.  Also, as a prelude to
-  // tokenizing the text, we need to insure that when
-  // block-level tags (such as <p> or <div>) are removed,
-  // neighboring words aren't joined.
-  $text = preg_replace(
-    array(
-      // Remove invisible content
-      '@<head[^>]*?>.*?</head>@siu',
-      '@<style[^>]*?>.*?</style>@siu',
-      '@<script[^>]*?.*?</script>@siu',
-      '@<object[^>]*?.*?</object>@siu',
-      '@<embed[^>]*?.*?</embed>@siu',
-      '@<applet[^>]*?.*?</applet>@siu',
-      '@<noframes[^>]*?.*?</noframes>@siu',
-      '@<noscript[^>]*?.*?</noscript>@siu',
-      '@<noembed[^>]*?.*?</noembed>@siu',
-
-      // Add line breaks before & after blocks
-      //'@<((br)|(hr))@iu',
-      //'@</?((address)|(blockquote)|(center)|(del))@iu',
-      //'@</?((div)|(h[1-9])|(ins)|(isindex)|(p)|(pre))@iu',
-      //'@</?((dir)|(dl)|(dt)|(dd)|(li)|(menu)|(ol)|(ul))@iu',
-      //'@</?((table)|(th)|(td)|(caption))@iu',
-      //'@</?((form)|(button)|(fieldset)|(legend)|(input))@iu',
-      //'@</?((label)|(select)|(optgroup)|(option)|(textarea))@iu',
-      //'@</?((frameset)|(frame)|(iframe))@iu',
-    ),
-    array(
-      ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-      "\n\$0", "\n\$0", "\n\$0", "\n\$0", "\n\$0", "\n\$0",
-      "\n\$0", "\n\$0",
-    ),
-    $text );
-
-  // Remove all remaining tags and comments and return.
-  return strip_tags( $text );
-}
 
 // Get data from html form textrArea field, remove all special characters
 // and make an array ($words), convert all words to lowercase 
 // Delete all dublicate words in the array and sort in descending order
-function split_text_into_words($text)
+function split_text_into_words($text, $numWords)
 {
 // Get data from html form textrArea field, remove all special characters
 // and make an array ($words), convert all words to lowercase 
 //$words = preg_split('/\P{L}+/u', $text, 0, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
-//$words = preg_split('/\P{L}+/u', $text, 0, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
 
 $words = preg_split('/\P{L}+/u', $text, 0, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
 
-//$text = filter_var($text, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
-//$words = preg_split('/[\s,]+/', strtolower($text), 0, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
-//$words = preg_split('/^([\p{Cyrillic}\s]+|[\p{Latin}\s]+)$/u', strtolower($text), 0, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
-
-//$words = preg_split('/[^\w\'\xc0-\xfd-]+/', $text, -1, PREG_SPLIT_NO_EMPTY);
-
-//$words = preg_split('/\W+/', $text, 0, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
-//$words = preg_split("/([\(\)’'\",.?!\r\n]+)/", $text, 0, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
+if(isset($numWords) && $numWords < array_count_values($words)){
+  $words = array_slice($words, 0, $numWords);
+}
 
 //Delete all words which len==1
 foreach ($words as $key=>$word) 
@@ -279,17 +202,13 @@ foreach ($words as $key=>$word)
   }
 }
 
-
 $words = array_map('strtolower', $words);
 // Delete all dublicate words in the array and sort in descending order
 $words = array_count_values($words);
 arsort($words);
 
-
 return $words;
-
 }
-
 
 // 3.=====
 // Translate every word in the $onlyWords[] array

@@ -38,7 +38,7 @@
     <?php 
       include_once("php/functions.php");
       $myLang=sanitize_input($_GET["myLang"]);
-      $langId="en"."-".$myLang;
+      $langId="ru"."-".$myLang;
     ?>
     <?php include_once("php/setsitelanguage-1.php");?> <!--Script to set site language-->
   </head>
@@ -57,52 +57,68 @@
             <input type="hidden" name="myUrl" id="myUrl" value="http://wordcharge.com/books/ru/idiot.html">
             <input type="hidden" name="langId" value="<?php echo $langId;?>">
             <input type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
-            </br>
+              <?php include("php/setbookpage.php");?>
+              <br>
+              <br>
             <a target="_blank" href="http://wordcharge.com/books/ru/idiot.txt">
               <img src="bookscovers/ru_idiot.jpg" alt="Идиот" width="100" height="140">
             </a>
             </form>
             <div class="bookDesc">"Идиoт" — роман Фёдора Михайловича Достоевского, впервые опубликован с января 1868 года.
             </div>
+              <br>
+              <br>
           </div>
           <div class="bookCover">
             <form action="getbooksdict-1.php?myLang=<?php echo $myLang;?>" method='post' target='_blank'>
             <input type="hidden" name="myUrl" id="myUrl" value="http://wordcharge.com/books/ru/igrok.txt">
             <input type="hidden" name="langId" value="<?php echo $langId;?>">
             <input type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
-            </br>
+              <?php include("php/setbookpage.php");?>
+              <br>
+              <br>
             <a target="_blank" href="http://wordcharge.com/books/ru/igrok.txt">
               <img src="bookscovers/ru_igrok.jpg" alt="Игрок" width="100" height="140">
             </a>
             </form>
             <div class="bookDesc">"Игрок" — роман русского писателя Фёдора Михайловича Достоевского, впервые опубликованный в 1866 году.
           </div>
+              <br>
+              <br>
           </div>
           <div class="bookCover">
             <form action="getbooksdict-1.php?myLang=<?php echo $myLang;?>" method='post' target='_blank'>
             <input type="hidden" name="myUrl" id="myUrl" value="http://wordcharge.com/books/ru/karams.txt">
             <input type="hidden" name="langId" value="<?php echo $langId;?>">
             <input type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
-            </br>
+              <?php include("php/setbookpage.php");?>
+              <br>
+              <br>
             <a target="_blank" href="http://wordcharge.com/books/ru/karams.txt">
               <img src="bookscovers/ru_bratya_karamazovi.jpg" alt="Братья Карамазовы" width="100" height="140">
             </a>
             </form>
             <div class="bookDesc">"Братья Карамазовы" — последний роман Ф. М. Достоевского, который автор писал два года. Роман был окончен в ноябре 1880 года.
             </div>
+              <br>
+              <br>
           </div>
           <div class="bookCover">
             <form action="getbooksdict-1.php?myLang=<?php echo $myLang;?>" method='post' target='_blank'>
             <input type="hidden" name="myUrl" id="myUrl" value="http://wordcharge.com/books/ru/prestup.txt">
             <input type="hidden" name="langId" value="<?php echo $langId;?>">
             <input type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
-            </br>
+              <?php include("php/setbookpage.php");?>
+              <br>
+              <br>
             <a target="_blank" href="http://wordcharge.com/books/ru/prestup.txt">
               <img src="bookscovers/ru_prestuplenie_i_nakazanie.jpg" alt="Преступление и наказание" width="100" height="140">
             </a>
             </form>
             <div class="bookDesc">"Преступление и наказание" — роман Фёдора Михайловича Достоевского, впервые опубликованный в 1866 году. 
             </div>
+              <br>
+              <br>
           </div>
         
             </div>  <!-- end of wrapper-content  -->

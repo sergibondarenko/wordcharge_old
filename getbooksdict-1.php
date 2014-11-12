@@ -89,6 +89,8 @@
             //$langId = $_POST['langId'];
             $myUrl = $_POST["myUrl"];
 
+            $numWords = sanitize_input($_POST["numWords"]);
+
             // Take the loged user name as a tables name           
             $UserNW=$theSessionUser."_NW"; //New words
             $UserKNW=$theSessionUser."_KNW"; //Known words
@@ -100,7 +102,8 @@
             $myUrl = get_redirected_url($myUrl);
             $content = remote_get_contents($myUrl);
             $text = strip_html_js_tags($content);
-            $words = split_text_into_words($text);
+            
+            $words = split_text_into_words($text,$numWords);
             $totalWords = count($words);
            
             // Select only new words
