@@ -56,7 +56,7 @@
             <form action="getbooksdict-1.php?myLang=<?php echo $myLang;?>" method='post' target='_blank'>
             <input type="hidden" name="myUrl" id="myUrl" value="http://wordcharge.com/books/it/decamerone.txt">
             <input type="hidden" name="langId" value="<?php echo $langId;?>">
-            <input type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
+            <input class="btn btn-default btn-md" type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
               <?php include("php/setbookpage.php");?>
               <br>
               <br>
@@ -73,7 +73,7 @@
             <form action="getbooksdict-1.php?myLang=<?php echo $myLang;?>" method='post' target='_blank'>
             <input type="hidden" name="myUrl" id="myUrl" value="http://wordcharge.com/books/it/ladivinacommedia.txt">
             <input type="hidden" name="langId" value="<?php echo $langId;?>">
-            <input type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
+            <input class="btn btn-default btn-md" type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
               <?php include("php/setbookpage.php");?>
               <br>
               <br>
@@ -90,7 +90,7 @@
             <form action="getbooksdict-1.php?myLang=<?php echo $myLang;?>" method='post' target='_blank'>
             <input type="hidden" name="myUrl" id="myUrl" value="http://wordcharge.com/books/it/ilnomedellarosa.txt">
             <input type="hidden" name="langId" value="<?php echo $langId;?>">
-            <input type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
+            <input class="btn btn-default btn-md" type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
               <?php include("php/setbookpage.php");?>
               <br>
               <br>
@@ -107,7 +107,7 @@
             <form action="getbooksdict-1.php?myLang=<?php echo $myLang;?>" method='post' target='_blank'>
             <input type="hidden" name="myUrl" id="myUrl" value="http://wordcharge.com/books/it/i_viaggi_e_la_carta_dei_fratelli_zeno_veneziani.txt">
             <input type="hidden" name="langId" value="<?php echo $langId;?>">
-            <input type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
+            <input class="btn btn-default btn-md" type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
               <?php include("php/setbookpage.php");?>
               <br>
               <br>

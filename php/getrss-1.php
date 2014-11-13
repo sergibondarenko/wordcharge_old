@@ -9,12 +9,6 @@ $foreignLang = $q;
 //for translation
 $langArray = parse_ini_file("../languages/".$myLang.".ini");
 
-////find out which feed was selected
-//if($q=="en") {
-//  $xml=("http://news.google.com/news?ned=us&topic=h&output=rss");
-//} elseif($q=="it") {
-//  $xml=("http://news.google.com/news?ned=it&topic=h&output=rss");
-//}
 
 switch ($q){
   case $q=="en":
@@ -79,7 +73,7 @@ for ($i=0; $i<=10; $i++) {
         "<input type='hidden' name='myUrl' value='$item_link'>".
         "<input type='hidden' name='langId' value='$foreignLang-$myLang'>".
         //"<input type='submit' name='myDict' value='$langArray[\"textButtonMakeDict\"]'>".
-        "<input type='submit' name='myDict' value='$makeDict'>".
+        "<input class='btn btn-default btn-md' type='submit' name='myDict' value='$makeDict'>".
         "</form>");
   echo ("<br>");
   echo ($item_desc . "</p>");

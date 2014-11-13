@@ -56,7 +56,7 @@
 
             var wordIndex = 2;
             var wordsTotal = <?php echo $numRows ?>;
-            document.getElementById("wordsTotal").innerHTML = "<small><?php echo $langArray["WordsTestTotal"];?>" + wordsTotal + "</small>";
+            document.getElementById("wordsTotal").innerHTML = "<small><?php echo $langArray["WordsTestTotal"];?>" + " " + wordsTotal + "</small>";
             var flashWordsJS = <?php echo json_encode($flashWordsPHP, JSON_PRETTY_PRINT) ?>;
             document.getElementById("wordField").innerHTML = flashWordsJS[wordIndex].word;
             document.getElementById("textField").innerHTML = "<?php echo $langArray["WordsTestText"]; ?>";
@@ -85,8 +85,8 @@
         </script>
 
       <p id="wordsTotal"></p>
-      <button id="showText"><?php echo $langArray["WordsTestShow"];?></button>
-      <button id="showNext"><?php echo $langArray["WordsTestNext"];?></button>
+      <button class="btn btn-default btn-md" id="showText"><?php echo $langArray["WordsTestShow"];?></button>
+      <button class="btn btn-default btn-md" id="showNext"><?php echo $langArray["WordsTestNext"];?></button>
       <br>
       <br>
       <p id="wordField"><br></p>

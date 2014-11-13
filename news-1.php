@@ -102,17 +102,21 @@
           <input type="radio" class='radio-button' name="typeNewsRadio" id="polNews" value="p" onclick="selectNewsType()">
           <label for="male"><?php echo $langArray["textNewsRadBus"];?></label>
           <input type="radio" class='radio-button' name="typeNewsRadio" id="busNews" value="b" onclick="selectNewsType()">
-
-          <select onchange="showRSS(this.value)">
+        <div class="col-xs-6 col-sm-5 col-md-4 col-lg-3">    
+          <select class="form-control" onchange="showRSS(this.value)">
           <option value=""><?php echo $langArray["textNewsDDL"];?></option>
           <?php include_once("php/newsdropdown.php");?>
-
+        </div>
+        
         </form>
-        <br>
+        <br><br><p></p>
+        
         <!--For news type variable-->
         <input type="hidden" id="newsTypeOutput">
 
-        <div id="rssOutput"><?php echo $langArray["textNewsField"];?></div>
+        <div id="rssOutput">
+            <?php echo $langArray["textNewsField"];?>
+        </div>
 
       </div>
 			

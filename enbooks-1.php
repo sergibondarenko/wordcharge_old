@@ -55,16 +55,18 @@
 			
       <div class="jumbotron">
         <div id="wrapper-content">
-        
+            
             <div class="bookCover">
               <form action="getbooksdict-1.php?myLang=<?php echo $myLang;?>" method='post' target='_blank'>
               <input type="hidden" name="myUrl" id="myUrl" value="http://wordcharge.com/books/en/hamlet.txt">
               <input type="hidden" name="langId" value="<?php echo $langId;?>">
-              <input type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
+              
+              <input class="btn btn-default btn-md" type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
                 <!--<div class="well">
                   <input type="text" class="span2" value="10" id="sl1" >
                 </div>-->
               <?php include("php/setbookpage.php");?>
+              
               <br>
               <br>
               <a target="_blank" href="http://wordcharge.com/books/en/hamlet.txt">
@@ -76,11 +78,12 @@
               <br>
               <br>
             </div>
+            
             <div class="bookCover">
               <form action="getbooksdict-1.php?myLang=<?php echo $myLang;?>" method='post' target='_blank'>
               <input type="hidden" name="myUrl" id="myUrl" value="http://wordcharge.com/books/en/kinglear.txt">
               <input type="hidden" name="langId" value="<?php echo $langId;?>">
-              <input type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
+              <input class="btn btn-default btn-md" type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
               <?php include("php/setbookpage.php");?>
               <br>
               <br>
@@ -97,7 +100,7 @@
               <form action="getbooksdict-1.php?myLang=<?php echo $myLang;?>" method='post' target='_blank'>
               <input type="hidden" name="myUrl" id="myUrl" value="http://wordcharge.com/books/en/macbeth.txt">
               <input type="hidden" name="langId" value="<?php echo $langId;?>">
-              <input type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
+              <input class="btn btn-default btn-md" type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
               <?php include("php/setbookpage.php");?>
               <br>
               <br>
@@ -114,7 +117,7 @@
               <form action="getbooksdict-1.php?myLang=<?php echo $myLang;?>" method='post' target='_blank'>
               <input type="hidden" name="myUrl" id="myUrl" value="http://wordcharge.com/books/en/merchantofvenice.txt">
               <input type="hidden" name="langId" value="<?php echo $langId;?>">
-              <input type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
+              <input class="btn btn-default btn-md" type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
               <?php include("php/setbookpage.php");?>
               <br>
               <br>
@@ -131,7 +134,7 @@
               <form action="getbooksdict-1.php?myLang=<?php echo $myLang;?>" method='post' target='_blank'>
               <input type="hidden" name="myUrl" id="myUrl" value="http://wordcharge.com/books/en/midsummernightdream.txt">
               <input type="hidden" name="langId" value="<?php echo $langId;?>">
-              <input type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
+              <input class="btn btn-default btn-md" type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
               <?php include("php/setbookpage.php");?>
               <br>
               <br>
@@ -149,7 +152,7 @@
               <form action="getbooksdict-1.php?myLang=<?php echo $myLang;?>" method='post' target='_blank'>
               <input type="hidden" name="myUrl" id="myUrl" value="http://wordcharge.com/books/en/taleoftwocities.txt">
               <input type="hidden" name="langId" value="<?php echo $langId;?>">
-              <input type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
+              <input class="btn btn-default btn-md" type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
               <?php include("php/setbookpage.php");?>
               <br>
               <br>

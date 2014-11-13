@@ -1,0 +1,3 @@
+lang = {
+textButtonMakeDict : "Make Dictionary"
+};

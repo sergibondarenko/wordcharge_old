@@ -4,7 +4,7 @@
   if(isset($_GET["myLang"])){
     //$myLang = sanitize_input($_GET["myLang"]);
     $myLang = $_GET["myLang"];
-    #setcookie ("lang_site", $myLang, time()+60*60*24*30);
+    setcookie ("lang_site", $myLang, time()+60*60*24*30);
   } else {
     if(isset($_COOKIE['lang_site'])){
       $myLang = $_COOKIE['lang_site']; // get lang from cookie
