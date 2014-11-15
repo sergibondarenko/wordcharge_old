@@ -54,8 +54,9 @@
         <script>
           $(document).ready(function(){
 
-            var wordIndex = 2;
+            var wordIndex = 0;
             var wordsTotal = <?php echo $numRows ?>;
+            var wordIndexMax = wordsTotal;
             document.getElementById("wordsTotal").innerHTML = "<small><?php echo $langArray["WordsTestTotal"];?>" + " " + wordsTotal + "</small>";
             var flashWordsJS = <?php echo json_encode($flashWordsPHP, JSON_PRETTY_PRINT) ?>;
             document.getElementById("wordField").innerHTML = flashWordsJS[wordIndex].word;
@@ -65,17 +66,15 @@
               $("#textField").html(flashWordsJS[wordIndex].text);
             });
             $("#showNext").click(function(){
-              if(wordIndex <= wordsTotal){
+              if(wordIndex < wordsTotal-1){
                 wordIndex++;
+                wordIndexMax--;
               } else {
-                wordIndex = 2;
+                wordIndex = 0;
+                wordIndexMax = wordsTotal-1;
               }
-
-              //if(flashWordsJS[wordIndex].word === "undefined"){
-              //    wordIndex++;
-              //    console.log("Undefined flashWordsJS!!!");
-              //} 
-
+              document.getElementById("wordsTotal").innerHTML = "<small><?php echo $langArray["WordsTestTotal"];?>" + " " + wordIndexMax + "</small>";
+             
               $("#wordField").html(flashWordsJS[wordIndex].word);
               $("#textField").html("<br>");
               console.log(wordIndex);
@@ -85,6 +84,7 @@
         </script>
 
       <p id="wordsTotal"></p>
+      <p id="wordsCurr"></p>
       <button class="btn btn-default btn-md" id="showText"><?php echo $langArray["WordsTestShow"];?></button>
       <button class="btn btn-default btn-md" id="showNext"><?php echo $langArray["WordsTestNext"];?></button>
       <br>

@@ -186,9 +186,8 @@ function split_text_into_words($text, $numWords)
 {
 // Get data from html form textrArea field, remove all special characters
 // and make an array ($words), convert all words to lowercase 
-//$words = preg_split('/\P{L}+/u', $text, 0, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
-
-$words = preg_split('/\P{L}+/u', $text, 0, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
+$words = preg_split('/\P{L}+/u', $text, -1, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
+//$words = preg_split('/\P{L}+/u', $text, 0, PREG_SPLIT_NO_EMPTY);
 
 if(isset($numWords) && $numWords < array_count_values($words)){
   $words = array_slice($words, 0, $numWords);
@@ -206,6 +205,8 @@ $words = array_map('strtolower', $words);
 // Delete all dublicate words in the array and sort in descending order
 $words = array_count_values($words);
 arsort($words);
+
+//print_r($words);
 
 return $words;
 }

@@ -90,12 +90,13 @@
             // Delete all dublicate words in the array and sort in descending order
             $words = split_text_into_words($textArea);
             $totalWords = count($words);
-           
+            
             // Select only new words
             $words = look_for_the_new_words($words,$langId,$MysqlUser,$MysqlUPass,$MysqlDB,$UserKNW);
-
+            
             // Count words stat
             $totalNew = count($words);
+            
             $youKnow = $totalWords - $totalNew;
             $yPercent = ($youKnow * 100)/$totalWords;
             echo "<div id=\"wordsStat\">".$langArray["textNewdictTotal"].": ".$totalWords."; ".$langArray["textNewdictNew"].": ".$totalNew."; ".$langArray["textNewdictYouknow"].": ".$youKnow." (".round($yPercent,2)."%);"."</div>";

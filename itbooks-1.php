@@ -120,6 +120,23 @@
               <br>
               <br>
           </div>
+          <div class="bookCover">
+            <form action="getbooksdict-1.php?myLang=<?php echo $myLang;?>" method='post' target='_blank'>
+            <input type="hidden" name="myUrl" id="myUrl" value="http://wordcharge.com/books/it/mastinodibask.txt">
+            <input type="hidden" name="langId" value="<?php echo $langId;?>">
+            <input class="btn btn-default btn-md" type="submit" name="makeDict" class="makeDict" value="<?php echo $langArray["textButtonMakeDict"];?>">
+              <?php include("php/setbookpage.php");?>
+              <br>
+              <br>
+            <a target="_blank" href="http://wordcharge.com/books/it/mastinodibask.txt">
+              <img src="bookscovers/mastinodibask.jpeg" alt="Il mastino dei Baskerville" width="100" height="140">
+            </a>
+            </form>
+            <div class="bookDesc">Il mastino dei Baskerville. Il mastino dei Baskerville è un romanzo di Arthur Conan Doyle con protagonista Sherlock Holmes.
+            </div>
+              <br>
+              <br>
+          </div>
         
             </div>
       </div> <!-- end of jumbotron -->
