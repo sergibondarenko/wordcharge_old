@@ -46,8 +46,17 @@
     <?php 
         include_once("php/functions.php");
         $myLang=sanitize_input($_GET["myLang"]);
-        $langId="en"."-".$myLang;
+        //$langId="en"."-".$myLang;
+        
+        $bookShelf=sanitize_input($_GET["shelf"]);
+        //echo $bookShelf . "<br>";
     ?>
+    <script>
+        var myBookShelf = <?php echo json_encode($bookShelf); ?>;
+        console.log(myBookShelf);
+        var myLang = <?php echo json_encode($myLang);?>;
+        console.log(myLang);
+    </script>
     <?php include_once("php/setsitelanguage-1.php");?> <!--Script to set site language-->
   </head>
 
@@ -61,25 +70,46 @@
         <div id="wrapper-content">
             
         <div id="booksShelf"></div>
+        <!--<div id="myError"></div>-->
         <script>
-            displayBooks(enbooks);
+        
+            var langId = "en";
+            switch(myBookShelf){
+                case "enbooks":
+                    langId = "en-";
+                    displayBooks(enbooks);
+                    break;
+                case "rubooks": 
+                    langId = "ru-";
+                    displayBooks(rubooks);
+                    break;
+                case "itbooks": 
+                    langId = "it-";
+                    displayBooks(itbooks);
+                    break;
+                default: 
+                    langId = "en-";
+                    displayBooks(enbooks);
+            }
+            
+            //displayBooks(enbooks);
             
             function displayBooks(arr) {
                 var out = "";
                 var i;
                 for(i = 0; i < arr.length; i++) {
-                    //out += '<a href="' + arr[i].url + '">' + 
-                    //arr[i].title + '</a><br>';
                     out += '<div class="bookCover">' +
-                    '<form action="getbooksdict-1.php?myLang=' + "<?php echo $myLang; ?>" +' method="post" target="_blank">' + 
+                    '<form method="post" target="_blank" action="getbooksdict-1.php?myLang=' + "<?php echo $myLang; ?>" +'">' + 
                     '<input type="hidden" name="myUrl" id="myUrl" value="'+ arr[i].url +'">' +
-                    '<input type="hidden" name="langId" value="' + "<?php echo $langId;?>" + '">' +
+                    //'<input name="langId" value="' + "<?php //echo $langId;?>" + '">' +
+                    '<input type="hidden" name="langId" value="' + langId + myLang + '">' +
                     '<input class="btn btn-default btn-md" type="submit" name="makeDict" class="makeDict" value="' + "<?php echo $langArray["textButtonMakeDict"]; ?>" + '">' +
                     '<label>&nbsp;' + "<?php echo $langArray["booksSelfWordsNum"];?>" + '</label><input type="text" name="numWords" maxlength="7" size="5" value=200>' +
                     '<br><br>' +
                     '<a target="_blank" href="'+ arr[i].url +'">' +
-                    '<img src="'+ arr[i].img +'" alt="The Tragedy of Hamlet, Prince of Denmark" width="100" height="140"></a></form>' +
+                    '<img src="'+ arr[i].img +'" alt="The Tragedy of Hamlet, Prince of Denmark" width="100" height="140"></a>' +
                     '<div class="bookDesc">'+ arr[i].description +'</div>' +
+                    '</form>' +
                     '<br><br></div>';
                 }
                 document.getElementById("booksShelf").innerHTML = out;

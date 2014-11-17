@@ -31,7 +31,7 @@
         //$textArea = $_POST['textArea'];
         $theSessionUser = $_SESSION["myusername"];
         //$langId = $_POST['langId'];
-        $myLang = $_GET['myLang']; //For user interface lang. Format: ru
+        $myLang = sanitize_input($_GET['myLang']); //For user interface lang. Format: ru
         $langId = $_POST['langId']; //For dict lang. Format: ru-en
         
       ?>
@@ -88,7 +88,13 @@
 
             //$langId = $_POST['langId'];
             $myUrl = $_POST["myUrl"];
-
+            
+            /*echo "Test vars: <br>";
+            echo $myUrl . "<br>";
+            echo $langId . "<br>";
+            echo $myLang . "<br>";
+            */
+            
             $numWords = sanitize_input($_POST["numWords"]);
 
             // Take the loged user name as a tables name           
@@ -100,6 +106,7 @@
             // and make an array ($words), convert all words to lowercase 
             // Delete all dublicate words in the array and sort in descending order
             $myUrl = get_redirected_url($myUrl);
+            
             $content = remote_get_contents($myUrl);
             $text = strip_html_js_tags($content);
             
