@@ -92,8 +92,8 @@
             /*echo "Test vars: <br>";
             echo $myUrl . "<br>";
             echo $langId . "<br>";
-            echo $myLang . "<br>";
-            */
+            echo $myLang . "<br>";*/
+            
             
             $numWords = sanitize_input($_POST["numWords"]);
 
@@ -110,6 +110,7 @@
             $content = remote_get_contents($myUrl);
             $text = strip_html_js_tags($content);
             
+            // Get words with regard to numWords indicated
             $words = split_text_into_words($text,$numWords);
             $totalWords = count($words);
            

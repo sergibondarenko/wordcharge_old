@@ -2,6 +2,8 @@
 require_once("vars.php");
 require_once("functions.php");
 
+//ob_start();
+
 //if(isset($_POST['myusername'] && isset($_POST['mypassword'])){
 if(!empty($_POST['myusername']) && !empty($_POST['mypassword'])){
   // Connect to server and select databse.
@@ -60,11 +62,13 @@ if(!empty($_POST['myusername']) && !empty($_POST['mypassword'])){
     session_start();
     $_SESSION["myusername"] = $myusername;
 
-    header("location:index.php?myLang=$myLang");    
-
+    //ob_end_clean();
+    header("location:index.php?myLang=$myLang");
+    //header("location:www.wordcharge.com/index.php?myLang=$myLang");   
+    //exit();
   } else {
     echo "Wrong Username or Password. Try again.";
   }
 } 
-
+//ob_end_flush();
 ?>

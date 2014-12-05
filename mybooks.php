@@ -98,19 +98,30 @@
                 var out = "";
                 var i;
                 for(i = 0; i < arr.length; i++) {
-                    out += '<div class="bookCover">' +
+                    out += '<div class="container-fluid">' +
+                    '<div class="row">' +
+                    '<div class="col-xs-12 col-sm-12 col-md-4">' + 
                     '<form method="post" target="_blank" action="getbooksdict-1.php?myLang=' + "<?php echo $myLang; ?>" +'">' + 
                     '<input type="hidden" name="myUrl" id="myUrl" value="'+ arr[i].url +'">' +
-                    //'<input name="langId" value="' + "<?php //echo $langId;?>" + '">' +
                     '<input type="hidden" name="langId" value="' + langId + myLang + '">' +
-                    '<input class="btn btn-default btn-md" type="submit" name="makeDict" class="makeDict" value="' + "<?php echo $langArray["textButtonMakeDict"]; ?>" + '">' +
-                    '<label>&nbsp;' + "<?php echo $langArray["booksSelfWordsNum"];?>" + '</label><input type="text" name="numWords" maxlength="7" size="5" value=200>' +
-                    '<br><br>' +
+                    '<input class="btn btn-default btn-xs" type="submit" name="makeDict" class="makeDict" value="' + 
+                    "<?php echo $langArray["textButtonMakeDict"]; ?>" + '">' +
+                    '&nbsp;&nbsp;&nbsp;&nbsp;<label>' + "<?php echo $langArray["booksSelfWordsNum"];?>" + 
+                    '</label>&nbsp;<input type="text" name="numWords" maxlength="14" size="5" value=200>' +
+                    //'</label>&nbsp;<div class="well"><input type="text" class="span2" value="" data-slider-min="50" data-slider-max="100000" data-slider-step="100" data-slider-value="200" id="sl1" ></div>' +
+                    '</div></div><br>' +
+                    '<div class="row">' +
+                    '<div class="col-xs-5 col-sm-4 col-md-3">' +
                     '<a target="_blank" href="'+ arr[i].url +'">' +
                     '<img src="'+ arr[i].img +'" alt="The Tragedy of Hamlet, Prince of Denmark" width="100" height="140"></a>' +
+                    '</div>'+
+                    '<div class="col-xs-7 col-sm-6 col-md-4">' +
                     '<div class="bookDesc">'+ arr[i].description +'</div>' +
                     '</form>' +
-                    '<br><br></div>';
+                    '</div>' +
+                    '</div>'+
+                    '</div>' +
+                    '<br><br>';
                 }
                 document.getElementById("booksShelf").innerHTML = out;
             }
@@ -126,12 +137,12 @@
 		</div> <!-- /container -->
 
 
-  <script>
-  /*if (top.location != location) {
+<!--	<script>
+	if (top.location != location) {
     top.location.href = document.location.href ;
   }
-    $(function(){
-      window.prettyPrint && prettyPrint();
+		$(function(){
+			window.prettyPrint && prettyPrint();
 
         $('#sl1').slider({
           formater: function(value) {
@@ -155,9 +166,9 @@
                 .data('slider');
 
         $('#eg input').slider();
-    });*/
+    });
   </script>
-
+-->
 
   </body>
 </html>

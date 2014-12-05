@@ -78,6 +78,7 @@
             }
             //$langId = $_POST['langId'];
             $myUrl = $_POST["myUrl"];
+            $numWords = sanitize_input($_POST["numWords"]);
 
             // Take the loged user name as a tables name           
             $UserNW=$theSessionUser."_NW"; //New words
@@ -94,6 +95,10 @@
             $dirtyWords = explode(" ", $content);
             $words = array_filter($dirtyWords, "return_only_words");
 
+            if(isset($numWords) && $numWords < array_count_values($words)){
+                $words = array_slice($words, 0, $numWords);
+            }
+            
             //Delete all words which len==1
             foreach ($words as $key=>$word)
             {
@@ -108,13 +113,8 @@
             arsort($words);
 
             //print_r($text);
-            //$words = split_newstext_into_words($text);
-            //print_r($words);
-
-            //$text = strip_html_js_tags($content);
-            //$text = strip_html_tags($content); 
-            //$text = my_strip_all_tags($content)  
-            //$words = split_text_into_words($text);
+            
+            //$words = split_text_into_words($content, $numWords);
             $totalWords = count($words);
            
             // Select only new words

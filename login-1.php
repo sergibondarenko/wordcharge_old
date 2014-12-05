@@ -1,3 +1,4 @@
+<?php ob_start();?>
 <?php session_start();?> <!--Session for a signed in user-->
 <?php include_once("php/setsitelanguage-1.php");?> <!--Script to set site language-->
 
@@ -50,36 +51,39 @@
           include_once("php/checklogin-1.php"); 
         ?>
         
-        <table id="mainTable">
-          <tr>
-          <form name="form1" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]).'?myLang='.$myLang;?>">
-            <td><!--<span id=""></span>-->
-            <table id="mainTableIn">
-              <tr>
-                <td colspan="3"><strong><?php echo $langArray["textMamberlogin"]; ?> </strong></td>
-              </tr>
-              <tr>
-                <td width="78"><?php echo $langArray["textUsername"]; ?></td>
-                <td width="6">:</td>
-                <td width="294"><input name="myusername" type="text" id="myusername"></td>
-              </tr>
-              <tr>
-                 <td><?php echo $langArray["textPass"]; ?></td>
-                 <td>:</td>
-                 <td><input name="mypassword" type="password" id="mypassword"></td>
-              </tr>
-              <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td><input type="submit" name="Submit" value="<?php echo $langArray["textLogin"]; ?>"></td>
-              </tr>
-            </table>
-            </td>
-          </form>
-          </tr>
-        </table>  
 
-      </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="well bs-component">
+              <form class="form-horizontal" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]).'?myLang='.$myLang;?>">
+                <fieldset>
+                  <legend><?php echo $langArray["textMamberlogin"]; ?></legend>
+                  <div class="form-group">
+                    <label for="inputEmail" class="col-lg-2 control-label"><?php echo $langArray["textUsername"]; ?></label>
+                    <div class="col-lg-10">
+                      <input type="text" class="form-control" name="myusername" id="myusername" placeholder="Username">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputPassword" class="col-lg-2 control-label"><?php echo $langArray["textPass"]; ?></label>
+                    <div class="col-lg-10">
+                      <input type="password" class="form-control" name="mypassword" id="mypassword" placeholder="Password">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                      <input type="submit" name="Submit" class="btn btn-primary" value="<?php echo $langArray["textLogin"]; ?>">
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+        </div>
+      
+      </div> <!-- End of Jumbotron -->
+      
+      
 			
     	<!--Footer-->
 			<?php include_once("php/footer-1.php");?>
@@ -87,7 +91,7 @@
     
 		</div> <!-- /container -->
 
-
+<?php ob_end_flush();?>
   </body>
 </html>
 

@@ -54,6 +54,7 @@ $channel_desc = $channel->getElementsByTagName('description')
 
 //$news_link_transl = "../test.php";
 $makeDict = $langArray["textButtonMakeDict"];
+$booksSelfWordsNum = $langArray["booksSelfWordsNum"];
 //get and output "<item>" elements
 $x=$xmlDoc->getElementsByTagName('item');
 for ($i=0; $i<=10; $i++) {
@@ -69,12 +70,16 @@ for ($i=0; $i<=10; $i++) {
   //. "?url="$item_link"' target='_blank'>" . "CLICK HERE to make dictionary from: "  . $item_title . "</a>");
   //. "?myUrl=$item_link"."' target='_blank'>" . "CLICK to make dictionary from: "  . $item_title . "</a>");
 
-  echo ("<form action='../getnewsdict-1.php?myLang=$myLang' method='post' target='_blank'>".
+  echo ("<div class='container-fluid'>".
+        "<div class='row'>".
+        "<form action='../getnewsdict-1.php?myLang=$myLang' method='post' target='_blank'>".
         "<input type='hidden' name='myUrl' value='$item_link'>".
         "<input type='hidden' name='langId' value='$foreignLang-$myLang'>".
         //"<input type='submit' name='myDict' value='$langArray[\"textButtonMakeDict\"]'>".
-        "<input class='btn btn-default btn-md' type='submit' name='myDict' value='$makeDict'>".
-        "</form>");
+        "<input class='btn btn-default btn-xs' type='submit' name='myDict' value='$makeDict'>".
+        "&nbsp;&nbsp;&nbsp;&nbsp;<label>$booksSelfWordsNum</label>".
+        '&nbsp;<input type="text" name="numWords" maxlength="14" size="5" value=200>'.
+        "</form>"."</div>"."</div>");
   echo ("<br>");
   echo ($item_desc . "</p>");
 }

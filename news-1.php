@@ -93,22 +93,30 @@
 
         <p><?php echo $langArray["textNewsText"];?></>
         
-        <form>
-          <label for="male"><?php echo $langArray["textNewsRadTop"];?></label>
-          <input type="radio" class='radio-button' name="typeNewsRadio" id="topNews" value="w" onclick="selectNewsType()">
-          <label for="male"><?php echo $langArray["textNewsRadSciTech"];?></label>
-          <input type="radio" class='radio-button' name="typeNewsRadio" id="sciTech" value="t" onclick="selectNewsType()" checked>
-          <label for="male"><?php echo $langArray["textNewsRadPol"];?></label>
-          <input type="radio" class='radio-button' name="typeNewsRadio" id="polNews" value="p" onclick="selectNewsType()">
-          <label for="male"><?php echo $langArray["textNewsRadBus"];?></label>
-          <input type="radio" class='radio-button' name="typeNewsRadio" id="busNews" value="b" onclick="selectNewsType()">
-        <div class="col-xs-6 col-sm-5 col-md-4 col-lg-3">    
-          <select class="form-control" onchange="showRSS(this.value)">
-          <option value=""><?php echo $langArray["textNewsDDL"];?></option>
-          <?php include_once("php/newsdropdown.php");?>
-        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-8 col-sm-12 col-md-4">
+                    <form>
+                      <label for="male"><?php echo $langArray["textNewsRadTop"];?></label>
+                      <input type="radio" class='radio-button' name="typeNewsRadio" id="topNews" value="w" onclick="selectNewsType()">
+                      <label for="male"><?php echo $langArray["textNewsRadSciTech"];?></label>
+                      <input type="radio" class='radio-button' name="typeNewsRadio" id="sciTech" value="t" onclick="selectNewsType()" checked>
+                      <label for="male"><?php echo $langArray["textNewsRadPol"];?></label>
+                      <input type="radio" class='radio-button' name="typeNewsRadio" id="polNews" value="p" onclick="selectNewsType()">
+                      <label for="male"><?php echo $langArray["textNewsRadBus"];?></label>
+                      <input type="radio" class='radio-button' name="typeNewsRadio" id="busNews" value="b" onclick="selectNewsType()">
+                </div>
+                    <!--<div class="col-xs-6 col-sm-5 col-md-4 col-lg-3">-->    
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                      <select class="form-control" onchange="showRSS(this.value)">
+                      <option value=""><?php echo $langArray["textNewsDDL"];?></option>
+                      <?php include_once("php/newsdropdown.php");?>
+                </div>
+                    <!--</div>-->
+                    </form>
+            </div> <!--End of row-->
+        </div> <!--End of fluid container-->   
         
-        </form>
         <br><br><p></p>
         
         <!--For news type variable-->
@@ -118,6 +126,7 @@
             <?php echo $langArray["textNewsField"];?>
         </div>
 
+        </div> <!--End of jumbotron-->
       </div>
 			
     	<!--Footer-->
