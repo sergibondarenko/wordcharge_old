@@ -32,7 +32,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mypassword=$_POST['mypassword']; 
     $myemail=$_POST['myemail']; 
 
-    if(!preg_match("/^[a-zA-Z]*$/",$myusername)){
+    //if(!preg_match("/^[a-zA-Z]*$/",$myusername)){
+    if(!preg_match("/^[a-zA-Z0-9 -_]*$/",$myusername)){
       $nameErr = $langArray["checkUsername"]."!!!";
     } else {
     

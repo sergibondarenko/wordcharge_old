@@ -32,12 +32,6 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li><?php include_once("php/wrapper-signin.php"); ?></li>
 					</ul>
-					<!--<ul class="nav navbar-nav navbar-right">
-						<li><a href="#"><?php //echo $langArray["textLogin"]; ?></a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#"><?php //echo $langArray["textSignup"]; ?></a></li>
-					</ul>-->
         </div><!--/.nav-collapse -->
       </div>
     </div>

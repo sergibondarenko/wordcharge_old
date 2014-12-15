@@ -92,6 +92,12 @@
                       <input type="submit" name="Submit" class="btn btn-primary" value="<?php echo $langArray["textLogin"]; ?>">
                     </div>
                   </div>
+                  <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                      <i><?php echo $nameErr; ?></i><br>
+                      <i><?php echo $signupErr;?></i>
+                    </div>
+                  </div>
                 </fieldset>
               </form>
             </div>

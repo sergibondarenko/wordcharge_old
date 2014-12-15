@@ -21,6 +21,9 @@ if (!mysqli_set_charset($con, "utf8")) {
 }
 
 $UserNW = $theSessionUser."_NW";
+$UserNW = preg_replace('/[^a-zA-Z0-9_]/', '_', $UserNW);
+//$UserKNW = preg_replace('/[^a-zA-Z0-9_]/', '_', $UserKNW);
+
 // Mysql query to display the table content 
 $sqlSelect = mysqli_query($con,"SELECT * FROM $UserNW");
 

@@ -1,6 +1,5 @@
 <li id="indexMenu"><a id="indexManu" href="index.php?myLang=<?php echo $myLang; ?>"><?php echo $langArray["textHome"]; ?></a></li>
 <li id="newwordsMenu"><a href="newwords-1.php?myLang=<?php echo $myLang; ?>"><?php echo $langArray["textNewwords"]; ?></a></li> 
-<!--<li id="flashwordsMenu"><a href="flashwords.php?myLang=<?php //echo $myLang; ?>"><?php //echo $langArray["WordsTestMenu"]; ?></a></li>-->
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $langArray["WordGames"]; ?> <b class="caret"></b></a>
                       <ul class="dropdown-menu">

@@ -84,12 +84,20 @@
 
     <script>
         //$(document).ready(function(){
-            var wordIndex = 0;
-            var numOfWords = 10;
-            var setOfWords = numOfWords;
+
+            
             var wordsTotal = <?php echo $numRows ?>;
-            var wordIndexMax = wordsTotal;
-            document.getElementById("wordsTotal").innerHTML = "<small><?php echo $langArray["WordsTestTotal"];?>" + " " + wordsTotal + "</small>";
+            var wordIndexMax = wordsTotal-1;
+            var numOfWords = wordsTotal-1;
+            var wordIndex = 0;
+            
+            if(wordsTotal <= 10){
+                var setOfWords = numOfWords;
+            } else {
+                var setOfWords = 10;
+            }
+            
+            document.getElementById("wordsTotal").innerHTML = "<small><?php echo $langArray["WordsTestTotal"];?>" + " " + wordIndexMax + "</small>";
             
             // Get dictionary in JSON format
             var flashWordsJS = <?php echo json_encode($flashWordsPHP, JSON_PRETTY_PRINT) ?>;
@@ -145,7 +153,7 @@
             }
             
             // Create a boxes that will contain words and corresponding translation
-            makeCards(0,numOfWords);
+            makeCards(0,setOfWords);
             
             // Fill the boxes
             function fillBoxes(firstWord, lastWord){
@@ -154,7 +162,7 @@
                     document.getElementById("droppable-"+i).innerHTML = flashWordsJS[i].text;
                 }    
             }
-            fillBoxes(0,numOfWords);
+            fillBoxes(0,setOfWords);
             
             // Assign Drug and Drop actions to the boxes
             function dragNDrop(firstWord, lastWord){
@@ -173,20 +181,29 @@
                     }
                 });
             }
-            dragNDrop(0,numOfWords);
+            dragNDrop(0,setOfWords);
             
-            document.getElementById("nextTen").addEventListener("click",function(){setOfWords = displayNextSet(setOfWords);});
+            document.getElementById("nextTen").addEventListener("click",function(){
+                        //if (typeof flashWordsJS[setOfWords+10].word === 'undefined') {
+                        if (!flashWordsJS[setOfWords+10].hasOwnProperty('word')) {
+                            setOfWords = displayNextSet(setOfWords,numOfWords-1);
+                        } else {
+                            setOfWords = displayNextSet(setOfWords,10);
+                            wordIndexMax -= 10;
+                            document.getElementById("wordsTotal").innerHTML = "<small><?php echo $langArray["WordsTestTotal"];?>" + " " + wordIndexMax + "</small>";
+                        }
+                        });
             
-            function displayNextSet(setOfWords){
+            function displayNextSet(setOfWords,num){
                 document.getElementById("draggables").innerHTML = " ";
                 document.getElementById("droppables").innerHTML = " ";
                 
-                styleBoxes(setOfWords,setOfWords+10);
-                makeCards(setOfWords,setOfWords+10);
-                fillBoxes(setOfWords,setOfWords+10);
-                dragNDrop(setOfWords,setOfWords+10);
+                styleBoxes(setOfWords,setOfWords + num);
+                makeCards(setOfWords,setOfWords + num);
+                fillBoxes(setOfWords,setOfWords + num);
+                dragNDrop(setOfWords,setOfWords + num);
                 
-                return setOfWords + 10;
+                return setOfWords + num;
             }
             
             //});

@@ -219,7 +219,7 @@ return $words;
 // and delete all dublicate values in the third array 
 //Implode the merged third array into string of values separated by coma
 
-function get_yandex_api_translation_dictionary($aWord, $langId, $trnsl_api, $trnsl_key, $dict_api, $dict_key)
+function get_yandex_api_translation_dictionary($aWord, $langId, $trnsl_api, $trnsl_key, $dict_api, $dict_key, $google_trnsl_key, $google_trnsl_api)
 {
 
 // 1.For ru-* variants you must use urlencode('слово')
@@ -227,9 +227,13 @@ function get_yandex_api_translation_dictionary($aWord, $langId, $trnsl_api, $trn
   
   // Get word translation from Yandex Translate API (JSON format)
   $jsonurlTr = $trnsl_api."?key=".$trnsl_key."&lang=".$langId."&format=html&text=".urlencode($aWord);
+  // Google Translation Api
+  $google_langId = explode("-", $langId);
+  $jsonurlTrGoogle = $google_trnsl_api."?key=".$google_trnsl_key."&source=".$google_langId[0]."&target=".$google_langId[1]."&q=".urlencode($aWord);
   
   // Get translation from Yandex Dict API (JSON format)
   $jsonurlDict = $dict_api."?key=".$dict_key."&lang=".$langId."&format=html&text=".urlencode($aWord);
+  
 
 //} else {
 
@@ -243,17 +247,36 @@ function get_yandex_api_translation_dictionary($aWord, $langId, $trnsl_api, $trn
 //}
 
 // Get word translation from Yandex Translate API
+//$timerStart = microtime(true);
 $jsonTr = json_decode(remote_get_contents($jsonurlTr), true);
 // Parse Yandex Translate API JSON string
 $dataTr = array();
 $nTr = 0;
 foreach($jsonTr["text"] as $keyTr=>$wordTr){
     $wordTr = str_replace("'", "`", $wordTr); // to screen special character "'"
+    $wordTr = str_replace(",", "", $wordTr);
     $dataTr[$nTr] = $wordTr;
     $nTr++;
 }
-
+/*$elapsed = microtime(true) - $timerStart;
+echo "<br> Yandex Translate API timer: ".$elapsed."<br>";
+*/
+// Google Translation API
+//$timerStart = microtime(true);
+$jsonTrG = json_decode(remote_get_contents($jsonurlTrGoogle), true);
+$dataTrG = array();
+$nTrG = 0;
+foreach($jsonTrG['data']['translations'] as $item){
+    //$item['translatedText'] = str_replace("'", "`", $item['translatedText']); // to screen special character "'"
+    $item['translatedText'] = str_replace(",", "", $item['translatedText']);
+    $dataTrG[$nTrG] = $item['translatedText'];
+    $nTrG++;    
+}
+/*$elapsed = microtime(true) - $timerStart;
+echo "<br> Google Translate API timer: ".$elapsed."<br>";
+*/
 // Get translation from Yandex Dict API
+//$timerStart = microtime(true);
 $jsonDict = json_decode(remote_get_contents($jsonurlDict), true);
 // Parse Yandex Dict API JSON string
 $dataDict = array();
@@ -262,6 +285,7 @@ foreach($jsonDict["def"] as $def){
     foreach($def["tr"] as $text){
         //$dataDict = array($text["text"]);
         $text["text"] = str_replace("'", "`", $text["text"]); // to screen special character "'"
+        $text["text"] = str_replace(",", "", $text["text"]);
         $dataDict[$nDict] = $text["text"];
         $nDict++;
         foreach($text["syn"] as $syn){
@@ -272,14 +296,28 @@ foreach($jsonDict["def"] as $def){
         }
     }
 }
-
+/*$elapsed = microtime(true) - $timerStart;
+echo "<br> Yandex Dict API timer: ".$elapsed."<br>";
+*/
 // Merge Translate and Dict arrays into third array 
 // and delete all dublicate values in the third array 
-$mergedTrDict = array_unique(array_merge($dataTr, $dataDict));
 
+//$timerStart = microtime(true);
+$mergedTrDict = array_unique(array_merge($dataTr, $dataDict, $dataTrG));
+//$mergedTrDict = array_unique($dataTr + $dataDict + $dataTrG);
+/*$elapsed = microtime(true) - $timerStart;
+echo "<br> array_unique(array_merge) timer: ".$elapsed."<br>";
+*/
 //Implode the merged third array into string of values separated by coma
+//$timerStart = microtime(true);
 $strDict = implode(", ", $mergedTrDict);
-
+/*$strDict ="";
+foreach($mergedTrDict as $c){
+    $strDict .= $c;
+}*/
+/*$elapsed = microtime(true) - $timerStart;
+echo "<br> implode timer: ".$elapsed."<br>";
+*/
 return $strDict;
 
 }

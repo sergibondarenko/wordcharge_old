@@ -59,7 +59,9 @@ session_start();
             // Take the loged user name as a tables name           
             $UserNW=$theSessionUser."_NW"; //New words
             $UserKNW=$theSessionUser."_KNW"; //Known words
- 
+            //$UserNW = preg_replace('/[^a-zA-Z0-9_]/', '_', $UserNW);
+            //$UserKNW = preg_replace('/[^a-zA-Z0-9_]/', '_', $UserKNW);
+            
             // 1.=====
             // Get data from html form textrArea field, remove all special characters
             // and make an array ($words), convert all words to lowercase 

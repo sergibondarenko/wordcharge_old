@@ -83,6 +83,8 @@
             // Take the loged user name as a tables name           
             $UserNW=$theSessionUser."_NW"; //New words
             $UserKNW=$theSessionUser."_KNW"; //Known words
+            $UserNW = preg_replace('/[^a-zA-Z0-9_]/', '_', $UserNW);
+            $UserKNW = preg_replace('/[^a-zA-Z0-9_]/', '_', $UserKNW);
  
             // 1.=====
             // Get data from html form textrArea field, remove all special characters
@@ -180,7 +182,7 @@
                 // Merge Translate and Dict arrays into third array 
                 // and delete all dublicate values in the third array 
                 //Implode the merged third array into string of values separated by coma
-                $strDict = get_yandex_api_translation_dictionary($onlyWords[$i], $langId, $trnsl_api, $trnsl_key, $dict_api, $dict_key);
+                $strDict = get_yandex_api_translation_dictionary($onlyWords[$i], $langId, $trnsl_api, $trnsl_key, $dict_api, $dict_key, $google_trnsl_key, $google_trnsl_api);
                 
                 // Sql query to update translation for the word
                 $sqlUpdate = mysqli_query($con, "UPDATE $UserNW SET text='$strDict' WHERE word='$onlyWords[$i]' AND freq='$onlyFreq[$i]' AND lang='$langId'");
