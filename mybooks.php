@@ -101,7 +101,8 @@
                     out += '<div class="container-fluid">' +
                     '<div class="row">' +
                     '<div class="col-xs-12 col-sm-12 col-md-4">' + 
-                    '<form method="post" target="_blank" action="getbooksdict-1.php?myLang=' + "<?php echo $myLang; ?>" +'">' + 
+                    '<form method="post" target="_blank" action="wdict.php?myLang=' + "<?php echo $myLang; ?>" +'">' + 
+                    '<input type="hidden" value="booksdict" name="dictCaller" />' +
                     '<input type="hidden" name="myUrl" id="myUrl" value="'+ arr[i].url +'">' +
                     '<input type="hidden" name="langId" value="' + langId + myLang + '">' +
                     '<input class="btn btn-default btn-xs" type="submit" name="makeDict" class="makeDict" value="' + 

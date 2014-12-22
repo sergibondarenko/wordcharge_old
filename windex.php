@@ -1,5 +1,5 @@
 <?php session_start();?> <!--Session for a signed in user-->
-<?php include_once("php/setsitelanguage-1.php");?> <!--Script to set site language-->
+<?php include_once("nphp/setsitelanguage.php");?> <!--Script to set site language-->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="WordCharge is a service for learning foreign languages. Learn new wordsi.">
+    <meta name="description" content="WordCharge is a service for learning foreign languages. Learn new words.">
     <meta name="author" content="Sergey Bondarenko">
 <!--    <link rel="icon" href="img/favicon.ico" type="image/vnd.microsoft.icon">-->
     <link rel="icon" href="img/favicon.png" type="image/png">
@@ -38,17 +38,19 @@
     <script src="js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
+    
   </head>
 
   <body>
 
-	<?php include_once("navbar.php"); ?>
+	<?php include_once("includes/navbar.php"); ?>
 
     <div class="container">
 			
       <div class="jumbotron">
         <h4><?php echo $langArray["textMakeCustomDic"]; ?></h4>
-		<form name="formIndex" method="post" action="wdict.php?myLang=<?php echo $myLang; ?>">
+		<form name="formIndex" method="post" action="dict.php?myLang=<?php echo $myLang; ?>">
+		    <input type="hidden" value="customdict" name="dictCaller" />
             <div class="row form-group">
         	    <div class="col-xs-6 col-sm-5 col-md-4 col-lg-3">
 				    <?php include_once("php/languagedropdown-1.php");?>
@@ -59,17 +61,20 @@
 											placeholder="<?php echo $langArray["textTextArea"]; ?>"></textarea></p>
             </div>
            	<div>
-           	    <p><input class="btn btn-default btn-md" type="submit" 
+           	    <p><input class="btn btn-default btn-md" type="submit" id = "makeDict"
 											value="<?php echo $langArray["textButtonMakeDict"]; ?>"></p>
 			</div>
 		</form>
 
       </div>
-			
+	
+	
+	  <div>
     	<!--Footer-->
-	  <?php include_once("php/footer-1.php");?>
+	    <?php include_once("includes/footer.php");?>
     	<!--END of Footer-->
-    
+      </div>
+	
 	</div> <!-- /container -->
 
   </body>

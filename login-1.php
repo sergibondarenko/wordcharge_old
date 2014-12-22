@@ -37,6 +37,8 @@
     <script src="js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <script src="https://apis.google.com/js/client:platform.js" async defer></script>
+
   </head>
 
   <body>
@@ -80,6 +82,17 @@
             </div>
           </div>
         </div>
+        
+        <!--<span id="signinButton">
+          <span
+            class="g-signin"
+            data-callback="signinCallback"
+            data-clientid="825831966231-rq91m17qru24g4ckn2qfmug5bcp5eegs.apps.googleusercontent.com"
+            data-cookiepolicy="single_host_origin"
+            data-requestvisibleactions="http://schema.org/AddAction"
+            data-scope="https://www.googleapis.com/auth/plus.login">
+          </span>
+        </span>-->
       
       </div> <!-- End of Jumbotron -->
       
@@ -90,6 +103,23 @@
     	<!--END of Footer-->
     
 		</div> <!-- /container -->
+
+    <script>
+     /*function signinCallback(authResult) {
+      if (authResult['status']['signed_in']) {
+        // Update the app to reflect a signed in user
+        // Hide the sign-in button now that the user is authorized, for example:
+        document.getElementById('signinButton').setAttribute('style', 'display: none');
+      } else {
+        // Update the app to reflect a signed out user
+        // Possible error values:
+        //   "user_signed_out" - User is signed-out
+        //   "access_denied" - User denied access to your app
+        //   "immediate_failed" - Could not automatically log in the user
+        console.log('Sign-in state: ' + authResult['error']);
+      }
+    }*/
+    </script>
 
 <?php ob_end_flush();?>
   </body>

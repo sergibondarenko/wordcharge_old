@@ -173,6 +173,10 @@ $knownWords = array_flip($knownWords);
 // Take only new words (words that are not in $UserKNW table)
 $newWords = array_diff_key($words, $knownWords);
 
+/*$newwords = array();
+$newwords = array_filter($newWords, 'strlen');
+return $newwords;*/
+
 return $newWords;
 
 mysqli_close($conF);
@@ -182,6 +186,30 @@ mysqli_close($conF);
 // Get data from html form textrArea field, remove all special characters
 // and make an array ($words), convert all words to lowercase 
 // Delete all dublicate words in the array and sort in descending order
+function split_news_into_words($text, $numWords)
+{
+    $dirtyWords = explode(" ", $text);
+    $words = array_filter($dirtyWords, "return_only_words");
+                
+    if(isset($numWords) && $numWords < array_count_values($words)){
+        $words = array_slice($words, 0, $numWords);
+    }
+                
+    //Delete all words which len==1
+    foreach ($words as $key=>$word)
+    {
+        if (strlen($words[$key]) < 2){
+            unset($words[$key]);
+            }
+    }
+                
+    $words = array_map('strtolower', $words);
+    // Delete all dublicate words in the array and sort in descending order
+    $words = array_count_values($words);
+    arsort($words);      
+    return $words;
+}
+
 function split_text_into_words($text, $numWords)
 {
 // Get data from html form textrArea field, remove all special characters
@@ -296,31 +324,47 @@ foreach($jsonDict["def"] as $def){
         }
     }
 }
-/*$elapsed = microtime(true) - $timerStart;
-echo "<br> Yandex Dict API timer: ".$elapsed."<br>";
-*/
+//$elapsed = microtime(true) - $timerStart;
+//echo "<br> Yandex Dict API timer: ".$elapsed."<br>";
+
 // Merge Translate and Dict arrays into third array 
 // and delete all dublicate values in the third array 
 
 //$timerStart = microtime(true);
 $mergedTrDict = array_unique(array_merge($dataTr, $dataDict, $dataTrG));
 //$mergedTrDict = array_unique($dataTr + $dataDict + $dataTrG);
-/*$elapsed = microtime(true) - $timerStart;
-echo "<br> array_unique(array_merge) timer: ".$elapsed."<br>";
-*/
+//$elapsed = microtime(true) - $timerStart;
+//echo "<br> array_unique(array_merge) timer: ".$elapsed."<br>";
+
 //Implode the merged third array into string of values separated by coma
 //$timerStart = microtime(true);
 $strDict = implode(", ", $mergedTrDict);
 /*$strDict ="";
-foreach($mergedTrDict as $c){
-    $strDict .= $c;
+$arrLength = count($mergedTrDict);
+for($i = 0; $i < $arrLength; $i++){
+    $strDict .= $mergedTrDict[$i] . ", ";
 }*/
-/*$elapsed = microtime(true) - $timerStart;
-echo "<br> implode timer: ".$elapsed."<br>";
-*/
+//$elapsed = microtime(true) - $timerStart;
+//echo "<br> implode timer: ".$elapsed."<br>";
+
 return $strDict;
 
 }
 
+        function strip_html_js_tags($text)
+        {
+          $search = array('@<script[^>]*?>.*?</script>@si',  // Strip out javascript 
+                          '@<style[^>]*?>.*?</style>@siU',    // Strip style tags properly 
+                          '@<[\/\!]*?[^<>]*?>@si',            // Strip out HTML tags 
+                          '@<![\s\S]*?–[ \t\n\r]*>@',         // Strip multi-line comments including CDATA 
+                          '/\s{2,}/',
+                          );
+          $text = preg_replace($search, "\n", html_entity_decode($text));
+          return $text;
+        }
+        
+        function return_only_words($var){
+            return ctype_alpha($var);
+        }
 
 ?>

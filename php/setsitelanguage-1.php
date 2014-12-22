@@ -14,6 +14,6 @@
     //$myLang = "en";
   }
 
-	$testVar = "This is the test variable!!!";
+  //$testVar = "This is the test variable!!!";
   $langArray = parse_ini_file("languages/".$myLang.".ini");
 ?>

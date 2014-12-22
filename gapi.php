@@ -9,8 +9,11 @@ $start = microtime(true);
 
 echo "Hello, this is the test of Google Translation API!"."<br>";
 
-$langId="zh-ru";
-$aWord = "家";
+$langId="en-ru";
+$aWord = "Ay, in the catalogue ye go for men,
+    As hounds and greyhounds, mongrels, spaniels, curs,
+    Shoughs, waterrugs, and demi-wolves are clept
+    All by the name of dogs. The valued file";
 
 $google_langId = explode("-", $langId);
 echo $google_langId[0]."<br>";

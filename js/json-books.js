@@ -270,6 +270,252 @@ var itbooks = [
 "img":"bookscovers/mastinodibask.jpeg",
 "title":"Il mastino dei Baskerville",
 "description":"Il mastino dei Baskerville. Il mastino dei Baskerville è un romanzo di Arthur Conan Doyle con protagonista Sherlock Holmes."
+},
+{
+"url":"http://wordcharge.com/books/it/Ildiavolonellampolla.txt",
+"img":"bookscovers/Ildiavolonellampolla.jpg",
+"title":"Il diavolo nell’ampolla",
+"description":"Il diavolo nell’ampolla. Scritto da Adolfo Albertazzi e pubblicato la prima volta nel 1918."
+},
+{
+"url":"http://wordcharge.com/books/it/Ottavia.txt",
+"img":"bookscovers/Ottavia.jpg",
+"title":"Ottavia",
+"description":"Ottavia. Scritto da Vittorio Alfieri e pubblicato nel 1783."
+},
+{
+"url":"http://wordcharge.com/books/it/Olanda.txt",
+"img":"bookscovers/Olanda.jpg",
+"title":"Olanda",
+"description":"Olanda. Scritto da Edmondo de Amicis e pubblicato la prima volta nel 1876."
+},
+{
+"url":"http://wordcharge.com/books/it/Dopoildivorzio.txt",
+"img":"bookscovers/Dopoildivorzio.jpg",
+"title":"Dopo il divorzio",
+"description":"Dopo il divorzio. Scritto da Grazia Deledda e pubblicato la prima volta nel 1902."
+},
+{
+"url":"http://wordcharge.com/books/it/LerivedellaBormidanel1794.txt",
+"img":"bookscovers/LerivedellaBormidanel1794.jpeg",
+"title":"Le rive della Bormida nel 1794",
+"description":"Le rive della Bormida nel 1794. Scritto da Giuseppe Cesare Abba e pubblicato nel 1910."
+},
+{
+"url":"http://wordcharge.com/books/it/Parvenzeesembianze.txt",
+"img":"bookscovers/Parvenzeesembianze.jpg",
+"title":"Parvenze e sembianze",
+"description":"Parvenze e sembianze. Scritto da Adolfo Albertazzi e pubblicato nel 1892."
+},
+{
+"url":"http://wordcharge.com/books/it/Agide.txt",
+"img":"bookscovers/Agide.jpg",
+"title":"Agide",
+"description":"Agide. Scritto da Vittorio Alfieri e pubblicato la prima volta nel 1788."
+},
+{
+"url":"http://wordcharge.com/books/it/Top.txt",
+"img":"bookscovers/Top.jpg",
+"title":"Top",
+"description":"Top. Scritto da Adolfo Albertazzi."
+},
+{
+"url":"http://wordcharge.com/books/it/Vecchiestoriedamore.txt",
+"img":"bookscovers/Vecchiestoriedamore.jpg",
+"title":"Vecchie storie d’amore",
+"description":"Vecchie storie d’amore. Scritto da Adolfo Albertazzi."
+},
+{
+"url":"http://wordcharge.com/books/it/Danzamacabra.txt",
+"img":"bookscovers/Danzamacabra.jpg",
+"title":"Danza macàbra",
+"description":"Danza macàbra. Scritto da Camillo Antona-Traversi e pubblicato la prima volta nel 1895."
+},
+{
+"url":"http://wordcharge.com/books/it/Ilpedante.txt",
+"img":"bookscovers/Ilpedante.jpg",
+"title":"Il pedante",
+"description":"Il pedante. Commedie del Cinquecento. Scritto da Francesco Belo. Il pedante fu pubblicato la prima volta nel 1529."
+},
+{
+"url":"http://wordcharge.com/books/it/CaosdelTriperuno.txt",
+"img":"bookscovers/CaosdelTriperuno.jpg",
+"title":"Caos del Triperuno",
+"description":"Caos del Triperuno. Opere Italiane. Autore Teofilo Folengo."
+},
+{
+"url":"http://wordcharge.com/books/it/IlbaciodellacontessaSavina.txt",
+"img":"bookscovers/IlbaciodellacontessaSavina.jpg",
+"title":"Il bacio della contessa Savina",
+"description":"Il bacio della contessa Savina. Scritto da Antonio Caccianiga."
+},
+{
+"url":"http://wordcharge.com/books/it/Iltamburodifuoco.txt",
+"img":"bookscovers/Iltamburodifuoco.jpg",
+"title":"Il tamburo di fuoco",
+"description":"Il tamburo di fuoco. Dramma africano di calore, colore, rumori, odori. Autore Filippo Tommaso Marinetti (1922)."
+},
+{
+"url":"http://wordcharge.com/books/it/Sonetti.txt",
+"img":"bookscovers/Sonetti.jpg",
+"title":"Sonetti",
+"description":"Sonetti. Scritto da Cesare Pascarella e pubblicato la prima volta nel 1900."
+},
+{
+"url":"http://wordcharge.com/books/it/LaCalandria.txt",
+"img":"bookscovers/LaCalandria.jpg",
+"title":"La Calandria",
+"description":"La Calandria. Commedie del Cinquecento. Autore Bernardo Dovizi da Bibbiena."
+},
+{
+"url":"http://wordcharge.com/books/it/Itretiranni.txt",
+"img":"bookscovers/Itretiranni.jpg",
+"title":"I tre tiranni",
+"description":"I tre tiranni. Commedie del Cinquecento. Scritto da  Agostino Ricchi (1533)."
+},
+{
+"url":"http://wordcharge.com/books/it/Lazampadelgatto.txt",
+"img":"bookscovers/Lazampadelgatto.jpg",
+"title":"La zampa del gatto",
+"description":"La zampa del gatto. Teatro in prosa. Autore Giuseppe Giacosa. Prima assoluta 1883."
+},
+{
+"url":"http://wordcharge.com/books/it/Resaadiscrezione.txt",
+"img":"bookscovers/Resaadiscrezione.GIF",
+"title":"Resa a discrezione",
+"description":"Resa a discrezione. Teatro in prosa. Autore Giuseppe Giacosa. Prima assoluta 1886."
+},
+{
+"url":"http://wordcharge.com/books/it/Acquazzoniinmontagna.txt",
+"img":"bookscovers/Acquazzoniinmontagna.jpg",
+"title":"Acquazzoni in montagna",
+"description":"Acquazzoni in montagna. Commedia in due atti. Autore Giuseppe Giacosa. Prima assoluta 1876."
+},
+{
+"url":"http://wordcharge.com/books/it/Avilanza.txt",
+"img":"bookscovers/Avilanza.jpg",
+"title":"A vilanza",
+"description":"A vilanza. Teatro dialettale siciliano. Autori Nino Martoglio, Luigi Pirandello (1922)."
+},
+{
+"url":"http://wordcharge.com/books/it/Sofonisba.txt",
+"img":"bookscovers/Sofonisba.jpg",
+"title":"Sofonisba",
+"description":"Sofonisba. Sofonisba è una tragedia storica scritta da Vittorio Alfieri. Composto nel 1789 ."
+},
+{
+"url":"http://wordcharge.com/books/it/Lignoto.txt",
+"img":"bookscovers/Lignoto.jpeg",
+"title":"L'ignoto",
+"description":"L'ignoto. Novelle. Scritto da Salvatore Di Giacomo (1920)."
+},
+{
+"url":"http://wordcharge.com/books/it/Operanovaamorosa.txt",
+"img":"bookscovers/Operanovaamorosa.jpeg",
+"title":"Opera nova amorosa",
+"description":"Opera nova amorosa. Strambotti, sonetti, capitoli, epistole et una disperata. Scritto da Nocturno Napolitano."
+},
+{
+"url":"http://wordcharge.com/books/it/Mattinatenapoletane.txt",
+"img":"bookscovers/Mattinatenapoletane.jpg",
+"title":"Mattinate napoletane",
+"description":"Mattinate napoletane. Scritto da Salvatore Di Giacomo e pubblicato nel 1887."
+},
+{
+"url":"http://wordcharge.com/books/it/Lafantesca.txt",
+"img":"bookscovers/Lafantesca.jpg",
+"title":"La fantesca",
+"description":"La fantesca. Scritto da Giambattista Della Porta. Commedia in cinque atti (1592) ."
+},
+{
+"url":"http://wordcharge.com/books/it/Unanottebizzarra.txt",
+"img":"bookscovers/Unanottebizzarra.jpeg",
+"title":"Una notte bizzarra",
+"description":"Una notte bizzarra. Novelle di Anton Giulio Barrili (1879)."
+},
+{
+"url":"http://wordcharge.com/books/it/Raccontifantastici.txt",
+"img":"bookscovers/Raccontifantastici.jpg",
+"title":"Racconti fantastici",
+"description":"Racconti fantastici. Scritto da Iginio Ugo Tarchetti."
+},
+{
+"url":"http://wordcharge.com/books/it/LeavventuredAlice.txt",
+"img":"bookscovers/LeavventuredAlice.jpg",
+"title":"Le avventure d'Alice nel paese delle meraviglie",
+"description":"Le avventure d'Alice nel paese delle meraviglie. Scritto da Lewis Carroll e pubblicato la prima volta nel 1865."
+},
+{
+"url":"http://wordcharge.com/books/it/ErmannoRaeli.txt",
+"img":"bookscovers/ErmannoRaeli.jpg",
+"title":"Ermanno Raeli",
+"description":"Ermanno Raeli. Scritto da Federico De Roberto e pubblicato la prima volta nel 1889."
+},
+{
+"url":"http://wordcharge.com/books/it/Idrammidecampi.txt",
+"img":"bookscovers/Idrammidecampi.jpg",
+"title":"I drammi de' campi",
+"description":"I drammi de' campi. Padre Don Giuseppe. La vendetta. Proprietari e fittaiuoli. Sequestro. Scritto da Emilio Raga e pubblicato la prima volta nel 1886."
+},
+{
+"url":"http://wordcharge.com/books/it/Nabuco.txt",
+"img":"bookscovers/Nabuco.jpg",
+"title":"Nabuco",
+"description":"Nabuco. Autore Ferdinando Fontana e pubblicato la prima volta nel 1893."
+},
+{
+"url":"http://wordcharge.com/books/it/LaCintia.txt",
+"img":"bookscovers/LaCintia.jpg",
+"title":"La Cintia",
+"description":"La Cintia. Scritto da Giambattista Della Porta (1601)."
+},
+{
+"url":"http://wordcharge.com/books/it/Latabernaria.txt",
+"img":"bookscovers/Latabernaria.jpeg",
+"title":"La tabernaria",
+"description":"La tabernaria. Scritto da Giambattista Della Porta. Commedia dell'arte."
+},
+{
+"url":"http://wordcharge.com/books/it/Nelpaesedeidollari.txt",
+"img":"bookscovers/Nelpaesedeidollari.jpg",
+"title":"Nel paese dei dollari",
+"description":"Nel paese dei dollari. Tre anni a New-York. Scritto da Adolfo Rossi (1893)."
+},
+{
+"url":"http://wordcharge.com/books/it/Comelefoglie.txt",
+"img":"bookscovers/Comelefoglie.jpg",
+"title":"Come le foglie",
+"description":"Come le foglie. Commedia di Giuseppe Giacosa. Prima assoluta 1900."
+},
+{
+"url":"http://wordcharge.com/books/it/IlBenefattore.txt",
+"img":"bookscovers/IlBenefattore.jpg",
+"title":"Il Benefattore",
+"description":"Il Benefattore. Scritto da Luigi Capuana e pubblicato nel 1901."
+},
+{
+"url":"http://wordcharge.com/books/it/Donnesalottiecostumi.txt",
+"img":"bookscovers/Donnesalottiecostumi.jpg",
+"title":"Donne, salotti e costumi",
+"description":"Donne, salotti e costumi. La vita italiana durante la Rivoluzione francese e l'Impero. Scritto da Ferdinando Martini e pubblicato nel 1912."
+},
+{
+"url":"http://wordcharge.com/books/it/DirittidellAnima.txt",
+"img":"bookscovers/DirittidellAnima.jpg",
+"title":"Diritti dell'Anima",
+"description":"Diritti dell'Anima. Commedia di Giuseppe Giacosa. Prima assoluta 1894."
+},
+{
+"url":"http://wordcharge.com/books/it/TristiAmori.txt",
+"img":"bookscovers/TristiAmori.jpg",
+"title":"Tristi Amori",
+"description":"Tristi Amori. Dramma borghese di Giuseppe Giacosa. Prima assoluta 1887."
+},
+{
+"url":"http://wordcharge.com/books/it/MemoriedelPresbiterio.txt",
+"img":"bookscovers/MemoriedelPresbiterio.jpg",
+"title":"Memorie del Presbiterio",
+"description":"Memorie del Presbiterio. Scritto da Emilio Praga e pubblicato a Torino nel 1881 ."
 }
 ];
 var rubooks = [

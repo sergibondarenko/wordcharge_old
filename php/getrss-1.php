@@ -72,7 +72,8 @@ for ($i=0; $i<=10; $i++) {
 
   echo ("<div class='container-fluid'>".
         "<div class='row'>".
-        "<form action='../getnewsdict-1.php?myLang=$myLang' method='post' target='_blank'>".
+        "<form action='../wdict.php?myLang=$myLang' method='post' target='_blank'>".
+        "<input type='hidden' name='dictCaller' value='newsdict'>".
         "<input type='hidden' name='myUrl' value='$item_link'>".
         "<input type='hidden' name='langId' value='$foreignLang-$myLang'>".
         //"<input type='submit' name='myDict' value='$langArray[\"textButtonMakeDict\"]'>".

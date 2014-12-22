@@ -26,11 +26,16 @@
         include_once("php/vars.php");
         include_once("php/functions.php");
         include_once("php/setsitelanguage-1.php"); 
-
-        // Transfer $_SESSION["myusername"] and $langId 
+        include_once("nphp/classes/wrdchUser.php");
+        include_once("nphp/classes/wrdchWords.php");
+ 
         $textArea = $_POST['textArea'];
-        $theSessionUser = $_SESSION["myusername"];
-        $langId = $_POST['langId'];
+        $theSessionUser = sanitize_input($_SESSION["myusername"]);
+        $langId = sanitize_input($_POST['langId']);
+        $dictCaller = sanitize_input($_POST['dictCaller']); // customdict, newsdict, booksdict
+        $myLang = sanitize_input($_GET['myLang']);
+      
+        
       ?>
 
 	  <!-- Bootstrap core JavaScript
@@ -57,19 +62,11 @@
 
     	<div class="jumbotron">
 
-      <!--<div id="wrapper-login">
-        <?php //include_once("php/wrapper-login.php");?>
-      </div>-->
-
         <!-- Progress bar holder -->
         <div class="progress">
           <div class="progress-bar progress-bar-custom" id="progress" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 100%"> </div>
         </div>
-				<!--<div class="progress">
-				    <div class="progress-bar" id="progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 5%;">
-				        <span class="sr-only">0% Complete</span>
-				    </div>
-				</div>-->
+
         <!-- Progress information -->
         <div id="information" style="width"></div>
         
@@ -78,19 +75,67 @@
         <?php
             header('Content-Type: text/html; charset=utf-8');
 
-            //$langId = $_POST['langId'];
-
+           
+            
             // Take the loged user name as a tables name           
             $UserNW=$theSessionUser."_NW"; //New words
             $UserKNW=$theSessionUser."_KNW"; //Known words
             $UserNW = preg_replace('/[^a-zA-Z0-9_]/', '_', $UserNW);
             $UserKNW = preg_replace('/[^a-zA-Z0-9_]/', '_', $UserKNW);
  
-            // 1.=====
-            // Get data from html form textrArea field, remove all special characters
-            // and make an array ($words), convert all words to lowercase 
-            // Delete all dublicate words in the array and sort in descending order
-            $words = split_text_into_words($textArea);
+            $myUser = new wrdchUser($theSessionUser);
+            //echo $myUser->classname . "<br>";
+            //echo $myUser->username . "<br>";
+            
+            $myWords = new wrdchWords;
+            
+            
+            if ($dictCaller == 'booksdict' or $dictCaller == 'newsdict') {
+                $myUrl = $_POST["myUrl"];
+                $numWords = sanitize_input($_POST["numWords"]);
+                $myUrl = get_redirected_url($myUrl);
+                $content = remote_get_contents($myUrl);
+                $text = strip_html_js_tags($content);
+            }
+            
+            /*if ($dictCaller == 'booksdict'){
+                $words = split_text_into_words($text,$numWords);
+            } else if ($dictCaller == 'newsdict') {
+                
+                $dirtyWords = explode(" ", $content);
+                $words = array_filter($dirtyWords, "return_only_words");
+                
+                if(isset($numWords) && $numWords < array_count_values($words)){
+                    $words = array_slice($words, 0, $numWords);
+                }
+                
+                //Delete all words which len==1
+                foreach ($words as $key=>$word)
+                {
+                  if (strlen($words[$key]) < 2){
+                    unset($words[$key]);
+                  }
+                }
+                
+                $words = array_map('strtolower', $words);
+                // Delete all dublicate words in the array and sort in descending order
+                $words = array_count_values($words);
+                arsort($words);
+            } 
+            else {*/
+            if ($dictCaller == 'booksdict' or $dictCaller == 'newsdict'){
+                $words = wrdchWords::splitintowords($text,$numWords);
+            } else {
+                // 1.=====
+                // Get data from html form textrArea field, remove all special characters
+                // and make an array ($words), convert all words to lowercase 
+                // Delete all dublicate words in the array and sort in descending order
+                $words = wrdchWords::splitintowords($textArea,str_word_count($textArea)); 
+                //$words = split_text_into_words($textArea);
+            }
+            
+            
+            
             $totalWords = count($words);
             
             // Select only new words
@@ -99,10 +144,11 @@
             // Count words stat
             $totalNew = count($words);
             
+            
+            
             $youKnow = $totalWords - $totalNew;
             $yPercent = ($youKnow * 100)/$totalWords;
             echo "<div id=\"wordsStat\">".$langArray["textNewdictTotal"].": ".$totalWords."; ".$langArray["textNewdictNew"].": ".$totalNew."; ".$langArray["textNewdictYouknow"].": ".$youKnow." (".round($yPercent,2)."%);"."</div>";
-            //echo $theSessionUser;
             
             // 2.=====
             // Set MySQL connection and fill the database with new words
@@ -113,9 +159,18 @@
               echo "Failed to connect to MySQL: " . mysqli_connect_error();
             }
            
-            // Create user Mysql tables if not exists   
-            //$UserNW=$theSessionUser."_NW";
-            //$UserKNW=$theSessionUser."_KNW";
+            //Purge _NW table  
+            $sqlPurgeNW = mysqli_query($con, "TRUNCATE TABLE $UserNW");
+            if(!$sqlPurgeNW){
+              die('dict.php - Error after NW table purging: ' . mysqli_error($con)); 
+            }
+            //!!!Check before implementing. This code purges _KNW table!!!
+            /*if ($UserKNW == '_KNW'){
+                $sqlEmptyDel = mysqli_query($con, "TRUNCATE TABLE $UserKNW");
+                if(!$sqlEmptyDel){
+                  die('dict.php - Error after KNW table purging: ' . mysqli_error($con)); 
+                }
+            }*/
             
             $sqlCreate = "CREATE TABLE IF NOT EXISTS $UserNW( ".
                    "id INT(20) NOT NULL AUTO_INCREMENT, ".
@@ -142,8 +197,11 @@
                 printf("Error loading character set utf8: %s\n", mysqli_error($con));
             }
             
+            
+            
              //$totalNew = maximum number of new words found
             // Loop through the words in $words array and run the Progress Bar
+            //$timerStart = microtime(true);
             for($i = 0; $i <= $totalNew; $i++){
 
                 // Progress Bar: Calculate the percentation
@@ -193,7 +251,15 @@
                 mysqli_free_result($sqlUpdate);
 
             }
-
+            //$elapsed = microtime(true) - $timerStart;
+            //echo "<br> Loop timer: ".$elapsed."<br>";
+            
+            //Delete empty rows
+            $sqlEmptyDel = mysqli_query($con, "DELETE FROM $UserNW WHERE id=11 ORDER BY id DESC LIMIT 1");
+            if(!$sqlEmptyDel){
+              die('dict.php - Error after empty element delete: ' . mysqli_error($con)); 
+            }
+            
             // Progress Bar: Tell user that the process is completed
             echo '<script language="javascript">document.getElementById("information").innerHTML="'.$langArray["textNewdictProcessBarComplete"].'"</script>'.'<br>';
             
@@ -209,9 +275,7 @@
             
             // Display user dictinary in form of the html table
             echo "<br>";
-            //echo "Dictionary: " . $langId . "<br>";
             echo $langArray["textNewdictDict"].": " . $langId . "<br>";
-            //echo "<table id='tableDict'> <!-- Old design. -->
             echo "<table class='table table-striped table-hover'>
             <tr>
             <th>".$langArray["textTableIknow"]."</th>
@@ -221,29 +285,28 @@
             </tr>";
             
             while($row = mysqli_fetch_array($sqlSelect)) {
-              // echo "<tr>"; <!-- Old design --> 
-              echo "<tr class='active'>";
-              echo "<td>" . "<span class=\"iKnowTheWord\"><a href=\"\">".$langArray["textTableYes"]."</a></span>" . "</td>";
-              echo "<td>" . "<span class=\"tdFreq\">" . $row['freq'] . "</span>" . "</td>";
-              //echo "<td>" . $row['word'] . "</td>";
-              echo "<td>" . "<span class=\"tdWord\">" . $row['word'] . "</span>" . "</td>";
-              echo "<td>" . "<span class=\"tdText\">" . $row['text'] . "</span>" . "</td>";
-              echo "</tr>";
+                if($row['freq'] != 0){
+                  echo "<tr class='active'>";
+                  echo "<td>" . "<span class=\"iKnowTheWord\"><a href=\"\">".$langArray["textTableYes"]."</a></span>" . "</td>";
+                  echo "<td>" . "<span class=\"tdFreq\">" . $row['freq'] . "</span>" . "</td>";
+                  //echo "<td>" . $row['word'] . "</td>";
+                  echo "<td>" . "<span class=\"tdWord\">" . $row['word'] . "</span>" . "</td>";
+                  echo "<td>" . "<span class=\"tdText\">" . $row['text'] . "</span>" . "</td>";
+                  echo "</tr>";
+                }
             }
             
             echo "</table><br>";
            
-            // To check MySQL charset
-            /*$charset = mysqli_character_set_name($con);
-            printf ("Current Mysql charset - %s\n",$charset);
-            echo "<br>";*/
 
             /* free result set */
             mysqli_free_result($sqlSelect);
             
             // Close MySQL connection
             mysqli_close($con);
+            
         
+            
         ?>
 
     	</div> <!--jumbotron-->
