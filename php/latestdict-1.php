@@ -44,10 +44,13 @@ echo "<table class='table table-striped table-hover'>
 </tr>";
 
 while($row = mysqli_fetch_array($sqlSelect)) {
+  $langId = explode("-", $row['lang']);
+
   echo "<tr class='active'>";
   echo "<td>" . $row['lang'] . "</td>";
   echo "<td>" . $row['freq'] . "</td>";
-  echo "<td>" . $row['word'] . "</td>";
+  echo "<td>" . "<span class=\"tdWord\"><a href='http://translate.google.com/translate_tts?ie=utf-8&tl=$langId[0]&q=".$row['word']."' target='_blank'>".$row['word']."</a></span>" . "</td>";
+  //echo "<td>" . $row['word'] . "</td>";
   echo "<td>" . $row['text'] . "</td>";
   echo "</tr>";
 }
