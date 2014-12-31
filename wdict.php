@@ -278,7 +278,8 @@
                   echo "<td>" . "<span class=\"iKnowTheWord\"><a href=\"\">".$langArray["textTableYes"]."</a></span>" . "</td>";
                   echo "<td>" . "<span class=\"tdFreq\">" . $row['freq'] . "</span>" . "</td>";
                   //echo "<td>" . $row['word'] . "</td>";
-                  echo "<td>" . "<span class=\"tdWord\">" . $row['word'] . "</span>" . "</td>";
+                  //echo "<td>" . "<span class=\"tdWord\">" . $row['word'] . "</span>" . "</td>";
+                  echo "<td>" . "<span class=\"tdWord\"><a href='http://translate.google.com/translate_tts?ie=utf-8&tl=$langId&q=".$row['word']."' target='_blank'>".$row['word']."</a></span>" . "</td>";
                   echo "<td>" . "<span class=\"tdText\">" . $row['text'] . "</span>" . "</td>";
                   echo "</tr>";
                 }
