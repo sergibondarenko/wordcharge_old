@@ -127,10 +127,9 @@
         </div>
 
         </div> <!--End of jumbotron-->
-      </div>
-			
+      		
     	<!--Footer-->
-			<?php include_once("php/footer-1.php");?>
+		<?php include_once("php/footer-1.php");?>
     	<!--END of Footer-->
     
 		</div> <!-- /container -->
