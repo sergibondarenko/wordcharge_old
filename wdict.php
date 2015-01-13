@@ -137,8 +137,10 @@
             
             $totalWords = count($words);
             
+            
             // Select only new words
             $words = look_for_the_new_words($words,$langId,$MysqlUser,$MysqlUPass,$MysqlDB,$UserKNW);
+            //$words = look_for_the_new_words($words,$langId,$MysqlUser,$MysqlUPass,$MysqlDB,$UserKNW,$langTable);
             
             // Count words stat
             $totalNew = count($words);
@@ -172,10 +174,12 @@
             }
             
             
-            /*$dbLang = str_replace("-", "", $langId);
-            $langTable = "wordcharge_" . $dbLang;
+            //$dbLang = str_replace("-", "", $langId);
+            //$langTable = "wordcharge_" . $dbLang;
+            $dbLang = str_replace("-", "", $langId);
+            $universalDictionary = "wordcharge_" . $dbLang;
             
-            $sqlCreate = "CREATE TABLE IF NOT EXISTS $langTable( ".
+            $sqlCreate = "CREATE TABLE IF NOT EXISTS $universalDictionary( ".
                    "id INT(30) NOT NULL AUTO_INCREMENT, ".
                    "lang VARCHAR(10) NOT NULL, ".
                    "word VARCHAR(40) NOT NULL, ".
@@ -185,7 +189,7 @@
             
             if (!mysqli_query($con,$sqlCreate)) {
               die('Error after Create: ' . mysqli_error($con));
-            }*/
+            }
             
             mysqli_free_result($sqlCreate);
  
@@ -229,12 +233,17 @@
                 $onlyFreq = array_values($words);
                 
                 // Insert word and its frequency into database
-                $sqlInsert = mysqli_query($con, "INSERT INTO $UserNW (lang,freq,word) VALUES ('$langId','$onlyFreq[$i]', '$onlyWords[$i]')");
+                /*$sqlInsert = mysqli_query($con, "INSERT INTO $UserNW (lang,freq,word) VALUES ('$langId','$onlyFreq[$i]', '$onlyWords[$i]')");
                 if(!$sqlInsert){
                   die('newdict.php - Error after Insert: ' . mysqli_error($con)); 
                 }
-                /* free result set */
+                $sqlInsert = mysqli_query($con, "INSERT INTO $universalDictionary (lang,word) VALUES ('$langId', '$onlyWords[$i]')");
+                if(!$sqlInsert){
+                  die('newdict.php - Error after Insert: ' . mysqli_error($con)); 
+                }
+                
                 mysqli_free_result($sqlInsert);
+                */
                 
                 // 3.=====
                 // Translate every word in the $onlyWords[] array
@@ -245,21 +254,58 @@
                 //Implode the merged third array into string of values separated by coma
                 ///
                 //$timerStartTr = microtime(true);
-                $strDict = get_yandex_api_translation_dictionary($onlyWords[$i], $langId, $trnsl_api, $trnsl_key, $dict_api, $dict_key, $google_trnsl_key, $google_trnsl_api);
-                                ///
-                //$elapsed = microtime(true) - $timerStartTr;
-                //echo "<br> Tr: ".$elapsed."<br>";
-                 
+                
+                
+                $sqlUnivDict = "SELECT word,text FROM $universalDictionary WHERE word='$onlyWords[$i]' AND lang='$langId'";
+                
+                $result = mysqli_query($con, $sqlUnivDict) or die("Woops!");
+                if ($data = mysqli_fetch_array($result)) {
+                    //print_r($data);
+                    $aWord = $data['word'];
+                    $aText = $data['text'];
+                    /*print_r($aWord);
+                    echo "<br>";
+                    print_r($aText);
+                    echo "<br>";*/
+                    $sqlInsert = mysqli_query($con, "INSERT INTO $UserNW (lang,freq,word,text) VALUES ('$langId','$onlyFreq[$i]','$aWord','$aText')");
+                    if(!$sqlInsert){
+                      die('newdict.php - Error after Insert: ' . mysqli_error($con)); 
+                    }
+                    mysqli_free_result($sqlInsert);
+                }
+                else {
+
+                
+                    $strDict = get_yandex_api_translation_dictionary($onlyWords[$i], $langId, $trnsl_api, $trnsl_key, $dict_api, $dict_key, $google_trnsl_key, $google_trnsl_api);
+                                    ///
+                    //$elapsed = microtime(true) - $timerStartTr;
+                    //echo "<br> Tr: ".$elapsed."<br>";
+                    
+                    $sqlInsert = mysqli_query($con, "INSERT INTO $UserNW (lang,freq,word,text) VALUES ('$langId','$onlyFreq[$i]','$onlyWords[$i]','$strDict')");
+                    if(!$sqlInsert){
+                      die('newdict.php - Error after Insert: ' . mysqli_error($con)); 
+                    }
+                    $sqlInsert = mysqli_query($con, "INSERT INTO $universalDictionary (lang,word,text) VALUES ('$langId', '$onlyWords[$i]','$strDict')");
+                    if(!$sqlInsert){
+                      die('newdict.php - Error after Insert: ' . mysqli_error($con)); 
+                    }
+                    /* free result set */
+                    mysqli_free_result($sqlInsert);
                 
                 // Sql query to update translation for the word
-                $sqlUpdate = mysqli_query($con, "UPDATE $UserNW SET text='$strDict' WHERE word='$onlyWords[$i]' AND freq='$onlyFreq[$i]' AND lang='$langId'");
+                /*$sqlUpdate = mysqli_query($con, "UPDATE $UserNW SET text='$strDict' WHERE word='$onlyWords[$i]' AND freq='$onlyFreq[$i]' AND lang='$langId'");
                 if(!$sqlUpdate){
                   die('newdict.php - Error after Update: ' . mysqli_error($con)); 
                 }
-                                               
-                /* free result set */
+                $sqlUpdate = mysqli_query($con, "UPDATE $universalDictionary SET text='$strDict' WHERE word='$onlyWords[$i]' AND lang='$langId'");
+                if(!$sqlUpdate){
+                  die('newdict.php - Error after Update: ' . mysqli_error($con)); 
+                }
+                
                 mysqli_free_result($sqlUpdate);
-
+                */
+                }
+                mysqli_free_result($sqlUnivDict);
             }
 
         
