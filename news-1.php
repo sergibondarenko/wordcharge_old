@@ -91,7 +91,7 @@
 			
       <div class="jumbotron">
 
-        <p><?php echo $langArray["textNewsText"];?></>
+        <h4><?php echo $langArray["textNewsText"];?></h4>
         
         <div class="container-fluid">
             <div class="row">

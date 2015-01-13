@@ -45,6 +45,9 @@
     <div class="container">
       
       <div class="jumbotron">
+        <h4><?php echo $langArray["textBooksDescr"]; ?></h4>
+        <br>
+      
         <?php include_once("php/bookshelf-1.php"); ?>
 
       </div>

@@ -130,7 +130,10 @@
     <div class="container">
 			
       <div class="jumbotron">
-        <h3><?php echo $langArray["WordsTestMenu"]; ?></h3>
+        <h4><?php echo $langArray["WordsTestMenu"]; ?></h4>
+        <h5><?php echo $langArray["WordsTestTextDescr"]; ?></h5>
+        <h5><?php echo $langArray["WordsTestTextDescr1"]; ?></h5>
+        <br>
       
             <p id="wordsTotal"></p>
             <p id="wordsCurr"></p>

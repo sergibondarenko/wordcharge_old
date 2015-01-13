@@ -63,7 +63,7 @@
     <div class="container">
 			
       <div class="jumbotron" id="jumbo">
-        <h3><?php echo $langArray["WordGamesDrugDropDescr"];?></h3>
+        <h4><?php echo $langArray["WordGamesDrugDropDescr"];?></h4>
         
         <p id="wordsTotal"></p>
         <button id="nextTen"><?php echo $langArray["WordGamesDrugDropNext"];?>&nbsp; 10</button>

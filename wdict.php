@@ -170,6 +170,23 @@
             if (!mysqli_query($con,$sqlCreate)) {
               die('Error after Create: ' . mysqli_error($con));
             }
+            
+            
+            /*$dbLang = str_replace("-", "", $langId);
+            $langTable = "wordcharge_" . $dbLang;
+            
+            $sqlCreate = "CREATE TABLE IF NOT EXISTS $langTable( ".
+                   "id INT(30) NOT NULL AUTO_INCREMENT, ".
+                   "lang VARCHAR(10) NOT NULL, ".
+                   "word VARCHAR(40) NOT NULL, ".
+                   "text VARCHAR(255) NOT NULL, ".
+                   "PRIMARY KEY ( id )) ".
+                   "ENGINE=InnoDB DEFAULT CHARSET=utf8";
+            
+            if (!mysqli_query($con,$sqlCreate)) {
+              die('Error after Create: ' . mysqli_error($con));
+            }*/
+            
             mysqli_free_result($sqlCreate);
  
             // Mysql query to delete old data from the new words table

@@ -48,6 +48,9 @@
 			
       <div class="jumbotron">
         <h4><?php echo $langArray["textMakeCustomDic"]; ?></h4>
+        <h5><?php echo $langArray["textMakeCustomDicDescr"]; ?></h5>
+        <h5><?php echo $langArray["textMakeCustomDicDescr1"]; ?></h5>
+	<br>
 
 			<form name="formIndex" method="post" action="wdict.php?myLang=<?php echo $myLang; ?>">
         	  <div class="row form-group">

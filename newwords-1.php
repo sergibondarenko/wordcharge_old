@@ -45,7 +45,9 @@
     <div class="container">
 			
       <div class="jumbotron">
-        <h3><?php echo $langArray["textNewwords"]; ?></h3>
+        <h4><?php echo $langArray["textNewwords"]; ?></h4>
+        <h5><?php echo $langArray["textNewwordsDescr"]; ?></h5>
+        <br>
         <?php 
             include("php/vars.php");
             include("php/latestdict-1.php"); 

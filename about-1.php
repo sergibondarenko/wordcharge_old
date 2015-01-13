@@ -45,7 +45,7 @@
     <div class="container">
 			
       <div class="jumbotron">
-         <p><?php echo $langArray["textAboutMain"]; ?></p>
+         <h4><?php echo $langArray["textAboutMain"]; ?></h4>
          
          <div class="embed-responsive embed-responsive-4by3">
             <iframe width="420" height="315" src="//www.youtube.com/embed/zyV37RKoELw" frameborder="0" allowfullscreen></iframe>
@@ -55,15 +55,15 @@
             <iframe width="420" height="315" src="//www.youtube.com/embed/apXgLCAgjYs" frameborder="0" allowfullscreen></iframe>
          </div>
        
-        <!--<div id="myCarousel" class="carousel slide">
+        <!--<div id="myCarousel" class="carousel slide" style="height: 400px; width: 700px; margin: 0 auto">-->
            <!-- Carousel indicators -->
-       <!--<ol class="carousel-indicators">
+            <!--<ol class="carousel-indicators">
               <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
               <li data-target="#myCarousel" data-slide-to="1"></li>
               <li data-target="#myCarousel" data-slide-to="2"></li>
-           </ol>   
+           </ol>-->
            <!-- Carousel items -->
-    <!--    <div class="carousel-inner">
+        <!--<div class="carousel-inner">
               <div class="item active">
                  <img src="/bookscovers/AChristmasCarol.jpg" alt="First slide">
               </div>
@@ -73,13 +73,13 @@
               <div class="item">
                  <img src="/bookscovers/AdventuresofHuckleberryFinn.jpg" alt="Third slide">
               </div>
-           </div>
+           </div>-->
            <!-- Carousel nav -->
-    <!--       <a class="carousel-control left" href="#myCarousel" 
+           <!--<a class="carousel-control left" href="#myCarousel" 
               data-slide="prev">&lsaquo;</a>
            <a class="carousel-control right" href="#myCarousel" 
               data-slide="next">&rsaquo;</a>
-        </div> -->
+        </div>-->
         
         
       </div>
