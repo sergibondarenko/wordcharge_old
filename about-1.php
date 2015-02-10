@@ -47,13 +47,12 @@
       <div class="jumbotron">
          <h4><?php echo $langArray["textAboutMain"]; ?></h4>
          
-         <div class="embed-responsive embed-responsive-4by3">
+         <!--<div class="embed-responsive embed-responsive-4by3">
             <iframe width="420" height="315" src="//www.youtube.com/embed/zyV37RKoELw" frameborder="0" allowfullscreen></iframe>
          </div>
-         <!--<br>-->
          <div class="embed-responsive embed-responsive-4by3">
             <iframe width="420" height="315" src="//www.youtube.com/embed/apXgLCAgjYs" frameborder="0" allowfullscreen></iframe>
-         </div>
+         </div>-->
        
         <!--<div id="myCarousel" class="carousel slide" style="height: 400px; width: 700px; margin: 0 auto">-->
            <!-- Carousel indicators -->

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>progressbar demo</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+  <script src="js/sitelang.js"></script>
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+  
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/navbar-static-top.css" rel="stylesheet">
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/ie10-viewport-bug-workaround.js"></script>-->
+    
+</head>
+<body>
+ 
+<!--<div id="progressbar"></div>-->
+<div class="progress">
+    <div class="progress-bar progress-bar-custom" id="progress" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 100%"> </div>
+</div>
+ 
+<div id="pageContent">
+    <select class="form-control" id="textLangId" name="textLangId">
+       <option value="en-ru" selected>Английский</option>
+       <option value="es-ru">Испанский</option>        
+       <option value="fr-ru">Французcкий</option>
+       <option value="de-ru">Немецкий</option>
+       <option value="it-ru">Итальянский</option>
+    </select>
+    <br><textarea class="form-control" rows="9" name="textArea" id="textArea">this is is a test value</textarea>
+    <br><button>Click</button>
+</div>
+ 
+ 
+<script>
+
+$(document).ready(function(){
+
+$( "#progressbar" ).progressbar({
+  value: 13
+});
+
+
+    function tableCreate(data){
+        
+        //document.write(data);
+        var data = $.parseJSON(data);
+        
+        var tbl=$("<table/>").attr("id","mytable");
+        $("#pageContent").append(tbl);
+        for(var i=0;i<data.length;i++)
+        {
+            var tr="<tr>";
+            var td1="<td>"+data[i].freq+"</td>";
+            var td2="<td>"+data[i].word+"</td>";
+            var td3="<td>"+data[i].text+"</td></tr>";
+            
+           $("#mytable").append(tr+td1+td2+td3); 
+          
+        }
+    }
+    
+  $("button").click(function(){
+    var textLangId = $("#textLangId option:selected").val();
+    var textArea = $("#textArea").val();
+    
+    $.post("php/dictionary.php",
+    {
+      textLangId:textLangId,
+      textArea:textArea
+    },
+    function(data,status){
+      $("#pageContent").empty();
+      console.log(data);
+      if (data == 1){
+          console.log("Turn on!");
+      } else {
+          console.log("Turn off!");
+      }
+      tableCreate(data);
+    });
+  });
+});
+
+</script>
+ 
+</body>
+</html>
