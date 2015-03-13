@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		
+        <script src="js/search.js" type="text/javascript"></script>
+       	<script src="https://apis.google.com/js/client.js" type="text/javascript"></script>
+       	<script src="https://apis.google.com/js/client.js?onload=onClientLoad" type="text/javascript"></script>
+    </head>
+    <body>
+		<div id="MyMenu">
+			<!--<select value ="movie trailers" onchange="getVideo(this.value)">-->
+			<select value ="movie trailers" onchange="onClientLoad(this.value)">
+				<option value="movie trailers">Movie trailers</option>
+				<option value="music">Music</option>
+				<option value="moby">Moby</option>
+			</select>
+			<button onclick="getNext()">Next</button>
+		</div>
+
+		<div id="MyTest"></div>
+        <pre id="videorows"></pre>
+	
+
+		<script>
+			function getNext(){
+				//document.getElementById("MyTest").innerHTML = val;
+				//Here I will count all videos and send this value to get next feed of new videos
+			}
+		</script>
+
+    </body>
+
+</html>

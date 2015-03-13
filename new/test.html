@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>WordCharge</title>
+
+<script src="js/sitelang.js"></script>
+<!--<script src="js/jquery.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>-->
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+</head>
+
+
+<body>
+<h3 id="firstHeader"></h3>
+
+<div id="progressbar"></div>
+
+<!--<form method="post" action="dictionary.php">-->
+<div id="pageContent">
+    <select class="form-control" id="textLangId" name="textLangId">
+       <option value="en-ru" selected>Английский</option>
+       <option value="es-ru">Испанский</option>        
+       <option value="fr-ru">Французcкий</option>
+       <option value="de-ru">Немецкий</option>
+       <option value="it-ru">Итальянский</option>
+    </select>
+    <br><textarea class="form-control" rows="9" name="textArea" id="textArea">this this is is a test value shark value is shark</textarea>
+    <br><input class="btn btn-default btn-md" type="submit" id="makeDict" onclick="makeDict();" />
+    <!--<br><button>Click</button>-->
+</div>
+
+    <p id="textLang"><p>
+    <p id="wordsNum"></p>
+    <p id="myText"></p>
+<!--</form>-->
+</body>
+
+<script>
+    
+    function myWord(lang, freq, word, text){
+        this.lang = lang;
+        this.freq = freq;
+        this.word = word;
+        this.text = text;
+    }
+    
+    function sort_words(array_of_obj){
+        //Bubble sort. Must be changed to Quicksort!
+        do {
+            var swapped = false;
+            for(var i = 0; i < array_of_obj.length-1; i++){
+                if(array_of_obj[i].freq > array_of_obj[i+1].freq){
+                    var temp = array_of_obj[i];
+                    array_of_obj[i] = array_of_obj[i+1];
+                    array_of_obj[i+1] = temp;
+                    swapped = true;
+                }
+            }
+        } while (swapped == true);
+        
+        return array_of_obj;
+    }
+    
+    function fill_temp_array_with_obj(text_array, myObjs){
+        myTextArray = text_array;
+        for(var i = 0; i < myTextArray.length; i++){
+            var my_word = new myWord("lang", 1, myTextArray[i], "text");
+            myObjs[i] = my_word;
+        }        
+    }
+    
+    function fill_array_with_uniq_obj(temp_obj_array, uniq_obj_array, word_cnt){
+        var myObjs = temp_obj_array;
+        var myObjsUniq = uniq_obj_array;
+        var wordCnt = word_cnt;
+        for(var i = 0; i < myObjs.length; i++){
+            if(typeof myObjsUniq[0] != "undefined"){
+                
+                for(var j = 0; j < myObjsUniq.length; j++){
+                    if(myObjs[i].word == myObjsUniq[j].word){
+                        wordCnt = 1;
+                        myObjsUniq[j].freq += wordCnt; 
+                    }
+                }
+                
+                if(wordCnt == 0){
+                    myObjsUniq.push(myObjs[i]);
+                }
+                
+                wordCnt = 0;
+                
+            } else {
+                myObjsUniq.push(myObjs[i]);
+            }
+        }
+        
+    }
+    
+    function print_objs_uniq(myWords){
+        //console.log(myObjsUniq.length);
+        for(var i = 0; i < myWords.length; i++){
+            console.log(myWords[i]);
+        }
+    }
+    
+    /*var xmlhttp, wordStr, wordText = [];
+    function translateWord(aWord, textLang){
+        if(window.XMLHttpRequest){
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        
+        xmlhttp.onreadystatechange=function(){
+          if (xmlhttp.readyState==4 && xmlhttp.status==200){
+            //wordText.push(xmlhttp.responseText);
+            //wordStr = xmlhttp.responseText;
+            console.log(xmlhttp.responseText);
+            }
+        }
+        
+        xmlhttp.open("POST","php/dictionary.php",true);
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        xmlhttp.send("aword="+aWord+"&tlang="+textLang);
+        //return wordStr;
+    }*/
+    
+    var xmlhttp, wordStr, wordText = [];
+    function translateWord(aWord,textLang,cfunc)
+    {
+        if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+        }
+        else{// code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        
+        xmlhttp.onreadystatechange=cfunc;
+        xmlhttp.open("POST","php/dictionary.php",true);
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        xmlhttp.send("aword="+aWord+"&tlang="+textLang);
+    }
+    
+    function getTranslation(aWord, textLang)
+    {
+    translateWord(aWord,textLang,function(){
+        xmlhttp.onreadystatechange=function(){
+        if (xmlhttp.readyState==4 && xmlhttp.status==200){
+            //document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+            console.log(xmlhttp.responseText);
+            wordText.push(xmlhttp.responseText);
+            return wordText;
+        }
+      }
+    });
+    }
+    
+    
+    function makeDict(){
+        
+        var aWord, wordCnt = 0;
+        myObjs = [];
+        myObjsUniq = [];
+        myWords = [];
+        
+        var myText = document.getElementById("textArea").value;
+        var ddList = document.getElementById("textLangId");
+        var textLang = ddList.options[ddList.selectedIndex].value;
+        console.log(textLang);
+        
+        myText = myText.toLowerCase();
+        myText = myText.replace(/[^a-z]/gi,' ');
+        var myTextArray = myText.match(/\S+/g);
+        var myTextArray = ["this", "is", "a", "test", "value", "shark"];
+        console.log(myTextArray);
+        
+        for(var i = 0; i < myTextArray.length; i++){
+            var my_word = new myWord(textLang, 1, myTextArray[i], "text");
+            myObjs[i] = my_word;
+        } 
+        
+        console.log(myObjs);
+        
+        for(var i = 0; i < myObjs.length; i++){
+            //myObjs[i].text = translateWord(myObjs[i].word, textLang);
+            //myObjs[i].text = translateWord(myObjs[i].word);
+            myObjs[i].text = getTranslation(myObjs[i].word, textLang);
+            //myObjs[i].text = "HHH";
+        }
+        
+        //console.log("myObjs[0].text[0]");
+        //console.log(myObjs[0].text[0]);
+        
+        
+        for(var i = 0; i < myObjs.length; i++){
+            console.log(myObjs[i].text);
+        }
+        
+        
+        
+        /*fill_temp_array_with_obj(myTextArray, myObjs);
+
+        fill_array_with_uniq_obj(myObjs, myObjsUniq, wordCnt);
+        
+        myWords = sort_words(myObjsUniq);
+        
+        myWords[0].text = "hello hello"; 
+        console.log(myWords);
+
+        for(var i = 0; i < myWords.length; i++){
+            myWords[i].lang = textLang;
+            myWords[i].text = translateWord(myWords[i].word, textLang);
+        }
+        
+        document.getElementById("wordsNum").innerHTML = myWords.length;
+        
+        var dictTable = "<table border='1'><th>Freq</th><th>Word</th><th>Translation</th>";
+        for(var i = myWords.length-1; i >= 0; i--){
+            console.log(myWords[2].text);
+            dictTable += "<tr><td>"+myWords[i].freq+"</td><td>"+myWords[i].word+"</td><td>"+myWords[i].text+"</td></tr>";
+        }
+        dictTable += "</table>";
+        document.getElementById("myText").innerHTML = dictTable;
+        
+        print_objs_uniq(myWords);*/
+        
+    }
+
+</script>
+
+</html>
